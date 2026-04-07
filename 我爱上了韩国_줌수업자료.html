@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我爱上了韩国的这个！줌 수업 자료</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pink: #E05585; --pink-light: #FBEAF0; --pink-dark: #72243E;
+    --blue: #185FA5; --blue-light: #E6F1FB;
+    --green: #3B6D11; --green-light: #EAF3DE;
+    --amber: #EF9F27; --amber-light: #FAEEDA; --amber-dark: #854F0B;
+    --purple: #3C3489; --purple-light: #EEEDFE;
+    --red: #D84040; --red-light: #FAECE7; --red-dark: #993C1D;
+    --text: #1a1a1a; --text-muted: #666; --text-hint: #999;
+    --border: rgba(0,0,0,0.1); --bg: #FFFCFE; --surface: #fff; --surface2: #F7F6F2;
+    --radius: 12px; --radius-sm: 8px;
+  }
+  body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header { background: linear-gradient(135deg, #C2185B, #E05585); color: white; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+  .header-title { font-size: 18px; font-weight: 700; }
+  .header-title .zh { font-family: 'Noto Serif SC', serif; font-size: 20px; margin-right: 4px; }
+  .header-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; background: rgba(255,255,255,0.25); color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+  .main-nav { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .main-nav-btn { flex: 1; min-width: 100px; padding: 0.9rem 0.5rem; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; color: var(--text-muted); background: transparent; border: none; border-bottom: 3px solid transparent; cursor: pointer; transition: all 0.2s; white-space: nowrap; text-align: center; }
+  .main-nav-btn:hover { color: var(--text); background: var(--surface2); }
+  .main-nav-btn.active { color: var(--pink); border-bottom-color: var(--pink); }
+
+  .content { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .page-title { font-size: 20px; font-weight: 700; margin-bottom: 0.4rem; }
+  .page-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+  /* 본문 */
+  .mode-row { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .mode-btn { font-size: 13px; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; }
+  .mode-btn.on { background: var(--purple-light); color: var(--purple); border-color: transparent; font-weight: 500; }
+  .text-area { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.75rem; }
+  .text-line { display: flex; align-items: flex-end; gap: 3px; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .char-block { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; cursor: pointer; }
+  .pinyin { font-size: 10px; color: var(--text-hint); min-height: 14px; transition: opacity 0.2s; }
+  .hanzi { font-family: 'Noto Serif SC', serif; font-size: 22px; line-height: 1.2; color: var(--text); }
+  .punc { font-family: 'Noto Serif SC', serif; font-size: 22px; color: var(--text-muted); }
+  .latin { font-size: 20px; color: var(--text); padding: 0 2px; align-self: flex-end; padding-bottom: 2px; }
+  .hint-text { font-size: 12px; color: var(--text-hint); margin-top: 0.75rem; }
+  .key-box { background: var(--pink-light); border-radius: var(--radius-sm); padding: 10px 16px; margin-bottom: 1.25rem; font-size: 14px; border-left: 3px solid var(--pink); }
+
+  /* 단어 카드 */
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .vocab-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 0.75rem; text-align: center; cursor: pointer; transition: all 0.15s; }
+  .vocab-card:hover { border-color: var(--pink); box-shadow: 0 2px 8px rgba(224,85,133,0.1); }
+  .vc-zh { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .vc-py { font-size: 11px; color: var(--pink); min-height: 16px; font-weight: 500; }
+  .vc-ko { font-size: 11px; color: var(--text-hint); margin-top: 2px; }
+
+  /* 마인드맵 */
+  .mindmap { display: grid; gap: 16px; }
+  .mm-person { background: var(--surface); border: 2px solid var(--pink); border-radius: var(--radius); padding: 1rem 1.25rem; }
+  .mm-person-name { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--pink); margin-bottom: 4px; }
+  .mm-person-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+  .mm-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .mm-cell { border-radius: var(--radius-sm); padding: 8px 10px; font-size: 13px; line-height: 1.5; }
+  .mm-label { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .mm-green { background: var(--green-light); }
+  .mm-green .mm-label { color: var(--green); }
+  .mm-pink { background: var(--pink-light); }
+  .mm-pink .mm-label { color: var(--pink); }
+  .mm-amber { background: var(--amber-light); }
+  .mm-amber .mm-label { color: var(--amber-dark); }
+
+  /* OX 퀴즈 */
+  .ox-box { background: var(--surface2); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 10px; }
+  .ox-q { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .ox-py { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+  .ox-btns { display: flex; gap: 8px; }
+  .ox-btn { font-size: 22px; padding: 8px 28px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); cursor: pointer; transition: all 0.15s; }
+  .ox-btn:hover:not(:disabled) { background: var(--surface2); }
+  .ox-btn.correct { background: var(--green-light); border-color: #C0DD97; }
+  .ox-btn.wrong { background: #FCEBEB; border-color: #F7C1C1; }
+  .ox-result { font-size: 13px; margin-top: 8px; min-height: 18px; line-height: 1.6; }
+
+  /* 선택 퀴즈 */
+  .pick-title { font-family: 'Noto Serif SC', serif; font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .pick-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1.25rem; }
+  .pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
+  .pick-btn { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; color: var(--text); cursor: pointer; text-align: left; transition: all 0.15s; line-height: 1.5; }
+  .pick-btn:hover { border-color: var(--pink); background: var(--pink-light); }
+  .pick-btn.selected { background: var(--pink-light); border-color: var(--pink); color: var(--pink-dark); font-weight: 500; }
+  .pick-result { background: var(--pink-light); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 14px; line-height: 1.8; min-height: 60px; border-left: 3px solid var(--pink); }
+  .pick-result .zh { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--pink); }
+
+  /* 진짜 중국 이야기 */
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 10px; }
+  .info-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .info-card p { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+  .tag { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 12px; margin-right: 5px; margin-bottom: 8px; font-weight: 500; }
+  .tag-pink { background: var(--pink-light); color: var(--pink-dark); }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-amber { background: var(--amber-light); color: var(--amber-dark); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-red { background: var(--red-light); color: var(--red-dark); }
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 0.5rem; }
+  .tl-item { display: flex; gap: 14px; padding-bottom: 16px; position: relative; }
+  .tl-item:not(:last-child)::before { content: ''; position: absolute; left: 19px; top: 32px; bottom: 0; width: 2px; background: var(--border); }
+  .tl-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--pink-light); color: var(--pink); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--pink); }
+  .tl-content { padding-top: 8px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+  .tl-content b { color: var(--text); }
+
+  /* 체크리스트 */
+  .stu-row { display: flex; gap: 8px; margin-bottom: 1rem; }
+  .stu-btn { font-size: 13px; padding: 6px 18px; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; font-family: 'Noto Sans KR', sans-serif; transition: all 0.15s; }
+  .stu-btn.active { background: var(--pink-light); color: var(--pink-dark); border-color: transparent; font-weight: 500; }
+  .progress-wrap { height: 6px; background: var(--surface2); border-radius: 4px; margin-bottom: 1.5rem; }
+  .progress-fill { height: 6px; background: var(--pink); border-radius: 4px; transition: width 0.3s; }
+  .check-list { display: flex; flex-direction: column; gap: 8px; }
+  .check-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); cursor: pointer; transition: all 0.15s; }
+  .check-item:hover { border-color: #aaa; }
+  .check-item.done { background: var(--green-light); border-color: #C0DD97; }
+  .check-box { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .check-item.done .check-box { background: var(--green); border-color: var(--green); color: white; }
+  .check-label { font-size: 14px; font-weight: 500; }
+  .check-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title"><span class="zh">❤️ 我爱上了韩国的这个！</span></div>
+  <div class="header-badges">
+    <span class="badge">第二课</span>
+    <span class="badge">10대 중국어 독해</span>
+    <span class="badge">줌 수업용</span>
+  </div>
+</div>
+
+<nav class="main-nav">
+  <button class="main-nav-btn active" onclick="switchPage('text')">📖 본문 읽기</button>
+  <button class="main-nav-btn" onclick="switchPage('vocab')">📝 단어 카드</button>
+  <button class="main-nav-btn" onclick="switchPage('mindmap')">🗺️ 마인드맵</button>
+  <button class="main-nav-btn" onclick="switchPage('quiz')">⭕ OX 퀴즈</button>
+  <button class="main-nav-btn" onclick="switchPage('pick')">💬 나의 대답</button>
+  <button class="main-nav-btn" onclick="switchPage('hallyu')">🌊 한류 이야기</button>
+  <button class="main-nav-btn" onclick="switchPage('check')">✅ 체크리스트</button>
+</nav>
+
+<div class="content">
+
+  <!-- 본문 읽기 -->
+  <div class="page active" id="page-text">
+    <div class="page-title">본문 읽기</div>
+    <div class="page-sub">병음 표시 방식을 바꿔가며 단계별로 읽어요.</div>
+    <div class="key-box">
+      <span style="color:var(--text-muted);font-size:13px;">핵심 문형 </span>
+      <span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">爱上了 / 又___又___ / 太___了！</span>
+    </div>
+    <div class="mode-row">
+      <button class="mode-btn on" id="btn-all" onclick="setMode('all')">병음 전체 보기</button>
+      <button class="mode-btn" id="btn-hover" onclick="setMode('hover')">클릭하면 병음 보기</button>
+      <button class="mode-btn" id="btn-none" onclick="setMode('none')">병음 없이 읽기</button>
+    </div>
+    <div class="text-area" id="text-area"></div>
+    <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
+  </div>
+
+  <!-- 단어 카드 -->
+  <div class="page" id="page-vocab">
+    <div class="page-title">단어 카드</div>
+    <div class="page-sub">카드를 클릭하면 병음이 나타나요!</div>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </div>
+
+  <!-- 마인드맵 -->
+  <div class="page" id="page-mindmap">
+    <div class="page-title">본문 내용 마인드맵</div>
+    <div class="page-sub">세 인물이 한국의 무엇에 반했는지 정리해봐요!</div>
+    <div class="mindmap" id="mindmap-area"></div>
+  </div>
+
+  <!-- OX 퀴즈 -->
+  <div class="page" id="page-quiz">
+    <div class="page-title">본문 내용 이해하기 (O/X 퀴즈)</div>
+    <div class="page-sub">본문을 잘 이해했는지 확인해봐요!</div>
+    <div id="quiz-area"></div>
+  </div>
+
+  <!-- 나의 대답 -->
+  <div class="page" id="page-pick">
+    <div class="page-title">나의 대답은?</div>
+    <div class="pick-title">你觉得韩国文化里最有魅力的是什么？</div>
+    <div class="pick-sub">한국 문화 중 가장 매력 있는 것은 무엇인가요? 클릭해서 골라봐요!</div>
+    <div class="pick-grid" id="pick-grid"></div>
+    <div class="pick-result" id="pick-result">
+      <span style="color:var(--text-hint);">위에서 항목을 골라보세요!</span>
+    </div>
+  </div>
+
+  <!-- 한류 이야기 -->
+  <div class="page" id="page-hallyu">
+    <div class="page-title">진짜 중국 이야기 — 한류 韩流</div>
+    <div class="page-sub" style="font-family:'Noto Serif SC',serif;font-size:15px;">한국의 물결, 한국에서 불어오는 흐름</div>
+    <div class="info-card" style="margin-bottom:1rem;">
+      <span class="tag tag-pink">한류란?</span>
+      <h3>韩流(Hánliú) — 한국 문화의 물결</h3>
+      <p>한국 드라마·음악·음식·화장품 등이 중국과 전 세계로 퍼져나가는 현상이에요. 한국에서 불어오는 문화의 바람이라는 뜻에서 <b>韩流(한류)</b>라고 불려요.</p>
+    </div>
+    <div class="info-card">
+      <span class="tag tag-blue">한류의 역사</span>
+      <h3>어떻게 시작됐을까요?</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot">2003</div>
+          <div class="tl-content"><b>《대장금》(大长今)</b>이 중국에서 방영되며 한국 문화가 큰 주목을 받기 시작했어요. 궁중 음식과 전통 의술 이야기가 많은 사람들을 감동시켰어요.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">이후</div>
+          <div class="tl-content"><b>《별에서 온 그대》, 《상속자들》</b> 등 드라마가 연이어 인기를 얻으며 한류(韩流)라는 이름으로 불리게 되었어요.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">확산</div>
+          <div class="tl-content">드라마에서 시작된 한류는 <b>음악(BTS, BLACKPINK), 화장품, 패션, 음식(삼겹살, 김치)</b>으로 빠르게 퍼져나갔어요.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">2016</div>
+          <div class="tl-content"><b>한한령(限韩令, Hànhánlìng)</b>이라는 규제로 한국 드라마와 연예인이 중국 방송에서 잠시 활동 금지가 되기도 했어요.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">현재</div>
+          <div class="tl-content">규제에도 온라인으로 드라마를 보거나 음악을 듣는 팬들이 많았고, 지금도 한류는 계속 변화하며 <b>중국과 세계에 한국을 알리는 다리</b> 역할을 하고 있어요.</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <span class="tag tag-amber">본문과 연결</span>
+      <h3>본문 속 인물들도 한류의 일부!</h3>
+      <p>본문에서 나오는 한국 드라마, 아이돌(G-Dragon, BLACKPINK), 한국 음식(烤肉)은 모두 한류가 중국에 퍼진 대표적인 예예요. 중국 친구가 한국 문화에 반한 것도 한류의 힘이랍니다 💕</p>
+    </div>
+  </div>
+
+  <!-- 체크리스트 -->
+  <div class="page" id="page-check">
+    <div class="page-title">수업 체크리스트</div>
+    <div class="page-sub">완료한 항목을 클릭해서 체크해요!</div>
+    <div class="stu-row">
+      <button class="stu-btn active" id="stu-a" onclick="switchStu('a')">1단계</button>
+      <button class="stu-btn" id="stu-b" onclick="switchStu('b')">2단계</button>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+    <div class="check-list" id="checklist"></div>
+  </div>
+
+</div>
+
+<script>
+const textData = [
+  { py:['Wǒ','ài','shàng','le','Hánguó','diànshìjù','.','Hánjù','de','gùshi','hěn','yǒuyìsi',',','nán','zhǔjué','hěn','shuài',','], zh:['我','爱','上','了','韩国','电视剧','。','韩剧','的','故事','很','有意思','，','男','主角','很','帅','，'] },
+  { py:['nǚ','zhǔjué','hěn','piàoliang','.','Wǒ','jīngcháng','xiǎng',':'], zh:['女','主角','很','漂亮','。','我','经常','想','：'] },
+  { py:['Hánguó','rén','dōu','zhème','shuài','ma','?'], zh:['韩国','人','都','这么','帅','吗','？'] },
+  { py:['Wǒ','mèimei','ài','shàng','le','Hánguó','de','ǒuxiàng','.','Tā','de','fángjiān','lǐ','dōu','shì','Hánguó','ǒuxiàng','de','zhàopiàn',','], zh:['我','妹妹','爱','上','了','韩国','的','偶像','。','她','的','房间','里','都','是','韩国','偶像','的','照片','，'] },
+  { py:['bǐrú','','','BLACKPINK','.','Tā','hái','shuō','yào','qù','Hánguó','kàn','yǎnchànghuì','ne','!'], zh:['比如','G-Dragon','、','BLACKPINK','。','她','还','说','要','去','韩国','看','演唱会','呢','！'] },
+  { py:['Wǒ','de','hǎo','péngyǒu','Xiǎo','Lǐ','ài','shàng','le','Hánguó','kǎoròu','.','Tā','shuō','Hánguó','kǎoròu','yòu','tián','yòu','xián',','], zh:['我','的','好','朋友','小','李','爱','上','了','韩国','烤肉','。','她','说','韩国','烤肉','又','甜','又','咸','，'] },
+  { py:['tèbié','hǎochī','.','Xiànzài','tā','měi','ge','xīngqī','dōu','yào','chī','yī','cì','!'], zh:['特别','好吃','。','现在','她','每','个','星期','都','要','吃','一','次','！'] },
+  { py:['Hánguó','wénhuà','tài','yǒu','mèilì','le','!'], zh:['韩国','文化','太','有','魅力','了','！'] },
+];
+
+const vocabData = [
+  { zh:'爱上', py:'ài shàng', ko:'사랑에 빠지다, ~에 반하다' },
+  { zh:'电视剧', py:'diànshìjù', ko:'드라마, TV 시리즈' },
+  { zh:'男主角', py:'nán zhǔjué', ko:'남자 주인공' },
+  { zh:'女主角', py:'nǚ zhǔjué', ko:'여자 주인공' },
+  { zh:'帅', py:'shuài', ko:'멋지다' },
+  { zh:'偶像', py:'ǒuxiàng', ko:'아이돌' },
+  { zh:'比如', py:'bǐrú', ko:'예를 들어' },
+  { zh:'演唱会', py:'yǎnchànghuì', ko:'콘서트' },
+  { zh:'烤肉', py:'kǎoròu', ko:'불고기, 구이' },
+  { zh:'又…又…', py:'yòu…yòu…', ko:'~하기도 하고 ~하기도 하다' },
+  { zh:'魅力', py:'mèilì', ko:'매력' },
+];
+
+const mindmapData = [
+  {
+    name: '나 (我)', sub: '한국 드라마에 반함',
+    like: '韩国电视剧', likeKo: '한국 드라마',
+    reason: '故事很有意思\n男主角很帅\n女主角很漂亮', reasonKo: '이야기가 재미있고 배우들이 멋지고 아름다워서',
+    action: '韩国人都这么帅吗？', actionKo: '"한국 사람들은 모두 이렇게 멋있나?" 라고 자주 생각함'
+  },
+  {
+    name: '妹妹 (여동생)', sub: '한국 아이돌에 반함',
+    like: '韩国偶像', likeKo: '한국 아이돌',
+    reason: 'G-Dragon\nBLACKPINK', reasonKo: '방에 아이돌 사진이 가득',
+    action: '想去韩国看演唱会', actionKo: '한국에 가서 콘서트를 보겠다고 말함'
+  },
+  {
+    name: '小李 (친구 샤오리)', sub: '한국 고기에 반함',
+    like: '韩国烤肉', likeKo: '한국 구이',
+    reason: '又甜又咸\n特别好吃', reasonKo: '달콤하면서 짭짤하고 특별히 맛있어서',
+    action: '每个星期吃一次', actionKo: '매주 한 번씩 꼭 먹음'
+  },
+];
+
+const oxData = [
+  { q:'1. 我爱上了韩国电视剧。', py:'(Wǒ ài shàng le Hánguó diànshìjù.)', ans:true, explain:'맞아요! 본문 첫 문장에서 나는 한국 드라마에 반했다고 했어요.' },
+  { q:'2. 我的妹妹房间里有BLACKPINK和G-Dragon的照片。', py:'(Wǒ de mèimei fángjiān lǐ yǒu BLACKPINK hé G-Dragon de zhàopiàn.)', ans:true, explain:'맞아요! 여동생 방은 온통 한국 아이돌 사진이고, 예시로 G-Dragon과 BLACKPINK가 나와요.' },
+  { q:'3. 我的好朋友小李喜欢韩国泡菜，每个星期都要吃一次。', py:'(Wǒ de hǎo péngyǒu Xiǎo Lǐ xǐhuān Hánguó pàocài, měi ge xīngqī dōu yào chī yícì.)', ans:false, explain:'틀렸어요! 小李가 좋아하는 건 泡菜(김치)가 아니라 烤肉(불고기/구이)예요!' },
+];
+
+const pickData = [
+  { label:'A. 韩国美食', ko:'한국 음식', fill:'我觉得韩国美食最有魅力！', ko2:'저는 한국 음식이 가장 매력 있다고 생각해요!' },
+  { label:'B. 韩国音乐(K-pop)', ko:'한국 음악', fill:'我觉得韩国音乐最有魅力！', ko2:'저는 K-pop이 가장 매력 있다고 생각해요!' },
+  { label:'C. 韩国电视剧', ko:'한국 드라마', fill:'我觉得韩国电视剧最有魅力！', ko2:'저는 한국 드라마가 가장 매력 있다고 생각해요!' },
+  { label:'D. 韩国偶像', ko:'한국 아이돌', fill:'我觉得韩国偶像最有魅力！', ko2:'저는 한국 아이돌이 가장 매력 있다고 생각해요!' },
+  { label:'E. 韩国化妆品', ko:'한국 화장품', fill:'我觉得韩国化妆品最有魅力！', ko2:'저는 한국 화장품이 가장 매력 있다고 생각해요!' },
+  { label:'F. 韩国旅游景点', ko:'한국 관광지', fill:'我觉得韩国旅游景点最有魅力！', ko2:'저는 한국 관광지가 가장 매력 있다고 생각해요!' },
+  { label:'G. 韩国时尚', ko:'한국 패션', fill:'我觉得韩国时尚最有魅力！', ko2:'저는 한국 패션이 가장 매력 있다고 생각해요!' },
+  { label:'H. 其他', ko:'기타', fill:'我觉得韩国______最有魅力！', ko2:'저는 한국 _____이/가 가장 매력 있다고 생각해요!' },
+];
+
+const checkData = {
+  a: [
+    { label:'단어 카드 11개 확인', sub:'병음 보지 않고 뜻 말하기' },
+    { label:'병음 보며 본문 전체 읽기', sub:'한 문장씩 따라 읽기' },
+    { label:'클릭 모드로 읽기', sub:'모르는 글자만 클릭해서 확인' },
+    { label:'마인드맵 3인물 확인하기', sub:'누가 무엇에 반했는지 말하기' },
+    { label:'OX 퀴즈 3문제 풀기', sub:'본문 내용 이해 확인' },
+    { label:'병음 없이 본문 1회 읽기', sub:'막히는 부분 체크' },
+  ],
+  b: [
+    { label:'단어 카드 빠르게 확인', sub:'5초 안에 뜻 말하기' },
+    { label:'병음 없이 본문 읽기', sub:'처음부터 끝까지' },
+    { label:'마인드맵 구조 설명하기', sub:'세 인물 이유·행동까지 중국어로' },
+    { label:'핵심 문형 활용하기', sub:'爱上了 / 又___又___ 직접 문장 만들기' },
+    { label:'나의 대답 중국어로 말하기', sub:'我觉得韩国___最有魅力！' },
+    { label:'유창하게 2회 연속 읽기', sub:'막힘 없이 본문 전체' },
+  ],
+};
+
+let mode = 'all', stuKey = 'a';
+let checkState = { a: new Array(6).fill(false), b: new Array(6).fill(false) };
+const oxAnswered = {};
+
+function buildText() {
+  const area = document.getElementById('text-area'); area.innerHTML = '';
+  const puncs = ['，','。','？','！','：','、'];
+  textData.forEach((line, li) => {
+    const div = document.createElement('div'); div.className = 'text-line';
+    line.zh.forEach((ch, ci) => {
+      if (puncs.includes(ch)) {
+        const sp = document.createElement('span'); sp.className = 'punc'; sp.textContent = ch; div.appendChild(sp);
+      } else if (ch === 'G-Dragon' || ch === 'BLACKPINK') {
+        const sp = document.createElement('span'); sp.className = 'latin'; sp.textContent = ch; div.appendChild(sp);
+      } else {
+        const block = document.createElement('span'); block.className = 'char-block';
+        const pySpan = document.createElement('span'); pySpan.className = 'pinyin'; pySpan.id = `py-${li}-${ci}`;
+        pySpan.textContent = (line.py[ci] || '');
+        const zhSpan = document.createElement('span'); zhSpan.className = 'hanzi'; zhSpan.textContent = ch;
+        block.appendChild(pySpan); block.appendChild(zhSpan);
+        block.onclick = () => { if (mode === 'hover') pySpan.style.opacity = pySpan.style.opacity === '0' ? '1' : '0'; };
+        div.appendChild(block);
+      }
+    });
+    area.appendChild(div);
+  });
+  applyMode();
+}
+
+function applyMode() { document.querySelectorAll('.pinyin').forEach(el => el.style.opacity = mode === 'all' ? '1' : '0'); }
+function setMode(m) { mode = m; ['all','hover','none'].forEach(k => document.getElementById('btn-'+k).classList.toggle('on', k === m)); applyMode(); }
+
+function buildVocab() {
+  const grid = document.getElementById('vocab-grid');
+  vocabData.forEach((v, i) => {
+    const card = document.createElement('div'); card.className = 'vocab-card';
+    card.innerHTML = `<div class="vc-zh">${v.zh}</div><div class="vc-py" id="vpy-${i}"></div><div class="vc-ko">${v.ko}</div>`;
+    card.onclick = () => { const py = document.getElementById('vpy-'+i); py.textContent = py.textContent ? '' : v.py; };
+    grid.appendChild(card);
+  });
+}
+
+function buildMindmap() {
+  const area = document.getElementById('mindmap-area');
+  mindmapData.forEach(p => {
+    const card = document.createElement('div'); card.className = 'mm-person';
+    card.innerHTML = `
+      <div class="mm-person-name">${p.name}</div>
+      <div class="mm-person-sub">${p.sub}</div>
+      <div class="mm-rows">
+        <div class="mm-cell mm-green"><div class="mm-label">좋아하는 것</div><div style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">${p.like}</div><div style="font-size:11px;color:var(--green);margin-top:3px;">${p.likeKo}</div></div>
+        <div class="mm-cell mm-pink"><div class="mm-label">이유/예시</div><div style="font-size:13px;white-space:pre-line;">${p.reason}</div><div style="font-size:11px;color:var(--pink-dark);margin-top:3px;">${p.reasonKo}</div></div>
+        <div class="mm-cell mm-amber"><div class="mm-label">생각·행동</div><div style="font-family:'Noto Serif SC',serif;font-size:13px;">${p.action}</div><div style="font-size:11px;color:var(--amber-dark);margin-top:3px;">${p.actionKo}</div></div>
+      </div>`;
+    area.appendChild(card);
+  });
+}
+
+function buildQuiz() {
+  const area = document.getElementById('quiz-area');
+  oxData.forEach((q, qi) => {
+    const box = document.createElement('div'); box.className = 'ox-box';
+    const qEl = document.createElement('div'); qEl.className = 'ox-q'; qEl.textContent = q.q;
+    const pyEl = document.createElement('div'); pyEl.className = 'ox-py'; pyEl.textContent = q.py;
+    const btns = document.createElement('div'); btns.className = 'ox-btns';
+    const res = document.createElement('div'); res.className = 'ox-result';
+    ['⭕','❌'].forEach((label, bi) => {
+      const btn = document.createElement('button'); btn.className = 'ox-btn'; btn.textContent = label;
+      btn.onclick = () => {
+        if (oxAnswered[qi]) return; oxAnswered[qi] = true;
+        const isO = bi === 0; const correct = isO === q.ans;
+        btn.classList.add(correct ? 'correct' : 'wrong');
+        btns.querySelectorAll('.ox-btn').forEach(b => b.disabled = true);
+        if (!correct) btns.querySelectorAll('.ox-btn')[q.ans ? 0 : 1].classList.add('correct');
+        res.style.color = correct ? '#3B6D11' : '#A32D2D';
+        res.textContent = (correct ? '정답! ' : '오답! ') + q.explain;
+      };
+      btns.appendChild(btn);
+    });
+    box.appendChild(qEl); box.appendChild(pyEl); box.appendChild(btns); box.appendChild(res);
+    area.appendChild(box);
+  });
+}
+
+function buildPick() {
+  const grid = document.getElementById('pick-grid');
+  pickData.forEach((p, i) => {
+    const btn = document.createElement('button'); btn.className = 'pick-btn';
+    btn.innerHTML = `<span style="font-weight:700;">${p.label}</span><br><span style="font-size:11px;color:var(--text-hint);">${p.ko}</span>`;
+    btn.onclick = () => {
+      grid.querySelectorAll('.pick-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      const res = document.getElementById('pick-result');
+      res.innerHTML = `<div class="zh">${p.fill}</div><div style="font-size:13px;color:var(--text-muted);margin-top:6px;">${p.ko2}</div>`;
+    };
+    grid.appendChild(btn);
+  });
+}
+
+function renderChecklist() {
+  const items = checkData[stuKey]; const states = checkState[stuKey];
+  const cl = document.getElementById('checklist'); cl.innerHTML = '';
+  items.forEach((item, i) => {
+    const div = document.createElement('div'); div.className = 'check-item' + (states[i] ? ' done' : '');
+    div.innerHTML = `<div class="check-box">${states[i] ? '✓' : ''}</div><div><div class="check-label">${item.label}</div><div class="check-sub">${item.sub}</div></div>`;
+    div.onclick = () => { states[i] = !states[i]; renderChecklist(); };
+    cl.appendChild(div);
+  });
+  document.getElementById('prog-bar').style.width = Math.round(states.filter(Boolean).length / items.length * 100) + '%';
+}
+function switchStu(k) { stuKey = k; document.getElementById('stu-a').classList.toggle('active', k==='a'); document.getElementById('stu-b').classList.toggle('active', k==='b'); renderChecklist(); }
+function switchPage(p) {
+  const keys = ['text','vocab','mindmap','quiz','pick','hallyu','check'];
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.main-nav-btn').forEach((el,i) => el.classList.toggle('active', keys[i]===p));
+  document.getElementById('page-'+p).classList.add('active');
+}
+buildText(); buildVocab(); buildMindmap(); buildQuiz(); buildPick(); renderChecklist();
+</script>
+</body>
+</html>
