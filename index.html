@@ -643,20 +643,16 @@ hallyu: {
 // ═══════════════════════════════════════════
 //  NAV
 // ═══════════════════════════════════════════
-function showHome(){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-home').classList.add('active');
-  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-home').classList.add('active');
-}
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-home').classList.add('active');
-  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-}
+// ── HASH ROUTING ──
+function showHome(){ location.hash=''; }
+function showPage(id){ location.hash=''; }
 let currentLesson=null;
-function openLesson(id){
+function openLesson(id){ location.hash=id; }
+function switchLPanel(idx,total){
+  document.querySelectorAll('.lesson-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  document.querySelectorAll('.l-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+}
+function _renderLesson(id){
   currentLesson=id;
   const L=LESSONS[id];
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -674,13 +670,22 @@ function openLesson(id){
   });
   const body=document.getElementById('lesson-body');
   L.render(body);
-  document.getElementById('lesson-back-btn').onclick=showHome;
+  document.getElementById('lesson-back-btn').onclick=()=>{ location.hash=''; };
   window.scrollTo(0,0);
 }
-function switchLPanel(idx,total){
-  document.querySelectorAll('.lesson-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  document.querySelectorAll('.l-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+function _renderHome(){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-home').classList.add('active');
 }
+function handleHash(){
+  const id=(location.hash||'').replace('#','').trim();
+  if(id && LESSONS[id]){ _renderLesson(id); }
+  else { _renderHome(); }
+}
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('DOMContentLoaded', handleHash);
 
 // ═══════════════════════════════════════════
 //  SHARED HELPERS
