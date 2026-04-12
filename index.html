@@ -355,9 +355,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
     <h1 class="hero-title">중국어,<br>재미있게 읽어봐요!</h1>
     <p class="hero-sub">병음부터 독해까지 — 단계별 읽기 연습 사이트</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">수업 자료</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">수업 자료</div></div>
       <div class="hero-stat"><div class="hero-stat-num">2</div><div class="hero-stat-label">학습 레벨</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">40+</div><div class="hero-stat-label">핵심 단어</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">60+</div><div class="hero-stat-label">핵심 단어</div></div>
     </div>
   </div>
 
@@ -403,7 +403,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
 
     <div class="section-header">
       <span class="section-title-main">📖 10대 독해 스터디</span>
-      <span class="section-title-zh">중국어 독해 스터디 1·2주차</span>
+      <span class="section-title-zh">중국어 독해 스터디 1~5주차</span>
     </div>
     <div class="courses-grid">
       <div class="course-card" onclick="openLesson('malatang')">
@@ -435,6 +435,38 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
         </div>
         <div class="course-card-footer">
           <span style="font-size:12px;color:var(--muted)">第二课</span>
+          <button class="go-btn">학습 시작</button>
+        </div>
+      </div>
+      <div class="course-card" onclick="openLesson('zgeneration')">
+        <div class="course-card-top" style="background:#FEF9E7">📦<span class="course-card-badge badge-teen">독해</span></div>
+        <div class="course-card-body">
+          <div class="course-card-title"><span class="zh">你知道Z世代吗？</span></div>
+          <div class="course-card-sub">Z세대와 블라인드박스! LABUBU를 알고 있나요? 재미있는 Z세대 문화를 배워요.</div>
+          <div class="course-card-tags">
+            <span class="c-tag c-tag-gray">盲盒 블라인드박스</span>
+            <span class="c-tag c-tag-gray">단어 12개</span>
+            <span class="c-tag c-tag-gray">한자 분해</span>
+          </div>
+        </div>
+        <div class="course-card-footer">
+          <span style="font-size:12px;color:var(--muted)">第三课</span>
+          <button class="go-btn">학습 시작</button>
+        </div>
+      </div>
+      <div class="course-card" onclick="openLesson('mingyán')">
+        <div class="course-card-top" style="background:#E9F7EF">🐢<span class="course-card-badge badge-teen">독해</span></div>
+        <div class="course-card-body">
+          <div class="course-card-title"><span class="zh">小小名言，大大力量</span></div>
+          <div class="course-card-sub">작은 명언, 큰 힘! 거북이와 에디슨 이야기로 배우는 중국 명언이에요.</div>
+          <div class="course-card-tags">
+            <span class="c-tag c-tag-gray">不怕慢只怕站</span>
+            <span class="c-tag c-tag-gray">명언 12개</span>
+            <span class="c-tag c-tag-gray">암송대회</span>
+          </div>
+        </div>
+        <div class="course-card-footer">
+          <span style="font-size:12px;color:var(--muted)">第五课</span>
           <button class="go-btn">학습 시작</button>
         </div>
       </div>
@@ -684,6 +716,287 @@ function handleHash(){
   if(id && LESSONS[id]){ _renderLesson(id); }
   else { _renderHome(); }
 }
+
+// ═══════════════════════════════════════════
+//  ZGEN — Z世代 盲盒
+// ═══════════════════════════════════════════
+LESSONS['zgeneration'] = {
+  titleZh:'你知道Z世代吗？',titleKo:'Z세대를 아나요? — 블라인드박스 이야기',
+  tags:[{t:'第三课',c:'red'},{t:'10대 독해',c:'blue'},{t:'Z世代·盲盒',c:'green'}],
+  tabs:['📖 본문 읽기','📝 단어 카드','🔍 한자 분해','⭕ OX 퀴즈','🌏 라부부 이야기','✅ 체크리스트'],
+  render(body){
+    body.innerHTML=`
+<div class="l-panel active" id="lp-0">
+  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">"___"的意思是___ / 你也___过___吗？</span></div>
+  <div class="mode-row">
+    <button class="mode-btn on" id="zgn-all" onclick="zgnMode('all')">병음 전체 보기</button>
+    <button class="mode-btn" id="zgn-hover" onclick="zgnMode('hover')">클릭하면 병음 보기</button>
+    <button class="mode-btn" id="zgn-none" onclick="zgnMode('none')">병음 없이 읽기</button>
+  </div>
+  <div class="text-area" id="zgn-text"></div>
+  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
+</div>
+<div class="l-panel" id="lp-1">
+  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
+  <div class="vocab-grid" id="zgn-vocab"></div>
+</div>
+<div class="l-panel" id="lp-2" id="zgn-hanja"></div>
+<div class="l-panel" id="lp-3" id="zgn-quiz"></div>
+<div class="l-panel" id="lp-4" id="zgn-labubu"></div>
+<div class="l-panel" id="lp-5">
+  <div class="stu-row">
+    <button class="stu-btn active" id="zgn-s1" onclick="zgnStu('a')">1단계</button>
+    <button class="stu-btn" id="zgn-s2" onclick="zgnStu('b')">2단계</button>
+  </div>
+  <div class="progress-wrap"><div class="progress-fill" id="zgn-prog" style="width:0%"></div></div>
+  <div class="check-list" id="zgn-check"></div>
+</div>`;
+    buildZGN();
+  }
+};
+
+window.zgn_mode='all';
+function zgnMode(m){setPoemMode('zgn',m);}
+let zgnStuKey='a';
+function zgnStu(k){zgnStuKey=k;document.getElementById('zgn-s1').classList.toggle('active',k==='a');document.getElementById('zgn-s2').classList.toggle('active',k==='b');buildChecklist('zgn-check','zgn-prog',zgnCheckData,k);}
+
+const zgnText=[
+  {py:['Nǐ','zhīdào','Z','shìdài','ma'],zh:['你','知道','Z','世代','吗','？']},
+  {py:['Z','shìdài','shì','1996','nián','dào','2010','nián','zhījiān','chūshēng','de','rén','.'],zh:['Z','世代','是','1996','年','到','2010','年','之间','出生','的','人','。']},
+  {py:['Tāmen','hěn','xǐhuan','mánghé','!'],zh:['他们','很','喜欢','盲盒','！']},
+  {py:['"Máng"','de','yìsi','shì','kàn','bu','jiàn',',',' "hé"','de','yìsi','shì','hézi','.'],zh:['"盲"','的','意思','是','看','不','见','，','"盒"','的','意思','是','盒子','。']},
+  {py:['Mánghé','lǐmiàn','yǒu','xiǎo','wánjù',',',' nǐ','yī','kāishǐ','bù','zhīdào','lǐmiàn','yǒu','shénme','.'],zh:['盲盒','里面','有','小','玩具','，','你','一','开始','不','知道','里面','有','什么','。']},
+  {py:['"Dādā','!"','dǎkāi','yǐhòu','cái','zhīdào','!','Hěn','hǎowán','.'],zh:['"哒哒','！"','打开','以后','才','知道','！','很','好玩','。']},
+  {py:['Bǐrú','POP MART','de','LABUBU',',',' yǒu','hěn','duō','yánsè',',',' tèbié','kě'ài','.'],zh:['比如','POP MART','的','LABUBU','，','有','很','多','颜色','，','特别','可爱','。']},
+  {py:['Nǐ','yě','mǎiguo','mánghé','ma'],zh:['你','也','买过','盲盒','吗','？']},
+];
+
+const zgnVocab=[
+  {zh:'世代',py:'shìdài',ko:'세대'},{zh:'之间',py:'zhījiān',ko:'~사이'},
+  {zh:'出生',py:'chūshēng',ko:'태어나다'},{zh:'喜欢',py:'xǐhuan',ko:'좋아하다'},
+  {zh:'盲',py:'máng',ko:'눈이 멀다, 블라인드'},{zh:'盒',py:'hé',ko:'상자, 박스'},
+  {zh:'意思',py:'yìsi',ko:'뜻, 의미'},{zh:'里面',py:'lǐmiàn',ko:'안, 내부'},
+  {zh:'打开',py:'dǎkāi',ko:'열다'},{zh:'好玩',py:'hǎowán',ko:'재미있다'},
+  {zh:'颜色',py:'yánsè',ko:'색깔'},{zh:'可爱',py:'kě'ài',ko:'귀엽다'},
+];
+
+const zgnOX=[
+  {q:'1. Z世代是1996年到2010年之间出生的人。',py:'(Z shìdài shì 1996 nián dào 2010 nián zhījiān chūshēng de rén.)',ans:true,explain:'맞아요! 본문 두 번째 문장에 정확히 나와요.'},
+  {q:'2. 盲盒里面有小玩具，但是一开始不知道里面有什么。',py:'(Mánghé lǐmiàn yǒu xiǎo wánjù, dànshì yīkāishǐ bù zhīdào lǐmiàn yǒu shénme.)',ans:true,explain:'맞아요! 열어봐야만 안에 뭐가 있는지 알 수 있어요.'},
+  {q:'3. LABUBU是POP MART的盲盒玩具，它只有一种颜色。',py:'(LABUBU shì POP MART de mánghé wánjù, tā zhǐ yǒu yī zhǒng yánsè.)',ans:false,explain:'틀렸어요! 본문에서 LABUBU는 有很多颜色(색깔이 매우 많다)고 했어요.'},
+];
+
+const zgnCheckData={
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'한자 분해 盲·盒 읽기',sub:'부수 뜻 이해하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'"___的意思是___" 문장 만들기',sub:'새 단어로 직접 문장 만들기'},{label:'라부부 인기 이유 설명하기',sub:'한국어 or 중국어로'},{label:'OX 퀴즈 이유 설명하기',sub:'왜 O/X인지 중국어로'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
+};
+
+function buildZGN(){
+  buildPoem('zgn-text',zgnText,'zgn');
+  buildVocabGrid('zgn-vocab',zgnVocab);
+  // 한자 분해
+  const lp2=document.getElementById('lp-2');
+  lp2.innerHTML=`<p class="page-sub-label">盲(máng)과 盒(hé)의 부수를 분해해서 뜻을 이해해봐요!</p>
+<div class="info-card" style="border-left:4px solid #F39C12;">
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+    <div style="font-family:'Noto Serif SC',serif;font-size:56px;font-weight:700;color:#B7950B;line-height:1">盲</div>
+    <div><div style="font-size:13px;color:var(--muted);margin-bottom:4px;">máng — 눈이 멀다, 블라인드</div>
+    <div style="font-size:13px;line-height:1.8;"><span style="background:#FEF9E7;padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500;">위 亡</span>망하다, 잃다<br>
+    <span style="background:#FEF9E7;padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500;">아래 目</span>눈(eye)<br>
+    → <b>눈(目)을 잃은(亡) 상태 = 볼 수 없다!</b></div></div>
+  </div>
+  <div style="background:var(--surface2);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--muted);">💡 盲盒 = 盲(볼 수 없다) + 盒(상자) → <b>열기 전까지 안을 볼 수 없는 상자!</b></div>
+</div>
+<div class="info-card" style="border-left:4px solid #1E8449;">
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+    <div style="font-family:'Noto Serif SC',serif;font-size:56px;font-weight:700;color:#1E8449;line-height:1">盒</div>
+    <div><div style="font-size:13px;color:var(--muted);margin-bottom:4px;">hé — 상자, 박스</div>
+    <div style="font-size:13px;line-height:1.8;"><span style="background:#E9F7EF;padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500;">위 合</span>합하다 (발음 힌트: hé)<br>
+    <span style="background:#E9F7EF;padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500;">아래 皿</span>그릇, 접시<br>
+    → <b>뚜껑과 그릇(皿)이 합쳐진(合) 것 = 상자!</b></div></div>
+  </div>
+</div>`;
+  // quiz
+  const lp3=document.getElementById('lp-3');
+  lp3.innerHTML=`<p class="page-sub-label">본문 내용을 확인해보세요!</p><div id="zgn-ox"></div>`;
+  buildOX('zgn-ox',zgnOX);
+  // labubu 이야기
+  const lp4=document.getElementById('lp-4');
+  lp4.innerHTML=`
+<div class="info-card"><span class="tag tag-gold">라부부란?</span><h3>LABUBU — 2.7조 대박 캐릭터</h3><p>홍콩 아티스트 카싱 렁이 북유럽 신화에서 영감을 받아 만든 요정 캐릭터예요. 토끼와 괴물을 섞어놓은 듯한 독특한 모습이에요. 리한나, 블랙핑크 리사 등 유명 연예인들이 소장하면서 전 세계 인기에 불을 당겼어요!</p></div>
+<div class="info-card"><span class="tag tag-blue">왜 Z세대가 열광할까?</span><h3>블라인드박스의 매력</h3><p>열기 전까지 어떤 캐릭터인지 알 수 없는 <b>두근두근 설렘</b>이 매력이에요. 각 시리즈를 모두 모으고 싶어서 계속 구매하게 되는 수집의 재미도 있어요. 또, <b>"울어도 괜찮다"</b>는 솔직한 감정 표현이 Z세대의 감성을 자극해요.</p></div>
+<div class="info-card"><span class="tag tag-red">얼마나 인기인가요?</span><h3>가격이 놀라워요!</h3><p>국내 정품은 2~5만원이지만, 특별판·콜라보 제품은 수십만원에 달해요. 베이징 경매장에서는 사람 크기 한정판 라부부가 무려 <b>120만 위안(약 2억 3천만 원)</b>에 낙찰됐어요! 중고 거래(리셀) 가격도 폭등하고 있어요.</p></div>
+<div class="info-card"><span class="tag tag-green">중국어로 말해봐요</span><h3>你也买过盲盒吗？</h3><p style="font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;margin-bottom:8px;">买过 ／ 没买过</p><p>블라인드박스를 사본 적 있나요? 없어도 괜찮아요 — 좋아하는 캐릭터가 있다면 중국어로 말해봐요!</p></div>`;
+  buildChecklist('zgn-check','zgn-prog',zgnCheckData,'a');
+}
+
+// ═══════════════════════════════════════════
+//  MINGYAN — 小小名言大大力量
+// ═══════════════════════════════════════════
+LESSONS['mingyán'] = {
+  titleZh:'小小名言，大大力量',titleKo:'작은 명언, 큰 힘',
+  tags:[{t:'第五课',c:'red'},{t:'10대 독해',c:'blue'},{t:'不怕慢只怕站',c:'green'},{t:'명언 암송대회',c:'gold'}],
+  tabs:['📖 본문 읽기','📝 단어 카드','📊 비교표','⭕ OX 퀴즈','🏆 명언 암송대회','✅ 체크리스트'],
+  render(body){
+    body.innerHTML=`
+<div class="l-panel active" id="lp-0">
+  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 명언 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">不怕慢，只怕站。 / 失败是成功之母。</span></div>
+  <div class="mode-row">
+    <button class="mode-btn on" id="mgy-all" onclick="mgyMode('all')">병음 전체 보기</button>
+    <button class="mode-btn" id="mgy-hover" onclick="mgyMode('hover')">클릭하면 병음 보기</button>
+    <button class="mode-btn" id="mgy-none" onclick="mgyMode('none')">병음 없이 읽기</button>
+  </div>
+  <div class="text-area" id="mgy-text"></div>
+  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
+</div>
+<div class="l-panel" id="lp-1">
+  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
+  <div class="vocab-grid" id="mgy-vocab"></div>
+</div>
+<div class="l-panel" id="lp-2" id="mgy-table"></div>
+<div class="l-panel" id="lp-3" id="mgy-quiz"></div>
+<div class="l-panel" id="lp-4" id="mgy-contest"></div>
+<div class="l-panel" id="lp-5">
+  <div class="stu-row">
+    <button class="stu-btn active" id="mgy-s1" onclick="mgyStu('a')">1단계</button>
+    <button class="stu-btn" id="mgy-s2" onclick="mgyStu('b')">2단계</button>
+  </div>
+  <div class="progress-wrap"><div class="progress-fill" id="mgy-prog" style="width:0%"></div></div>
+  <div class="check-list" id="mgy-check"></div>
+</div>`;
+    buildMGY();
+  }
+};
+
+window.mgy_mode='all';
+function mgyMode(m){setPoemMode('mgy',m);}
+let mgyStuKey='a';
+function mgyStu(k){mgyStuKey=k;document.getElementById('mgy-s1').classList.toggle('active',k==='a');document.getElementById('mgy-s2').classList.toggle('active',k==='b');buildChecklist('mgy-check','mgy-prog',mgyCheckData,k);}
+
+const mgyText=[
+  {py:['Nǐ','tīng','guo','zhèxiē','huà','ma'],zh:['你','听','过','这些','话','吗','？']},
+  {py:['"Bú','pà','màn',',',' zhǐ','pà','zhàn','."'],zh:['"不','怕','慢','，','只','怕','站','。"']},
+  {py:['Wūguī','zǒu','de','hěn','màn',',',' kěshì','tā','yīzhí','zǒu',',',' zuìhòu','dào','le','zhōngdiǎn','.'],zh:['乌龟','走','得','很','慢','，','可是','它','一直','走','，','最后','到','了','终点','。']},
+  {py:['"Shībài','shì','chénggōng','zhī','mǔ','."'],zh:['"失败','是','成功','之','母','。"']},
+  {py:['Àidíshēng','zuò','dēng','de','shíhou',',',' shībài','le','yī','qiān','cì',',',' zuìhòu','chénggōng','le','.'],zh:['爱迪生','做','灯','的','时候','，','失败','了','一','千','次','，','最后','成功','了','。']},
+  {py:['Zhèxiē','míngyán','huì','ràng','wǒmen','gèng','yǒnggǎn',',',' yě','gèng','kuàilè','.'],zh:['这些','名言','会','让','我们','更','勇敢','，','也','更','快乐','。']},
+  {py:['Nǐ','hái','zhīdào','bié','de','míngyán','ma'],zh:['你','还','知道','别','的','名言','吗','？']},
+];
+
+const mgyVocab=[
+  {zh:'这些',py:'zhèxiē',ko:'이들, 이것들'},{zh:'话',py:'huà',ko:'말, 이야기'},
+  {zh:'怕',py:'pà',ko:'두려워하다'},{zh:'慢',py:'màn',ko:'느리다'},
+  {zh:'站',py:'zhàn',ko:'서다'},{zh:'乌龟',py:'wūguī',ko:'거북이'},
+  {zh:'走',py:'zǒu',ko:'걷다'},{zh:'终点',py:'zhōngdiǎn',ko:'종점, 끝'},
+  {zh:'失败',py:'shībài',ko:'실패하다'},{zh:'成功',py:'chénggōng',ko:'성공하다'},
+  {zh:'灯',py:'dēng',ko:'등, 전등'},{zh:'快乐',py:'kuàilè',ko:'즐겁다, 행복하다'},
+];
+
+const mgyOX=[
+  {q:'1. 乌龟走得很快。',py:'(Wūguī zǒu de hěn kuài.)',ans:false,explain:'틀렸어요! 본문에서 乌龟走得很慢(거북이는 아주 천천히 걸었다)고 했어요.'},
+  {q:'2. 爱迪生做灯的时候，一次就成功了。',py:'(Àidíshēng zuò dēng de shíhou, yícì jiù chénggōng le.)',ans:false,explain:'틀렸어요! 에디슨은 失败了一千次(천 번이나 실패했지만) 마침내 성공했어요.'},
+  {q:'3. 这些名言会让我们更勇敢，也更快乐。',py:'(Zhèxiē míngyán huì ràng wǒmen gèng yǒnggǎn, yě gèng kuàilè.)',ans:true,explain:'맞아요! 마지막 문장에 정확히 나와요. 명언은 우리를 더 용감하고 즐겁게 해줘요!'},
+];
+
+const mgyContestData=[
+  {ko:'느린 것은 두렵지 않다, 멈추는 것이 두렵다',en:'Don't be afraid of going slow, only of standing still.',zh:'不怕慢，只怕站。',py:'Bú pà màn, zhǐ pà zhàn.'},
+  {ko:'실패는 성공의 어머니다',en:'Failure is the mother of success.',zh:'失败是成功之母。',py:'Shībài shì chénggōng zhī mǔ.'},
+  {ko:'연습하면 능숙해진다',en:'Practice makes perfect.',zh:'熟能生巧。',py:'Shúnéng shēng qiǎo.'},
+  {ko:'지식은 힘이다',en:'Knowledge is power.',zh:'知识就是力量。',py:'Zhīshi jiù shì lìliang.'},
+  {ko:'시간은 돈이다',en:'Time is money.',zh:'时间就是金钱。',py:'Shíjiān jiù shì jīnqián.'},
+  {ko:'정직이 최선의 방책이다',en:'Honesty is the best policy.',zh:'诚实为上策。',py:'Chéngshí wéi shàngcè.'},
+  {ko:'웃음은 최고의 약이다',en:'Laughter is the best medicine.',zh:'笑是最好的药。',py:'Xiào shì zuì hǎo de yào.'},
+  {ko:'말보다 행동이 더 중요하다',en:'Actions speak louder than words.',zh:'行动胜于言语。',py:'Xíngdòng shèng yú yányǔ.'},
+  {ko:'일찍 일어나는 새가 벌레를 잡는다',en:'The early bird catches the worm.',zh:'早起的鸟儿有虫吃。',py:'Zǎoqǐ de niǎor yǒu chóng chī.'},
+  {ko:'노력 없이는 얻는 것도 없다',en:'No pain, no gain.',zh:'没有付出，就没有收获。',py:'Méiyǒu fùchū, jiù méiyǒu shōuhuò.'},
+  {ko:'어려울 때 친구가 진짜 친구다',en:'A friend in need is a friend indeed.',zh:'患难见真情。',py:'Huànnàn jiàn zhēnqíng.'},
+  {ko:'천 리 길도 한 걸음부터 시작된다',en:'The journey of a thousand miles begins with a single step.',zh:'千里之行，始于足下。',py:'Qiānlǐ zhī xíng, shǐ yú zú xià.'},
+];
+
+const mgyCheckData={
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'비교표 내용 확인하기',sub:'두 명언의 예시·핵심어 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'명언 암송대회에서 7개 선택',sub:'한·영·중 3개 국어로 연습'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'두 명언의 차이 설명하기',sub:'각 명언이 주는 교훈 말하기'},{label:'명언 7개 암기 완료',sub:'한국어·영어·중국어 모두'},{label:'내가 좋아하는 명언 이유 말하기',sub:'중국어로 한 문장 만들기'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
+};
+
+function buildMGY(){
+  buildPoem('mgy-text',mgyText,'mgy');
+  buildVocabGrid('mgy-vocab',mgyVocab);
+  // 비교표
+  const lp2=document.getElementById('lp-2');
+  lp2.innerHTML=`<p class="page-sub-label">두 명언을 비교해서 정리해봐요!</p>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead>
+<tr>
+  <th style="background:var(--surface2);padding:12px;border:1px solid var(--border);font-weight:700;width:20%">항목</th>
+  <th style="background:#FEF9E7;padding:12px;border:1px solid var(--border);font-family:'Noto Serif SC',serif;font-size:15px;text-align:center;">不怕慢，只怕站</th>
+  <th style="background:#E9F7EF;padding:12px;border:1px solid var(--border);font-family:'Noto Serif SC',serif;font-size:15px;text-align:center;">失败是成功之母</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2);">例子 (예시)</td>
+  <td style="padding:12px;border:1px solid var(--border);text-align:center;"><span style="font-family:'Noto Serif SC',serif;font-size:16px;">🐢 乌龟</span><br><span style="font-size:12px;color:var(--muted)">천천히 걸어도 결국 종점에 도착</span></td>
+  <td style="padding:12px;border:1px solid var(--border);text-align:center;"><span style="font-family:'Noto Serif SC',serif;font-size:16px;">💡 爱迪生</span><br><span style="font-size:12px;color:var(--muted)">천 번 실패 후 전등 발명 성공</span></td>
+</tr>
+<tr>
+  <td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2);">关键词 (핵심어)</td>
+  <td style="padding:12px;border:1px solid var(--border);text-align:center;"><span style="background:#FEF9E7;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">慢 (느리다)</span><br><span style="background:#FEF9E7;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">站 (서다)</span><br><span style="background:#FEF9E7;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">走 (걷다)</span></td>
+  <td style="padding:12px;border:1px solid var(--border);text-align:center;"><span style="background:#E9F7EF;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">失败 (실패)</span><br><span style="background:#E9F7EF;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">成功 (성공)</span><br><span style="background:#E9F7EF;padding:3px 8px;border-radius:6px;margin:2px;display:inline-block;">爱迪生</span></td>
+</tr>
+<tr>
+  <td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2);">给我们 (교훈)</td>
+  <td colspan="2" style="padding:12px;border:1px solid var(--border);text-align:center;"><span style="font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;">勇敢 (yǒnggǎn) + 快乐 (kuàilè)</span><br><span style="font-size:12px;color:var(--muted);">더 용감하게, 더 즐겁게!</span></td>
+</tr>
+</tbody>
+</table>
+</div>`;
+  // quiz
+  const lp3=document.getElementById('lp-3');
+  lp3.innerHTML=`<p class="page-sub-label">본문 내용을 확인해보세요!</p><div id="mgy-ox"></div>`;
+  buildOX('mgy-ox',mgyOX);
+  // 명언 암송대회
+  const lp4=document.getElementById('lp-4');
+  const selected=new Set();
+  let html=`<div style="background:var(--ink);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.25rem;color:white;">
+<div style="font-size:16px;font-weight:700;margin-bottom:4px;">🏆 명언 암송대회</div>
+<div style="font-size:13px;color:rgba(255,255,255,0.65);">12개 중 7개 이상 골라 암기! 한국어·영어·중국어 3개 국어 완료 시 기프티콘 선물 🎁</div>
+<div style="margin-top:8px;font-size:13px;color:rgba(255,255,255,0.8);">선택한 명언: <span id="mgy-count">0</span> / 7개 이상</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px;" id="mgy-contest-list">`;
+  mgyContestData.forEach((m,i)=>{
+    html+=`<div id="mgy-c${i}" onclick="mgyToggle(${i})" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;cursor:pointer;transition:all 0.15s;">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+<div id="mgy-cb${i}" style="width:22px;height:22px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;"></div>
+<div style="font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;">${m.zh}</div>
+</div>
+<div style="font-size:11px;color:var(--muted);margin-left:32px;">${m.py}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-left:32px;margin-top:6px;">
+<div style="font-size:12px;background:var(--surface2);border-radius:4px;padding:4px 8px;">🇰🇷 ${m.ko}</div>
+<div style="font-size:12px;background:var(--surface2);border-radius:4px;padding:4px 8px;">🇬🇧 ${m.en}</div>
+</div></div>`;
+  });
+  html+=`</div>`;
+  lp4.innerHTML=html;
+  window.mgySelected=new Set();
+  window.mgyToggle=function(i){
+    const el=document.getElementById('mgy-c'+i);
+    const cb=document.getElementById('mgy-cb'+i);
+    if(window.mgySelected.has(i)){
+      window.mgySelected.delete(i);
+      el.style.background='var(--surface)';el.style.borderColor='var(--border)';
+      cb.style.background='transparent';cb.style.borderColor='#ccc';cb.textContent='';
+    } else {
+      window.mgySelected.add(i);
+      el.style.background='#E9F7EF';el.style.borderColor='#A9DFBF';
+      cb.style.background='#27AE60';cb.style.borderColor='#27AE60';cb.style.color='white';cb.textContent='✓';
+    }
+    document.getElementById('mgy-count').textContent=window.mgySelected.size;
+    document.getElementById('mgy-count').style.color=window.mgySelected.size>=7?'#27AE60':'white';
+  };
+  buildChecklist('mgy-check','mgy-prog',mgyCheckData,'a');
+}
+
 window.addEventListener('hashchange', handleHash);
 window.addEventListener('DOMContentLoaded', handleHash);
 
