@@ -454,7 +454,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
           <button class="go-btn">학습 시작</button>
         </div>
       </div>
-      <div class="course-card" onclick="openLesson('mingyán')">
+      <div class="course-card" onclick="openLesson('mingyan')">
         <div class="course-card-top" style="background:#E9F7EF">🐢<span class="course-card-badge badge-teen">독해</span></div>
         <div class="course-card-body">
           <div class="course-card-title"><span class="zh">小小名言，大大力量</span></div>
@@ -833,7 +833,7 @@ function buildZGN(){
 // ═══════════════════════════════════════════
 //  MINGYAN — 小小名言大大力量
 // ═══════════════════════════════════════════
-LESSONS['mingyán'] = {
+LESSONS['mingyan'] = {
   titleZh:'小小名言，大大力量',titleKo:'작은 명언, 큰 힘',
   tags:[{t:'第五课',c:'red'},{t:'10대 독해',c:'blue'},{t:'不怕慢只怕站',c:'green'},{t:'명언 암송대회',c:'gold'}],
   tabs:['📖 본문 읽기','📝 단어 카드','📊 비교표','⭕ OX 퀴즈','🏆 명언 암송대회','✅ 체크리스트'],
@@ -998,7 +998,7 @@ function buildMGY(){
 }
 
 window.addEventListener('hashchange', handleHash);
-window.addEventListener('DOMContentLoaded', handleHash);
+window.addEventListener('DOMContentLoaded', function(){ setTimeout(handleHash, 0); });
 
 // ═══════════════════════════════════════════
 //  SHARED HELPERS
