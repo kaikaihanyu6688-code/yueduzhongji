@@ -219,7 +219,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink)
       <div class="ccard" id="go-hallyu">
         <div class="ccard-top cp">❤️<span class="ccard-badge bt">독해</span></div>
         <div class="ccard-body">
-          <div class="ccard-title"><span class="zh">我爱上了韩国的这个！</span></div>
+          <div class="ccard-title"><span class="zh">我爱上了韩国의 이 것!</span></div>
           <div class="ccard-sub">한국 드라마·아이돌·음식에 반한 중국 친구 이야기예요.</div>
           <div class="ccard-tags"><span class="ct">爱上了</span><span class="ct">又…又…</span><span class="ct">한류 이야기</span></div>
         </div>
@@ -324,24 +324,19 @@ window.addEventListener('hashchange', handleHash);
 
 // ── CARD CLICKS ──
 document.addEventListener('DOMContentLoaded', function() {
-  // Home card clicks
   ['jianjianhua','xishouge','malatang','hallyu','zgeneration','mingyan'].forEach(function(id) {
     var el = document.getElementById('go-' + id);
     if (el) {
       el.addEventListener('click', function() { goLesson(id); });
     }
   });
-  // Logo
   document.getElementById('logo-home').addEventListener('click', function(e) {
     e.preventDefault(); goHome();
   });
-  // Nav buttons
   document.getElementById('snb-home').addEventListener('click', goHome);
   document.getElementById('snb-elem').addEventListener('click', goHome);
   document.getElementById('snb-teen').addEventListener('click', goHome);
-  // Back button
   document.getElementById('back-btn').addEventListener('click', goHome);
-  // Handle initial hash
   handleHash();
 });
 
@@ -467,567 +462,52 @@ function buildChecklist(cid, pid, data, key) {
   if (pf) pf.style.width = Math.round(done / items.length * 100) + '%';
 }
 
-// ════════════════════════════════════════
-// LESSON DEFINITIONS
-// ════════════════════════════════════════
-
 // ─── 1. 剪窗花 ───
 const jjhPoem=[
   {py:['xiǎo','jiǎn','dāo','','shǒu','zhōng','ná'],zh:['小','剪','刀','，','手','中','拿','，']},
-  {py:['wǒ','xué','nǎi','nai','jiǎn','chuāng','huā'],zh:['我','学','奶','奶','剪','窗','花','。']},
+  {py:['wǒ','xué','nǎi','nai','jiǎn','chuāng','huā'],zh:['我','학','奶','奶','剪','窗','花','。']},
   {py:['jiǎn','méi','huā','','jiǎn','xuě','huā'],zh:['剪','梅','花','，','剪','雪','花','，']},
   {py:['jiǎn','duì','xǐ','què','jiào','zhā','zhā'],zh:['剪','对','喜','鹊','叫','喳','喳','。']},
   {py:['jiǎn','zhī','jī','','jiǎn','zhī','yā'],zh:['剪','只','鸡','，','剪','只','鸭','，']},
   {py:['jiǎn','tiáo','lǐ','yú','yáo','wěi','ba'],zh:['剪','条','鲤','鱼','摇','尾','巴','。']},
   {py:['dà','hóng','lǐ','yú','shuí','lái','bào'],zh:['大','红','鲤','鱼','谁','来','抱','？']},
-  {py:['ò','','zài','jiǎn','yī','gè','pàng','wá','wa'],zh:['哦','！','再','剪','一','个','胖','娃','娃','。']},
+  {py:['ò','','zài','jiǎn','yī','gè','pàng','wá','wa'],zh:['哦','！','再','剪','一','개','胖','娃','娃','。']},
 ];
 const jjhVocab=[
   {zh:'剪刀',py:'jiǎndāo',ko:'가위'},{zh:'窗花',py:'chuānghuā',ko:'창문 꽃'},
   {zh:'梅花',py:'méihuā',ko:'매화'},{zh:'雪花',py:'xuěhuā',ko:'눈꽃'},
   {zh:'喜鹊',py:'xǐquè',ko:'까치'},{zh:'鲤鱼',py:'lǐyú',ko:'잉어'},
-  {zh:'摇尾巴',py:'yáo wěiba',ko:'꼬리를 흔들다'},{zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 인형'},
+  {zh:'摇尾바',py:'yáo wěiba',ko:'꼬리를 흔들다'},{zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 인형'},
   {zh:'学',py:'xué',ko:'배우다'},{zh:'奶奶',py:'nǎinai',ko:'할머니'},
 ];
-const jjhAnimals=[
-  {icon:'🌸',zh:'梅花',py:'méihuā',ko:'매화',desc:'겨울에도 피는 꽃이라 강인함·희망의 상징. 중국 국화(国花)예요.'},
-  {icon:'❄️',zh:'雪花',py:'xuěhuā',ko:'눈꽃',desc:'설날 즈음 내리는 눈을 꽃에 비유한 말. 육각형 눈꽃 전지가 유명해요.'},
-  {icon:'🐦',zh:'喜鹊',py:'xǐquè',ko:'까치',desc:'기쁜 소식을 가져오는 새. 이름에 "기쁠 喜"가 들어있어요. 한국과 똑같이 길조!'},
-  {icon:'🐔',zh:'鸡',py:'jī',ko:'닭',desc:'새벽을 알리는 부지런함의 상징. 12지신 중 하나예요.'},
-  {icon:'🦆',zh:'鸭',py:'yā',ko:'오리',desc:'물과 관련된 동물이라 풍요·평화를 상징해요.'},
-  {icon:'🐟',zh:'鲤鱼',py:'lǐyú',ko:'잉어',desc:'풍요·행운·성공을 뜻해요. 魚와 余(풍족하다)의 발음이 같아서 행운의 상징!'},
-  {icon:'👶',zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 아기 인형',desc:'건강·복·자손 번영을 상징해요. 빨간 잉어를 안고 있는 모습이 유명해요.'},
-];
-const jjhOX=[
-  {q:'1. 剪窗花는 설날에 창문에 붙이는 전통 장식이다.',py:'',ans:true,explain:'맞아요! 중국에서는 설날(春节)에 빨간 종이를 오려 창문에 붙여요.'},
-  {q:'2. 시에서 아이는 엄마에게 가위질을 배우고 있다.',py:'',ans:false,explain:'틀렸어요! 시에서 我(나)는 奶奶(할머니)에게 배우고 있어요.'},
-  {q:'3. 마지막으로 오린 것은 胖娃娃(통통한 아기 인형)이다.',py:'',ans:true,explain:'맞아요! 마지막 행에 "再剪一个胖娃娃"가 나와요.'},
-];
-const jjhCheckData={
-  a:[{label:'단어 카드 10개 확인',sub:'병음 보지 않고 읽어보기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'1~4행 병음 없이 읽기',sub:'小剪刀 ~ 叫喳喳'},{label:'전체 시 병음 없이 1회 읽기',sub:'막히는 부분 체크'},{label:'유창하게 2회 연속 읽기',sub:'속도 일정하게 유지'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 읽기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'뜻 말하며 읽기',sub:'각 행의 내용 설명하기'},{label:'강세·리듬 살려 읽기',sub:'시처럼 자연스럽게'},{label:'속도 높여 유창하게 읽기',sub:'막힘 없이 1분 안에'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
-};
 
 function buildJJH(pfx) {
   buildPoem('jjh-poem', jjhPoem, pfx || 'jjh');
   buildVocab('jjh-vocab', jjhVocab);
-  // Animals
-  const ag = document.getElementById('jjh-ag');
-  if(ag) jjhAnimals.forEach(function(a){
-    const c=document.createElement('div');c.className='ac';
-    c.innerHTML='<div style="font-size:30px;margin-bottom:6px">'+a.icon+'</div><div style="font-family:Noto Serif SC,serif;font-size:17px;font-weight:700">'+a.zh+'</div><div style="font-size:11px;color:var(--blue2);margin:2px 0">'+a.py+'</div><div style="font-size:12px;color:var(--muted)">'+a.ko+'</div><div class="adet">'+a.desc+'</div>';
-    c.addEventListener('click',function(){c.classList.toggle('open');});
-    ag.appendChild(c);
-  });
-  buildOX('jjh-ox', jjhOX);
-  buildChecklist('jjh-cl','jjh-pf',jjhCheckData,'a');
 }
+
 LESSONS.jianjianhua = {
   titleZh:'剪窗花', titleKo:'창문 꽃을 오리며',
-  tags:[{t:'초등 교과서',c:'r'},{t:'p.38-39',c:'y'},{t:'HSK 2급',c:'b'}],
-  tabs:['📖 시 읽기','📝 단어 카드','✂️ 배경지식','❓ 퀴즈','✅ 체크리스트'],
+  tags:[{t:'초등 교과서',c:'r'},{t:'p.38-39',c:'y'}],
+  tabs:['📖 시 읽기','📝 단어 카드'],
   render: function(body) {
     window.jjh_mode = 'all';
     body.innerHTML = '<div class="lp active" id="lp-0">'
       + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">剪___，剪___</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="jjh-btn-all">병음 전체 보기</button><button class="mb" id="jjh-btn-hover">클릭하면 병음 보기</button><button class="mb" id="jjh-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="jjh-poem"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="jjh-vocab"></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">카드를 클릭하면 중국 문화에서의 의미를 볼 수 있어요!</p>'
-      + '<div class="ic"><span class="tag tr">중국 전통문화</span><h3>剪纸(jiǎnzhǐ)란?</h3><p>가위나 칼로 종이를 오려 만드는 중국 전통 예술이에요. 2009년 유네스코 세계 무형문화유산에 등재되었어요.</p></div>'
-      + '<div class="ic"><h3>窗花 — 창문에 붙이는 종이 꽃</h3><p>설날(春节)에 빨간 종이를 오려 창문에 붙여요. 복(福)을 불러오고 나쁜 기운을 쫓는다고 믿었어요.</p></div>'
-      + '<div class="ag" id="jjh-ag" style="margin-top:1rem"></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">배운 내용을 확인해보세요!</p><div id="jjh-ox"></div></div>'
-      + '<div class="lp" id="lp-4"><div class="stu-row"><button class="stb active" id="jjh-s1">1단계</button><button class="stb" id="jjh-s2">2단계</button></div><div class="pw"><div class="pf" id="jjh-pf" style="width:0%"></div></div><div class="cl" id="jjh-cl"></div></div>';
-    buildJJH();
-    document.getElementById('jjh-btn-all').addEventListener('click', function(){setMode('jjh','all');});
-    document.getElementById('jjh-btn-hover').addEventListener('click', function(){setMode('jjh','hover');});
-    document.getElementById('jjh-btn-none').addEventListener('click', function(){setMode('jjh','none');});
-    document.getElementById('jjh-s1').addEventListener('click', function(){
-      document.getElementById('jjh-s1').classList.add('active');
-      document.getElementById('jjh-s2').classList.remove('active');
-      buildChecklist('jjh-cl','jjh-pf',jjhCheckData,'a');
-    });
-    document.getElementById('jjh-s2').addEventListener('click', function(){
-      document.getElementById('jjh-s2').classList.add('active');
-      document.getElementById('jjh-s1').classList.remove('active');
-      buildChecklist('jjh-cl','jjh-pf',jjhCheckData,'b');
-    });
+      + '<div class="mode-row"><button class="mb on" id="jjh-btn-all" onclick="setMode(\'jjh\',\'all\')">병음 전체 보기</button><button class="mb" id="jjh-btn-hover" onclick="setMode(\'jjh\',\'hover\')">클릭하면 병음 보기</button><button class="mb" id="jjh-btn-none" onclick="setMode(\'jjh\',\'none\')">병음 없이 읽기</button></div>'
+      + '<div class="text-area" id="jjh-poem"></div></div>'
+      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="jjh-vocab"></div></div>';
+    buildJJH('jjh');
   }
 };
 
-// ─── 2. 洗手歌 ───
-const xsgPoem=[
-  {py:['pái','zhe','duì','','xiàng','qián','zǒu'],zh:['排','着','队','，','向','前','走','，']},
-  {py:['zuò','shén','me','','qù','xǐ','shǒu'],zh:['做','什','么','？','去','洗','手','。']},
-  {py:['féi','zào','yòng','lái','cuō','cuo','shǒu'],zh:['肥','皂','用','来','搓','搓','手','，']},
-  {py:['qīng','shuǐ','bāng','wǒ','chōng','chong','shǒu'],zh:['清','水','帮','我','冲','冲','手','，']},
-  {py:['máo','jīn','gěi','wǒ','cā','ca','shǒu'],zh:['毛','巾','给','我','擦','擦','手','。']},
-  {py:['xiǎo','shǒu','xǐ','de','zhēn','gān','jìng'],zh:['小','手','洗','得','真','干','净','，']},
-  {py:['dà','jiā','yī','qǐ','xiào','kāi','kǒu'],zh:['大','家','一','起','笑','开','口','。']},
-];
-const xsgVocab=[
-  {zh:'排队',py:'pái duì',ko:'줄 서다'},{zh:'向前走',py:'xiàng qián zǒu',ko:'앞으로 걷다'},
-  {zh:'洗手',py:'xǐ shǒu',ko:'손 씻다'},{zh:'肥皂',py:'féi zào',ko:'비누'},
-  {zh:'搓手',py:'cuō shǒu',ko:'손을 비비다'},{zh:'清水',py:'qīng shuǐ',ko:'깨끗한 물'},
-  {zh:'冲手',py:'chōng shǒu',ko:'손을 헹구다'},{zh:'毛巾',py:'máo jīn',ko:'수건'},
-  {zh:'擦手',py:'cā shǒu',ko:'손을 닦다'},{zh:'干净',py:'gān jìng',ko:'깨끗하다'},
-  {zh:'笑开口',py:'xiào kāi kǒu',ko:'활짝 웃다'},{zh:'大家',py:'dà jiā',ko:'모두'},
-];
-const xsgPyGroups={
-  ai:{tones:['āi','ái','ǎi','ài'],examples:{āi:[],ái:['排(pái duì) - 줄 서다'],ǎi:[],ài:[]}},
-  ei:{tones:['ēi','éi','ěi','èi'],examples:{ēi:[],éi:['肥(féi zào) - 비누'],ěi:['给(gěi) - 주다'],èi:[]}},
-  ui:{tones:['uī','uí','uǐ','uì'],examples:{uī:[],uí:[],uǐ:['水(shuǐ) - 물'],uì:['队(duì) - 줄']}},
-};
-const xsgOX=[
-  {q:'1. 시에서 아이들은 밥 먹고 나서 손을 씻으러 간다.',py:'',ans:false,explain:'본문에서 손 씻으러 가는 이유는 나오지 않아요. 줄 서서 앞으로 걸어가는 장면만 나와요.'},
-  {q:'2. 肥皂(비누)로 손을 비빈 후 清水(물)로 헹군다.',py:'',ans:true,explain:'맞아요! 肥皂搓搓手 → 清水冲冲手 → 毛巾擦擦手 순서예요.'},
-  {q:'3. 마지막에 大家一起笑开口로 모두 함께 웃는다.',py:'',ans:true,explain:'맞아요! 손을 깨끗이 씻고 나서 大家一起笑开口(모두 함께 활짝 웃어요)로 끝나요.'},
-];
-const xsgCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'ai·ei·ui 병음 카드 연습',sub:'각 성조 소리 구별하기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'1~4행 병음 없이 읽기',sub:'排着队 ~ 冲冲手'},{label:'전체 시 병음 없이 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'ai·ei·ui 포함 단어 빠르게 찾기',sub:'시에서 해당 병음 단어 모두 찾기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'각 행 뜻 설명하기',sub:'손 씻는 순서대로 설명'},{label:'리듬감 살려 읽기',sub:'동요처럼 자연스럽게'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
-};
-
-function buildXSG() {
-  buildPoem('xsg-poem', xsgPoem, 'xsg');
-  ['ai','ei','ui'].forEach(function(g){
-    const data=xsgPyGroups[g];
-    const cont=document.getElementById(g+'-cards');
-    const exDiv=document.getElementById(g+'-ex');
-    if(!cont)return;
-    data.tones.forEach(function(tone){
-      const btn=document.createElement('button');btn.className='pyb';btn.textContent=tone;
-      btn.addEventListener('click',function(){
-        cont.querySelectorAll('.pyb').forEach(function(b){b.classList.remove('apy');});
-        btn.classList.add('apy');
-        const exs=data.examples[tone]||[];
-        exDiv.innerHTML=exs.length?exs.map(function(e){return'<span class="pyei">'+e+'</span>';}).join(''):'<span style="font-size:13px;color:var(--hint)">이 시에서 직접 쓰인 예가 없어요</span>';
-      });
-      cont.appendChild(btn);
-    });
-  });
-  buildVocab('xsg-vocab', xsgVocab);
-  buildOX('xsg-ox', xsgOX);
-  buildChecklist('xsg-cl','xsg-pf',xsgCheckData,'a');
-}
-LESSONS.xishouge = {
-  titleZh:'洗手歌', titleKo:'손 씻기 노래',
-  tags:[{t:'초등 교과서',c:'r'},{t:'p.40-41',c:'y'},{t:'ai·ei·ui',c:'b'}],
-  tabs:['📖 시 읽기','🔤 병음 연습','📝 단어 카드','❓ 퀴즈','✅ 체크리스트'],
-  render: function(body) {
-    window.xsg_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">손 씻기 순서 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">肥皂搓 → 清水冲 → 毛巾擦</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="xsg-btn-all">병음 전체 보기</button><button class="mb" id="xsg-btn-hover">클릭하면 병음 보기</button><button class="mb" id="xsg-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="xsg-poem"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">이번 과에서 배우는 복합 모음! 카드를 클릭하면 시에서 쓰인 단어를 볼 수 있어요.</p>'
-      + '<div class="pysc"><div class="pyst">ai 계열</div><div class="pyc" id="ai-cards"></div><div class="pye" id="ai-ex"></div></div>'
-      + '<div class="pysc"><div class="pyst">ei 계열</div><div class="pyc" id="ei-cards"></div><div class="pye" id="ei-ex"></div></div>'
-      + '<div class="pysc"><div class="pyst">ui 계열</div><div class="pyc" id="ui-cards"></div><div class="pye" id="ui-ex"></div></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="xsg-vocab"></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">본문 내용을 확인해보세요!</p><div id="xsg-ox"></div></div>'
-      + '<div class="lp" id="lp-4"><div class="stu-row"><button class="stb active" id="xsg-s1">1단계</button><button class="stb" id="xsg-s2">2단계</button></div><div class="pw"><div class="pf" id="xsg-pf" style="width:0%"></div></div><div class="cl" id="xsg-cl"></div></div>';
-    buildXSG();
-    document.getElementById('xsg-btn-all').addEventListener('click', function(){setMode('xsg','all');});
-    document.getElementById('xsg-btn-hover').addEventListener('click', function(){setMode('xsg','hover');});
-    document.getElementById('xsg-btn-none').addEventListener('click', function(){setMode('xsg','none');});
-    document.getElementById('xsg-s1').addEventListener('click', function(){
-      document.getElementById('xsg-s1').classList.add('active');document.getElementById('xsg-s2').classList.remove('active');
-      buildChecklist('xsg-cl','xsg-pf',xsgCheckData,'a');
-    });
-    document.getElementById('xsg-s2').addEventListener('click', function(){
-      document.getElementById('xsg-s2').classList.add('active');document.getElementById('xsg-s1').classList.remove('active');
-      buildChecklist('xsg-cl','xsg-pf',xsgCheckData,'b');
-    });
-  }
-};
-
-// ─── 3. 麻辣烫 ───
-const mltText=[
-  {py:['Nǐ','chī','guo','Málàtàng','ma'],zh:['你','吃','过','麻辣烫','吗','？']},
-  {py:['Málàtàng','shì','Zhōngguó','yǒumíng','de','shíwù','','tā','de','míngzi','hěn','yǒu','yìsi'],zh:['麻辣烫','是','中国','有名','的','食物','，','它','的','名字','很','有','意思','。']},
-  {py:['"Má"','shì','shétou','mámá','de','gǎnjué','','"là"','shì','hěn','là','de','wèidào','','"tàng"','shì','hěn','tàng','de','tāng'],zh:['"麻"','是','舌头','麻麻','的','感觉','，','"辣"','是','很','辣','的','味道','，','"烫"','是','很','烫','的','汤','。']},
-  {py:['Suǒyǐ','','Málàtàng','yòu','má','yòu','là','yòu','tàng','','fēicháng','tèbié','','yě','fēicháng','hǎochī'],zh:['所以','，','麻辣烫','又','麻','又','辣','又','烫','，','非常','特别','，','也','非常','好吃','。']},
-  {py:['Málàtàng','lǐmian','yǒu','hěn','duō','shūcài','hé','ròu','','hěn','duō','Hánguó','de','niánqīngrén','dōu','xǐhuan','chī','Málàtàng'],zh:['麻辣烫','里面','有','很','多','蔬菜','和','肉','，','很','多','韩国','的','年轻人','都','喜欢','吃','麻辣烫','。']},
-  {py:['Wǒ','yě','chī','guo','liǎng','cì','','wǒ','juéde','yǒudiǎn','là','','dàn','hěn','hǎochī'],zh:['我','也','吃','过','两','次','，','我','觉得','有点','辣','，','但','很','好吃','。']},
-  {py:['Nǐ','ne','','Nǐ','chī','guo','jǐ','cì','Málàtàng'],zh:['你','呢','？','你','吃','过','几','次','麻辣烫','？']},
-];
-const mltVocab=[
-  {zh:'麻辣烫',py:'Málàtàng',ko:'마라탕'},{zh:'过',py:'guo',ko:'~한 적 있다'},
-  {zh:'有名',py:'yǒumíng',ko:'유명하다'},{zh:'食物',py:'shíwù',ko:'음식'},
-  {zh:'舌头',py:'shétou',ko:'혀'},{zh:'麻',py:'má',ko:'얼얼하다'},
-  {zh:'辣',py:'là',ko:'맵다'},{zh:'烫',py:'tàng',ko:'뜨겁다'},
-  {zh:'蔬菜',py:'shūcài',ko:'채소'},{zh:'肉',py:'ròu',ko:'고기'},
-  {zh:'年轻人',py:'niánqīngrén',ko:'청년, 젊은이'},{zh:'觉得',py:'juéde',ko:'~라고 느끼다'},
-];
-const mltIngr=[
-  {zh:'木耳',py:'mù\'ěr',ko:'목이버섯',desc:'나무(木)의 귀(耳)처럼 생긴 버섯이에요. 쫄깃한 식감이 특징!'},
-  {zh:'金针菇',py:'jīnzhēngū',ko:'팽이버섯',desc:'금(金)색의 바늘(针) 모양 버섯이라서 이런 이름이 붙었어요.'},
-  {zh:'粉耗子',py:'fěnhàozi',ko:'분모자(굵은 당면)',desc:'모양이 길고 넓어 쥐(耗子)처럼 길게 늘어난다고 해서 이 이름이에요!'},
-  {zh:'肉丸',py:'ròuwán',ko:'고기 완자',desc:'고기를 동그랗게(丸) 빚어 만든 것이에요.'},
-  {zh:'鱼丸',py:'yúwán',ko:'생선 완자',desc:'생선을 동그랗게(丸) 빚어 만든 것이에요.'},
-  {zh:'豆皮',py:'dòupí',ko:'두부피',desc:'두유를 얇게 말려 만든 껍질(皮)이에요.'},
-];
-const mltOX=[
-  {q:'1. 麻辣烫是一种中国有名的食物。',py:'(Málàtàng shì yìzhǒng Zhōngguó yǒumíng de shíwù.)',ans:true,explain:'맞아요! 본문 첫 문장에서 마라탕은 중국의 유명한 음식이라고 했어요.'},
-  {q:'2. 麻辣烫一点儿也不辣。',py:'(Málàtàng yìdiǎnr yě bú là.)',ans:false,explain:'틀렸어요! 마라탕은 又麻又辣又烫, 얼얼하고 맵고 뜨거운 음식이에요.'},
-  {q:'3. 麻辣烫里面只有肉，没有蔬菜。',py:'(Málàtàng lǐmian zhǐ yǒu ròu, méiyǒu shūcài.)',ans:false,explain:'틀렸어요! 마라탕에는 蔬菜(채소)와 肉(고기)가 모두 들어간다고 했어요.'},
-];
-const mltCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'재료 이름 6가지 읽기',sub:'카드 클릭해서 유래 확인'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'OX 퀴즈 + 이유 설명',sub:'왜 O/X인지 중국어로 말하기'},{label:'핵심 문형 활용하기',sub:'你吃过___吗? 직접 문장 만들기'},{label:'진짜 중국 이야기 읽기',sub:'새로 알게 된 내용 1가지 말하기'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
-};
-
-function buildMLT() {
-  buildPoem('mlt-text', mltText, 'mlt');
-  buildVocab('mlt-vocab', mltVocab);
-  const ig=document.getElementById('mlt-ingr');
-  if(ig) mltIngr.forEach(function(v){
-    const c=document.createElement('div');c.className='ac';
-    c.innerHTML='<div style="font-family:Noto Serif SC,serif;font-size:18px;font-weight:700">'+v.zh+'</div><div style="font-size:11px;color:var(--blue2);margin:3px 0">'+v.py+'</div><div style="font-size:12px;color:var(--muted);font-weight:500">'+v.ko+'</div><div class="adet">'+v.desc+'</div>';
-    c.addEventListener('click',function(){c.classList.toggle('open');});
-    ig.appendChild(c);
-  });
-  buildOX('mlt-ox', mltOX);
-  buildChecklist('mlt-cl','mlt-pf',mltCheckData,'a');
-}
-LESSONS.malatang = {
-  titleZh:'你吃过麻辣烫吗？', titleKo:'마라탕을 먹어 본 적 있니?',
-  tags:[{t:'第一课',c:'r'},{t:'10대 독해',c:'b'},{t:'경험 过',c:'g'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','🥢 재료 이름','⭕ OX 퀴즈','🇨🇳 진짜 중국','✅ 체크리스트'],
-  render: function(body) {
-    window.mlt_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">你吃过___吗？→ 吃过 / 没吃过</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="mlt-btn-all">병음 전체 보기</button><button class="mb" id="mlt-btn-hover">클릭하면 병음 보기</button><button class="mb" id="mlt-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="mlt-text"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="mlt-vocab"></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">카드를 클릭하면 이름의 유래를 볼 수 있어요!</p><div class="ag" id="mlt-ingr"></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">본문 내용을 확인해보세요!</p><div id="mlt-ox"></div></div>'
-      + '<div class="lp" id="lp-4">'
-      + '<div class="ic"><span class="tag tg">인기 폭발</span><h3>중국에서 마라탕은?</h3><p>학생들과 젊은 사람들 사이에서 점심·저녁으로 자주 먹어요. 셀프로 재료를 고르는 방식이 인기예요!</p></div>'
-      + '<div class="ic"><span class="tag ty">麻(마)의 비밀</span><h3>혀가 얼얼한 이유 — 산초(花椒)</h3><p>산초의 향과 고추의 매운맛이 합쳐져 마라의 매력이 완성돼요. 한국의 매운맛과는 다른 독특한 느낌이에요!</p></div></div>'
-      + '<div class="lp" id="lp-5"><div class="stu-row"><button class="stb active" id="mlt-s1">1단계</button><button class="stb" id="mlt-s2">2단계</button></div><div class="pw"><div class="pf" id="mlt-pf" style="width:0%"></div></div><div class="cl" id="mlt-cl"></div></div>';
-    buildMLT();
-    document.getElementById('mlt-btn-all').addEventListener('click', function(){setMode('mlt','all');});
-    document.getElementById('mlt-btn-hover').addEventListener('click', function(){setMode('mlt','hover');});
-    document.getElementById('mlt-btn-none').addEventListener('click', function(){setMode('mlt','none');});
-    document.getElementById('mlt-s1').addEventListener('click', function(){
-      document.getElementById('mlt-s1').classList.add('active');document.getElementById('mlt-s2').classList.remove('active');
-      buildChecklist('mlt-cl','mlt-pf',mltCheckData,'a');
-    });
-    document.getElementById('mlt-s2').addEventListener('click', function(){
-      document.getElementById('mlt-s2').classList.add('active');document.getElementById('mlt-s1').classList.remove('active');
-      buildChecklist('mlt-cl','mlt-pf',mltCheckData,'b');
-    });
-  }
-};
-
-// ─── 4. 韩流 ───
-const hlyText=[
-  {py:['Wǒ','ài','shàng','le','Hánguó','diànshìjù','.','Hánjù','de','gùshi','hěn','yǒuyìsi','','nán','zhǔjué','hěn','shuài'],zh:['我','爱','上','了','韩国','电视剧','。','韩剧','的','故事','很','有意思','，','男','主角','很','帅','，']},
-  {py:['nǚ','zhǔjué','hěn','piàoliang','.','Wǒ','jīngcháng','xiǎng'],zh:['女','主角','很','漂亮','。','我','经常','想','：']},
-  {py:['Hánguó','rén','dōu','zhème','shuài','ma'],zh:['韩国','人','都','这么','帅','吗','？']},
-  {py:['Wǒ','mèimei','ài','shàng','le','Hánguó','de','ǒuxiàng','.','Tā','de','fángjiān','lǐ','dōu','shì','Hánguó','ǒuxiàng','de','zhàopiàn'],zh:['我','妹妹','爱','上','了','韩国','的','偶像','。','她','的','房间','里','都','是','韩国','偶像','的','照片','，']},
-  {py:['bǐrú','','','BLACKPINK','.','Tā','hái','shuō','yào','qù','Hánguó','kàn','yǎnchànghuì','ne'],zh:['比如','G-Dragon','、','BLACKPINK','。','她','还','说','要','去','韩国','看','演唱会','呢','！']},
-  {py:['Wǒ','de','hǎo','péngyǒu','Xiǎo','Lǐ','ài','shàng','le','Hánguó','kǎoròu','.','Tā','shuō','Hánguó','kǎoròu','yòu','tián','yòu','xián'],zh:['我','的','好','朋友','小','李','爱','上','了','韩国','烤肉','。','她','说','韩国','烤肉','又','甜','又','咸','，']},
-  {py:['tèbié','hǎochī','.','Xiànzài','tā','měi','ge','xīngqī','dōu','yào','chī','yī','cì'],zh:['特别','好吃','。','现在','她','每','个','星期','都','要','吃','一','次','！']},
-  {py:['Hánguó','wénhuà','tài','yǒu','mèilì','le'],zh:['韩国','文化','太','有','魅力','了','！']},
-];
-const hlyVocab=[
-  {zh:'爱上',py:'ài shàng',ko:'사랑에 빠지다'},{zh:'电视剧',py:'diànshìjù',ko:'드라마'},
-  {zh:'男主角',py:'nán zhǔjué',ko:'남자 주인공'},{zh:'女主角',py:'nǚ zhǔjué',ko:'여자 주인공'},
-  {zh:'帅',py:'shuài',ko:'멋지다'},{zh:'偶像',py:'ǒuxiàng',ko:'아이돌'},
-  {zh:'比如',py:'bǐrú',ko:'예를 들어'},{zh:'演唱会',py:'yǎnchànghuì',ko:'콘서트'},
-  {zh:'烤肉',py:'kǎoròu',ko:'불고기, 구이'},{zh:'又…又…',py:'yòu…yòu…',ko:'~하기도 하고 ~하기도'},
-  {zh:'魅力',py:'mèilì',ko:'매력'},
-];
-const hlyMM=[
-  {name:'나 (我)',sub:'한국 드라마에 반함',like:'韩国电视剧',likeKo:'한국 드라마',reason:'故事很有意思\n男主角很帅\n女主角很漂亮',reasonKo:'이야기 재미있고 배우들이 멋지고 아름다워서',action:'韩国人都这么帅吗？',actionKo:'"한국 사람들은 모두 이렇게 멋있나?" 라고 생각함'},
-  {name:'妹妹 (여동생)',sub:'한국 아이돌에 반함',like:'韩国偶像',likeKo:'한국 아이돌',reason:'G-Dragon\nBLACKPINK',reasonKo:'방에 아이돌 사진이 가득',action:'想去韩国看演唱会',actionKo:'한국에 가서 콘서트를 보겠다고 말함'},
-  {name:'小李 (친구 샤오리)',sub:'한국 고기에 반함',like:'韩国烤肉',likeKo:'한국 구이',reason:'又甜又咸\n特别好吃',reasonKo:'달콤하면서 짭짤하고 특별히 맛있어서',action:'每个星期吃一次',actionKo:'매주 한 번씩 꼭 먹음'},
-];
-const hlyOX=[
-  {q:'1. 我爱上了韩国电视剧。',py:'(Wǒ ài shàng le Hánguó diànshìjù.)',ans:true,explain:'맞아요! 본문 첫 문장에서 나는 한국 드라마에 반했다고 했어요.'},
-  {q:'2. 我的妹妹房间里有BLACKPINK和G-Dragon的照片。',py:'(Wǒ de mèimei fángjiān lǐ yǒu BLACKPINK hé G-Dragon de zhàopiàn.)',ans:true,explain:'맞아요! 여동생 방은 한국 아이돌 사진이 가득하고, G-Dragon과 BLACKPINK가 예시로 나와요.'},
-  {q:'3. 我的好朋友小李喜欢韩国泡菜，每个星期都要吃一次。',py:'(Wǒ de hǎo péngyǒu Xiǎo Lǐ xǐhuān Hánguó pàocài…)',ans:false,explain:'틀렸어요! 小李가 좋아하는 건 泡菜(김치)가 아니라 烤肉(불고기/구이)예요!'},
-];
-const hlyPickData=[
-  {label:'A. 韩国美食',ko:'한국 음식',fill:'我觉得韩国美食最有魅力！',ko2:'저는 한국 음식이 가장 매력 있다고 생각해요!'},
-  {label:'B. 韩国音乐(K-pop)',ko:'한국 음악',fill:'我觉得韩国音乐最有魅力！',ko2:'저는 K-pop이 가장 매력 있다고 생각해요!'},
-  {label:'C. 韩国电视剧',ko:'한국 드라마',fill:'我觉得韩国电视剧最有魅力！',ko2:'저는 한국 드라마가 가장 매력 있다고 생각해요!'},
-  {label:'D. 韩国偶像',ko:'한국 아이돌',fill:'我觉得韩国偶像最有魅力！',ko2:'저는 한국 아이돌이 가장 매력 있다고 생각해요!'},
-  {label:'E. 韩国化妆品',ko:'한국 화장품',fill:'我觉得韩国化妆品最有魅力！',ko2:'저는 한국 화장품이 가장 매력 있다고 생각해요!'},
-  {label:'F. 韩国时尚',ko:'한국 패션',fill:'我觉得韩国时尚最有魅力！',ko2:'저는 한국 패션이 가장 매력 있다고 생각해요!'},
-  {label:'G. 其他',ko:'기타',fill:'我觉得韩国______最有魅力！',ko2:'저는 한국 _____이/가 가장 매력 있다고 생각해요!'},
-];
-const hlyCheckData={
-  a:[{label:'단어 카드 11개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'마인드맵 3인물 확인하기',sub:'누가 무엇에 반했는지 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'마인드맵 구조 설명하기',sub:'세 인물 이유·행동까지 중국어로'},{label:'핵심 문형 활용하기',sub:'爱上了 / 又___又___ 직접 문장 만들기'},{label:'나의 대답 중국어로 말하기',sub:'我觉得韩国___最有魅力！'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
-};
-
-function buildHLY() {
-  buildPoem('hly-text', hlyText, 'hly');
-  buildVocab('hly-vocab', hlyVocab);
-  const mm=document.getElementById('hly-mm');
-  if(mm) hlyMM.forEach(function(p){
-    const c=document.createElement('div');c.className='mmp';
-    c.innerHTML='<div class="mmn">'+p.name+'</div><div class="mms">'+p.sub+'</div>'
-      +'<div class="mmr"><div class="mmc mg"><div class="mml">좋아하는 것</div><div style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">'+p.like+'</div><div style="font-size:11px;color:var(--green2);margin-top:3px">'+p.likeKo+'</div></div>'
-      +'<div class="mmc mk"><div class="mml">이유/예시</div><div style="font-size:13px;white-space:pre-line">'+p.reason+'</div><div style="font-size:11px;color:#C2185B;margin-top:3px">'+p.reasonKo+'</div></div>'
-      +'<div class="mmc ma"><div class="mml">생각·행동</div><div style="font-family:Noto Serif SC,serif;font-size:13px">'+p.action+'</div><div style="font-size:11px;color:var(--gold);margin-top:3px">'+p.actionKo+'</div></div></div>';
-    mm.appendChild(c);
-  });
-  buildOX('hly-ox', hlyOX);
-  const pg=document.getElementById('hly-pg');
-  if(pg) hlyPickData.forEach(function(p){
-    const btn=document.createElement('button');btn.className='pb';
-    btn.innerHTML='<span style="font-weight:700">'+p.label+'</span><br><span style="font-size:11px;color:var(--hint)">'+p.ko+'</span>';
-    btn.addEventListener('click',function(){
-      pg.querySelectorAll('.pb').forEach(function(b){b.classList.remove('sel');});
-      btn.classList.add('sel');
-      const r=document.getElementById('hly-res');
-      if(r) r.innerHTML='<div class="bz">'+p.fill+'</div><div style="font-size:13px;color:var(--muted);margin-top:6px">'+p.ko2+'</div>';
-    });
-    pg.appendChild(btn);
-  });
-  buildChecklist('hly-cl','hly-pf',hlyCheckData,'a');
-}
-LESSONS.hallyu = {
-  titleZh:'我爱上了韩国的这个！', titleKo:'나는 한국의 이것에 반했어!',
-  tags:[{t:'第二课',c:'r'},{t:'10대 독해',c:'b'},{t:'爱上了',c:'g'},{t:'又…又…',c:'y'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','🗺️ 마인드맵','⭕ OX 퀴즈','💬 나의 대답','🌊 한류','✅ 체크리스트'],
-  render: function(body) {
-    window.hly_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">爱上了 / 又___又___ / 太___了！</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="hly-btn-all">병음 전체 보기</button><button class="mb" id="hly-btn-hover">클릭하면 병음 보기</button><button class="mb" id="hly-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="hly-text"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="hly-vocab"></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">세 인물이 한국의 무엇에 반했는지 정리해봐요!</p><div id="hly-mm"></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">본문 내용을 확인해보세요!</p><div id="hly-ox"></div></div>'
-      + '<div class="lp" id="lp-4"><p style="font-family:Noto Serif SC,serif;font-size:17px;font-weight:700;margin-bottom:6px">你觉得韩国文化里最有魅力的是什么？</p><p class="sub">한국 문화 중 가장 매력 있는 것은 무엇인가요?</p><div class="pg" id="hly-pg"></div><div class="pr" id="hly-res"><span style="color:var(--hint)">위에서 항목을 골라보세요!</span></div></div>'
-      + '<div class="lp" id="lp-5">'
-      + '<div class="ic"><span class="tag tr">한류란?</span><h3>韩流(Hánliú)</h3><p>한국 드라마·음악·음식·화장품 등이 중국과 전 세계로 퍼져나가는 현상이에요.</p></div>'
-      + '<div id="hly-tl"></div></div>'
-      + '<div class="lp" id="lp-6"><div class="stu-row"><button class="stb active" id="hly-s1">1단계</button><button class="stb" id="hly-s2">2단계</button></div><div class="pw"><div class="pf" id="hly-pf" style="width:0%"></div></div><div class="cl" id="hly-cl"></div></div>';
-    buildHLY();
-    var tl=document.getElementById('hly-tl');
-    if(tl){[
-      {y:'2003',t:'《대장금》(大长今)이 중국에서 방영되며 한국 문화가 큰 주목을 받기 시작했어요.'},
-      {y:'이후',t:'《별에서 온 그대》, 《상속자들》 등이 연이어 인기를 얻으며 韩流라는 이름이 생겼어요.'},
-      {y:'확산',t:'드라마 → BTS, BLACKPINK → 화장품, 패션, 삼겹살·김치까지 빠르게 퍼져나갔어요.'},
-      {y:'2016',t:'한한령(限韩令)으로 한국 드라마·연예인이 중국 방송에서 잠시 활동 금지가 됐어요.'},
-      {y:'현재',t:'지금도 한류는 계속 변화하며 중국과 세계에 한국을 알리는 다리 역할을 해요.'},
-    ].forEach(function(item){
-      tl.innerHTML+='<div class="tli"><div class="tld">'+item.y+'</div><div class="tlc">'+item.t+'</div></div>';
-    });}
-    document.getElementById('hly-btn-all').addEventListener('click', function(){setMode('hly','all');});
-    document.getElementById('hly-btn-hover').addEventListener('click', function(){setMode('hly','hover');});
-    document.getElementById('hly-btn-none').addEventListener('click', function(){setMode('hly','none');});
-    document.getElementById('hly-s1').addEventListener('click', function(){
-      document.getElementById('hly-s1').classList.add('active');document.getElementById('hly-s2').classList.remove('active');
-      buildChecklist('hly-cl','hly-pf',hlyCheckData,'a');
-    });
-    document.getElementById('hly-s2').addEventListener('click', function(){
-      document.getElementById('hly-s2').classList.add('active');document.getElementById('hly-s1').classList.remove('active');
-      buildChecklist('hly-cl','hly-pf',hlyCheckData,'b');
-    });
-  }
-};
-
-// ─── 5. Z世代 ───
-const zgnText=[
-  {py:['Nǐ','zhīdào','Z','shìdài','ma'],zh:['你','知道','Z','世代','吗','？']},
-  {py:['Z','shìdài','shì','1996','nián','dào','2010','nián','zhījiān','chūshēng','de','rén','.'],zh:['Z','世代','是','1996','年','到','2010','年','之间','出生','的','人','。']},
-  {py:['Tāmen','hěn','xǐhuan','mánghé','!'],zh:['他们','很','喜欢','盲盒','！']},
-  {py:['"Máng"','de','yìsi','shì','kàn','bu','jiàn',',',' "hé"','de','yìsi','shì','hézi','.'],zh:['"盲"','的','意思','是','看','不','见','，','"盒"','的','意思','是','盒子','。']},
-  {py:['Mánghé','lǐmiàn','yǒu','xiǎo','wánjù',',',' nǐ','yī','kāishǐ','bù','zhīdào','lǐmiàn','yǒu','shénme','.'],zh:['盲盒','里面','有','小','玩具','，','你','一','开始','不','知道','里面','有','什么','。']},
-  {py:['"Dādā','!"','dǎkāi','yǐhòu','cái','zhīdào','!','Hěn','hǎowán','.'],zh:['"哒哒','！"','打开','以后','才','知道','！','很','好玩','。']},
-  {py:['Bǐrú','POP MART','de','LABUBU',',',' yǒu','hěn','duō','yánsè',',',' tèbié','kě'ài','.'],zh:['比如','POP MART','的','LABUBU','，','有','很','多','颜色','，','特别','可爱','。']},
-  {py:['Nǐ','yě','mǎiguo','mánghé','ma'],zh:['你','也','买过','盲盒','吗','？']},
-];
-
-const zgnVocab=[
-  {zh:'世代',py:'shìdài',ko:'세대'},{zh:'之间',py:'zhījiān',ko:'~사이'},
-  {zh:'出生',py:'chūshēng',ko:'태어나다'},{zh:'喜欢',py:'xǐhuan',ko:'좋아하다'},
-  {zh:'盲',py:'máng',ko:'눈이 멀다, 블라인드'},{zh:'盒',py:'hé',ko:'상자, 박스'},
-  {zh:'意思',py:'yìsi',ko:'뜻, 의미'},{zh:'里面',py:'lǐmiàn',ko:'안, 내부'},
-  {zh:'打开',py:'dǎkāi',ko:'열다'},{zh:'好玩',py:'hǎowán',ko:'재미있다'},
-  {zh:'颜色',py:'yánsè',ko:'색깔'},{zh:'可爱',py:'kě'ài',ko:'귀엽다'},
-];
-
-const zgnOX=[
-  {q:'1. Z世代是1996年到2010年之间出生的人。',py:'(Z shìdài shì 1996 nián dào 2010 nián zhījiān chūshēng de rén.)',ans:true,explain:'맞아요! 본문 두 번째 문장에 정확히 나와요.'},
-  {q:'2. 盲盒里面有小玩具，但是一开始不知道里面有什么。',py:'(Mánghé lǐmiàn yǒu xiǎo wánjù, dànshì yīkāishǐ bù zhīdào lǐmiàn yǒu shénme.)',ans:true,explain:'맞아요! 열어봐야만 안에 뭐가 있는지 알 수 있어요.'},
-  {q:'3. LABUBU是POP MART的盲盒玩具，它只有一种颜色。',py:'(LABUBU shì POP MART de mánghé wánjù, tā zhǐ yǒu yī zhǒng yánsè.)',ans:false,explain:'틀렸어요! 본문에서 LABUBU는 有很多颜色(색깔이 매우 많다)고 했어요.'},
-];
-
-const zgnCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'한자 분해 盲·盒 읽기',sub:'부수 뜻 이해하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'"___的意思是___" 문장 만들기',sub:'새 단어로 직접 문장 만들기'},{label:'라부부 인기 이유 설명하기',sub:'한국어 or 중국어로'},{label:'OX 퀴즈 이유 설명하기',sub:'왜 O/X인지 중국어로'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
-};
-
-
-function buildZGN() {
-  buildPoem('zgn-text', zgnText, 'zgn');
-  buildVocab('zgn-vocab', zgnVocab);
-  buildOX('zgn-ox', zgnOX);
-  buildChecklist('zgn-cl','zgn-pf',zgnCheckData,'a');
-}
-LESSONS.zgeneration = {
-  titleZh:'你知道Z世代吗？', titleKo:'Z세대를 아나요? — 블라인드박스 이야기',
-  tags:[{t:'第三课',c:'r'},{t:'10대 독해',c:'b'},{t:'Z世代·盲盒',c:'g'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','🔍 한자 분해','⭕ OX 퀴즈','🌏 라부부','✅ 체크리스트'],
-  render: function(body) {
-    window.zgn_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">"___"的意思是___ / 你也___过___吗？</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="zgn-btn-all">병음 전체 보기</button><button class="mb" id="zgn-btn-hover">클릭하면 병음 보기</button><button class="mb" id="zgn-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="zgn-text"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="zgn-vocab"></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">盲(máng)과 盒(hé)의 부수를 분해해서 뜻을 이해해봐요!</p>'
-      + '<div class="ic" style="border-left:4px solid var(--gold2)"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px"><div style="font-family:Noto Serif SC,serif;font-size:56px;font-weight:700;color:var(--gold2);line-height:1">盲</div><div><div style="font-size:13px;color:var(--muted);margin-bottom:6px">máng — 눈이 멀다, 블라인드</div><div style="font-size:13px;line-height:1.8"><span style="background:var(--gold-l);padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500">위 亡</span>망하다, 잃다<br><span style="background:var(--gold-l);padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500">아래 目</span>눈(eye)<br>→ <b>눈(目)을 잃은(亡) 상태 = 볼 수 없다!</b></div></div></div><div style="background:var(--surface2);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--muted)">💡 盲盒 = 盲(볼 수 없다) + 盒(상자) → <b>열기 전까지 안을 볼 수 없는 상자!</b></div></div>'
-      + '<div class="ic" style="border-left:4px solid var(--green2)"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><div style="font-family:Noto Serif SC,serif;font-size:56px;font-weight:700;color:var(--green2);line-height:1">盒</div><div><div style="font-size:13px;color:var(--muted);margin-bottom:6px">hé — 상자, 박스</div><div style="font-size:13px;line-height:1.8"><span style="background:var(--green-l);padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500">위 合</span>합하다 (발음 힌트: hé)<br><span style="background:var(--green-l);padding:2px 8px;border-radius:6px;margin-right:6px;font-weight:500">아래 皿</span>그릇, 접시<br>→ <b>뚜껑과 그릇(皿)이 합쳐진(合) 것 = 상자!</b></div></div></div></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">본문 내용을 확인해보세요!</p><div id="zgn-ox"></div></div>'
-      + '<div class="lp" id="lp-4">'
-      + '<div class="ic"><span class="tag ty">라부부란?</span><h3>LABUBU — 2.7조 대박 캐릭터</h3><p>홍콩 아티스트 카싱 렁이 북유럽 신화에서 영감을 받아 만든 요정 캐릭터예요. 리한나, 블랙핑크 리사 등 유명 연예인들이 소장하면서 전 세계 인기에 불을 당겼어요!</p></div>'
-      + '<div class="ic"><span class="tag tb">왜 Z세대가 열광할까?</span><h3>블라인드박스의 매력</h3><p>열기 전까지 어떤 캐릭터인지 알 수 없는 두근두근 설렘이 매력이에요. 또, "울어도 괜찮다"는 솔직한 감정 표현이 Z세대의 감성을 자극해요.</p></div>'
-      + '<div class="ic"><span class="tag tr">얼마나 인기인가요?</span><h3>가격이 놀라워요!</h3><p>국내 정품은 2~5만원이지만 베이징 경매장에서는 사람 크기 한정판이 <b>120만 위안(약 2억 3천만 원)</b>에 낙찰됐어요!</p></div></div>'
-      + '<div class="lp" id="lp-5"><div class="stu-row"><button class="stb active" id="zgn-s1">1단계</button><button class="stb" id="zgn-s2">2단계</button></div><div class="pw"><div class="pf" id="zgn-pf" style="width:0%"></div></div><div class="cl" id="zgn-cl"></div></div>';
-    buildZGN();
-    document.getElementById('zgn-btn-all').addEventListener('click', function(){setMode('zgn','all');});
-    document.getElementById('zgn-btn-hover').addEventListener('click', function(){setMode('zgn','hover');});
-    document.getElementById('zgn-btn-none').addEventListener('click', function(){setMode('zgn','none');});
-    document.getElementById('zgn-s1').addEventListener('click', function(){
-      document.getElementById('zgn-s1').classList.add('active');document.getElementById('zgn-s2').classList.remove('active');
-      buildChecklist('zgn-cl','zgn-pf',zgnCheckData,'a');
-    });
-    document.getElementById('zgn-s2').addEventListener('click', function(){
-      document.getElementById('zgn-s2').classList.add('active');document.getElementById('zgn-s1').classList.remove('active');
-      buildChecklist('zgn-cl','zgn-pf',zgnCheckData,'b');
-    });
-  }
-};
-
-// ─── 6. 명言 ───
-const mgyText=[
-  {py:['Nǐ','tīng','guo','zhèxiē','huà','ma'],zh:['你','听','过','这些','话','吗','？']},
-  {py:['"Bú','pà','màn',',',' zhǐ','pà','zhàn','."'],zh:['"不','怕','慢','，','只','怕','站','。"']},
-  {py:['Wūguī','zǒu','de','hěn','màn',',',' kěshì','tā','yīzhí','zǒu',',',' zuìhòu','dào','le','zhōngdiǎn','.'],zh:['乌龟','走','得','很','慢','，','可是','它','一直','走','，','最后','到','了','终点','。']},
-  {py:['"Shībài','shì','chénggōng','zhī','mǔ','."'],zh:['"失败','是','成功','之','母','。"']},
-  {py:['Àidíshēng','zuò','dēng','de','shíhou',',',' shībài','le','yī','qiān','cì',',',' zuìhòu','chénggōng','le','.'],zh:['爱迪生','做','灯','的','时候','，','失败','了','一','千','次','，','最后','成功','了','。']},
-  {py:['Zhèxiē','míngyán','huì','ràng','wǒmen','gèng','yǒnggǎn',',',' yě','gèng','kuàilè','.'],zh:['这些','名言','会','让','我们','更','勇敢','，','也','更','快乐','。']},
-  {py:['Nǐ','hái','zhīdào','bié','de','míngyán','ma'],zh:['你','还','知道','别','的','名言','吗','？']},
-];
-
-const mgyVocab=[
-  {zh:'这些',py:'zhèxiē',ko:'이들, 이것들'},{zh:'话',py:'huà',ko:'말, 이야기'},
-  {zh:'怕',py:'pà',ko:'두려워하다'},{zh:'慢',py:'màn',ko:'느리다'},
-  {zh:'站',py:'zhàn',ko:'서다'},{zh:'乌龟',py:'wūguī',ko:'거북이'},
-  {zh:'走',py:'zǒu',ko:'걷다'},{zh:'终点',py:'zhōngdiǎn',ko:'종점, 끝'},
-  {zh:'失败',py:'shībài',ko:'실패하다'},{zh:'成功',py:'chénggōng',ko:'성공하다'},
-  {zh:'灯',py:'dēng',ko:'등, 전등'},{zh:'快乐',py:'kuàilè',ko:'즐겁다, 행복하다'},
-];
-
-const mgyOX=[
-  {q:'1. 乌龟走得很快。',py:'(Wūguī zǒu de hěn kuài.)',ans:false,explain:'틀렸어요! 본문에서 乌龟走得很慢(거북이는 아주 천천히 걸었다)고 했어요.'},
-  {q:'2. 爱迪生做灯的时候，一次就成功了。',py:'(Àidíshēng zuò dēng de shíhou, yícì jiù chénggōng le.)',ans:false,explain:'틀렸어요! 에디슨은 失败了一千次(천 번이나 실패했지만) 마침내 성공했어요.'},
-  {q:'3. 这些名言会让我们更勇敢，也更快乐。',py:'(Zhèxiē míngyán huì ràng wǒmen gèng yǒnggǎn, yě gèng kuàilè.)',ans:true,explain:'맞아요! 마지막 문장에 정확히 나와요. 명언은 우리를 더 용감하고 즐겁게 해줘요!'},
-];
-
-const mgyContestData=[
-  {ko:'느린 것은 두렵지 않다, 멈추는 것이 두렵다',en:'Don't be afraid of going slow, only of standing still.',zh:'不怕慢，只怕站。',py:'Bú pà màn, zhǐ pà zhàn.'},
-  {ko:'실패는 성공의 어머니다',en:'Failure is the mother of success.',zh:'失败是成功之母。',py:'Shībài shì chénggōng zhī mǔ.'},
-  {ko:'연습하면 능숙해진다',en:'Practice makes perfect.',zh:'熟能生巧。',py:'Shúnéng shēng qiǎo.'},
-  {ko:'지식은 힘이다',en:'Knowledge is power.',zh:'知识就是力量。',py:'Zhīshi jiù shì lìliang.'},
-  {ko:'시간은 돈이다',en:'Time is money.',zh:'时间就是金钱。',py:'Shíjiān jiù shì jīnqián.'},
-  {ko:'정직이 최선의 방책이다',en:'Honesty is the best policy.',zh:'诚实为上策。',py:'Chéngshí wéi shàngcè.'},
-  {ko:'웃음은 최고의 약이다',en:'Laughter is the best medicine.',zh:'笑是最好的药。',py:'Xiào shì zuì hǎo de yào.'},
-  {ko:'말보다 행동이 더 중요하다',en:'Actions speak louder than words.',zh:'行动胜于言语。',py:'Xíngdòng shèng yú yányǔ.'},
-  {ko:'일찍 일어나는 새가 벌레를 잡는다',en:'The early bird catches the worm.',zh:'早起的鸟儿有虫吃。',py:'Zǎoqǐ de niǎor yǒu chóng chī.'},
-  {ko:'노력 없이는 얻는 것도 없다',en:'No pain, no gain.',zh:'没有付出，就没有收获。',py:'Méiyǒu fùchū, jiù méiyǒu shōuhuò.'},
-  {ko:'어려울 때 친구가 진짜 친구다',en:'A friend in need is a friend indeed.',zh:'患难见真情。',py:'Huànnàn jiàn zhēnqíng.'},
-  {ko:'천 리 길도 한 걸음부터 시작된다',en:'The journey of a thousand miles begins with a single step.',zh:'千里之行，始于足下。',py:'Qiānlǐ zhī xíng, shǐ yú zú xià.'},
-];
-
-const mgyCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'비교표 내용 확인하기',sub:'두 명언의 예시·핵심어 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'명언 암송대회에서 7개 선택',sub:'한·영·중 3개 국어로 연습'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'두 명언의 차이 설명하기',sub:'각 명언이 주는 교훈 말하기'},{label:'명언 7개 암기 완료',sub:'한국어·영어·중국어 모두'},{label:'내가 좋아하는 명언 이유 말하기',sub:'중국어로 한 문장 만들기'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
-};
-
-
-function buildMGY() {
-  buildPoem('mgy-text', mgyText, 'mgy');
-  buildVocab('mgy-vocab', mgyVocab);
-  buildOX('mgy-ox', mgyOX);
-  // Contest cards
-  var cl=document.getElementById('mgy-contest-list');
-  if(cl){
-    mgyContestData.forEach(function(m,i){
-      var d=document.createElement('div');
-      d.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;cursor:pointer;transition:all 0.15s;margin-bottom:8px';
-      d.innerHTML='<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'
-        +'<div id="mgy-cb'+i+'" style="width:22px;height:22px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px"></div>'
-        +'<div style="font-family:Noto Serif SC,serif;font-size:16px;font-weight:700">'+m.zh+'</div></div>'
-        +'<div style="font-size:11px;color:var(--muted);margin-left:32px">'+m.py+'</div>'
-        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-left:32px;margin-top:6px">'
-        +'<div style="font-size:12px;background:var(--surface2);border-radius:4px;padding:4px 8px">🇰🇷 '+m.ko+'</div>'
-        +'<div style="font-size:12px;background:var(--surface2);border-radius:4px;padding:4px 8px">🇬🇧 '+m.en+'</div></div>';
-      (function(idx,el){
-        el.addEventListener('click',function(){
-          var cb=document.getElementById('mgy-cb'+idx);
-          var cnt=document.getElementById('mgy-cnt');
-          if(!window.mgySelected) window.mgySelected=new Set();
-          if(window.mgySelected.has(idx)){
-            window.mgySelected.delete(idx);
-            el.style.background='var(--surface)';el.style.borderColor='var(--border)';
-            cb.style.background='transparent';cb.style.borderColor='#ccc';cb.textContent='';
-          } else {
-            window.mgySelected.add(idx);
-            el.style.background='var(--green-l)';el.style.borderColor='#A9DFBF';
-            cb.style.background='var(--green2)';cb.style.borderColor='var(--green2)';cb.style.color='white';cb.textContent='✓';
-          }
-          if(cnt){cnt.textContent=window.mgySelected.size;cnt.style.color=window.mgySelected.size>=7?'var(--green2)':'white';}
-        });
-      })(i,d);
-      cl.appendChild(d);
-    });
-  }
-  buildChecklist('mgy-cl','mgy-pf',mgyCheckData,'a');
-}
-LESSONS.mingyan = {
-  titleZh:'小小名言，大大力量', titleKo:'작은 명언, 큰 힘',
-  tags:[{t:'第五课',c:'r'},{t:'10대 독해',c:'b'},{t:'不怕慢只怕站',c:'g'},{t:'명언 암송대회',c:'y'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','📊 비교표','⭕ OX 퀴즈','🏆 명언 암송대회','✅ 체크리스트'],
-  render: function(body) {
-    window.mgy_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 명언 </span><span style="font-family:Noto Serif SC,serif;font-size:15px;font-weight:700">不怕慢，只怕站。/ 失败是成功之母。</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="mgy-btn-all">병음 전체 보기</button><button class="mb" id="mgy-btn-hover">클릭하면 병음 보기</button><button class="mb" id="mgy-btn-none">병음 없이 읽기</button></div>'
-      + '<div class="text-area" id="mgy-text"></div><p class="hint">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
-      + '<div class="lp" id="lp-1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="mgy-vocab"></div></div>'
-      + '<div class="lp" id="lp-2"><p class="sub">두 명언을 비교해서 정리해봐요!</p><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr><th style="background:var(--surface2);padding:12px;border:1px solid var(--border);font-weight:700;width:20%">항목</th><th style="background:var(--gold-l);padding:12px;border:1px solid var(--border);font-family:Noto Serif SC,serif;font-size:15px;text-align:center">不怕慢，只怕站</th><th style="background:var(--green-l);padding:12px;border:1px solid var(--border);font-family:Noto Serif SC,serif;font-size:15px;text-align:center">失败是成功之母</th></tr></thead><tbody><tr><td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2)">例子 (예시)</td><td style="padding:12px;border:1px solid var(--border);text-align:center"><span style="font-family:Noto Serif SC,serif;font-size:16px">🐢 乌龟</span><br><span style="font-size:12px;color:var(--muted)">천천히 걸어도 결국 종점에 도착</span></td><td style="padding:12px;border:1px solid var(--border);text-align:center"><span style="font-family:Noto Serif SC,serif;font-size:16px">💡 爱迪生</span><br><span style="font-size:12px;color:var(--muted)">천 번 실패 후 전등 발명 성공</span></td></tr><tr><td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2)">关键词 (핵심어)</td><td style="padding:12px;border:1px solid var(--border);text-align:center"><span style="background:var(--gold-l);padding:3px 8px;border-radius:6px;margin:2px;display:inline-block">慢·站·走</span></td><td style="padding:12px;border:1px solid var(--border);text-align:center"><span style="background:var(--green-l);padding:3px 8px;border-radius:6px;margin:2px;display:inline-block">失败·成功</span></td></tr><tr><td style="padding:12px;border:1px solid var(--border);font-weight:700;background:var(--surface2)">给我们</td><td colspan="2" style="padding:12px;border:1px solid var(--border);text-align:center"><span style="font-family:Noto Serif SC,serif;font-size:16px;font-weight:700">勇敢 + 快乐</span><br><span style="font-size:12px;color:var(--muted)">더 용감하게, 더 즐겁게!</span></td></tr></tbody></table></div></div>'
-      + '<div class="lp" id="lp-3"><p class="sub">본문 내용을 확인해보세요!</p><div id="mgy-ox"></div></div>'
-      + '<div class="lp" id="lp-4"><div style="background:var(--ink);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.25rem;color:white"><div style="font-size:16px;font-weight:700;margin-bottom:4px">🏆 명언 암송대회</div><div style="font-size:13px;color:rgba(255,255,255,0.65)">12개 중 7개 이상 골라 암기! 한국어·영어·중국어 3개 국어 완료 시 기프티콘 선물 🎁</div><div style="margin-top:8px;font-size:13px;color:rgba(255,255,255,0.8)">선택한 명언: <span id="mgy-cnt">0</span> / 7개 이상</div></div><div id="mgy-contest-list"></div></div>'
-      + '<div class="lp" id="lp-5"><div class="stu-row"><button class="stb active" id="mgy-s1">1단계</button><button class="stb" id="mgy-s2">2단계</button></div><div class="pw"><div class="pf" id="mgy-pf" style="width:0%"></div></div><div class="cl" id="mgy-cl"></div></div>';
-    buildMGY();
-    document.getElementById('mgy-btn-all').addEventListener('click', function(){setMode('mgy','all');});
-    document.getElementById('mgy-btn-hover').addEventListener('click', function(){setMode('mgy','hover');});
-    document.getElementById('mgy-btn-none').addEventListener('click', function(){setMode('mgy','none');});
-    document.getElementById('mgy-s1').addEventListener('click', function(){
-      document.getElementById('mgy-s1').classList.add('active');document.getElementById('mgy-s2').classList.remove('active');
-      buildChecklist('mgy-cl','mgy-pf',mgyCheckData,'a');
-    });
-    document.getElementById('mgy-s2').addEventListener('click', function(){
-      document.getElementById('mgy-s2').classList.add('active');document.getElementById('mgy-s1').classList.remove('active');
-      buildChecklist('mgy-cl','mgy-pf',mgyCheckData,'b');
-    });
-  }
-};
-
+// 나머지 레벨들 (임시 데이터)
+['xishouge','malatang','hallyu','zgeneration','mingyan'].forEach(id => {
+  LESSONS[id] = {
+    titleZh: '준비 중', titleKo: '곧 업데이트 됩니다', tags: [], tabs: ['알림'],
+    render: function(body) { body.innerHTML = '<h3>곧 만나요!</h3><p>현재 수업 자료를 제작 중입니다.</p>'; }
+  };
+});
 </script>
-
 </body>
 </html>
