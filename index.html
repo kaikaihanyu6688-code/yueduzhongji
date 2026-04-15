@@ -502,52 +502,70 @@ LESSONS.jianjianhua = {
 };
 
 // 나머지 레벨들 (임시 데이터)
-// ─── 2. 洗手歌 ───
+// // ─── 2. 洗手歌 (확장판 복구) ───
 const xsgPoem = [
-  {py:['pāi','pāi','shǒu','','pāi','pāi','shǒu'], zh:['拍','拍','手','，','拍','拍','手','']},
-  {py:['dà','jiā','yī','qǐ','lái','xǐ','shǒu'], zh:['大','家','一','起','来','洗','手','。']},
-  {py:['xiān','cuō','zhǎng','xīn','','hòu','cuō','bèi'], zh:['先','搓','掌','心','，','后','搓','背','']},
-  {py:['shǐ','jìn','cuō','cuō','shǒu','zhǐ','fèng'], zh:['使','劲','搓','搓','手','指','缝','。']}
+  { py:['pái','zhe','duì','','xiàng','qián','zǒu'], zh:['排','着','队','，','向','前','走','，'] },
+  { py:['zuò','shén','me','','qù','xǐ','shǒu'], zh:['做','什','me','？','去','洗','手','。'] },
+  { py:['féi','zào','yòng','lái','cuō','cuo','shǒu'], zh:['肥','皂','용','래','搓','搓','手','，'] },
+  { py:['qīng','shuǐ','bāng','wǒ','chōng','chong','shǒu'], zh:['清','水','방','아','冲','冲','手','，'] },
+  { py:['máo','jīn','gěi','wǒ','cā','ca','shǒu'], zh:['毛','巾','게','아','擦','擦','手','。'] },
+  { py:['xiǎo','shǒu','xǐ','de','zhēn','gān','jìng'], zh:['小','手','세','득','真','干','净','，'] },
+  { py:['dà','jiā','yī','qǐ','xiào','kāi','kǒu'], zh:['大','家','일','기','笑','开','口','。'] }
 ];
+
 const xsgVocab = [
-  {zh:'拍手', py:'pāishǒu', ko:'박수치다'}, {zh:'大家', py:'dàjiā', ko:'여러분'},
-  {zh:'一起', py:'yīqǐ', ko:'함께'}, {zh:'洗手', py:'xǐshǒu', ko:'손을 씻다'},
-  {zh:'掌心', py:'zhǎngxīn', ko:'손바닥'}, {zh:'手指缝', py:'shǒuzhǐfèng', ko:'손가락 사이'}
+  {zh:'排队', py:'pái duì', ko:'줄 서다'}, {zh:'洗手', py:'xǐ shǒu', ko:'손 씻다'},
+  {zh:'肥皂', py:'féi zào', ko:'비누'}, {zh:'干净', py:'gān jìng', ko:'깨끗하다'}
 ];
 
 LESSONS.xishouge = {
   titleZh:'洗手歌', titleKo:'손 씻기 노래',
-  tags:[{t:'초등 교과서',c:'b'},{t:'p.40-41',c:'y'}],
-  tabs:['📖 노래 가사','📝 단어 카드'],
+  tags:[{t:'중국 교과서 9과',c:'b'},{t:'HSK 2급',c:'y'}],
+  tabs:['📖 시 읽기','💡 배경지식','❓ 퀴즈'],
   render: function(body) {
-    window.xsg_mode = 'all';
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<div class="key-box"><span style="font-size:13px;color:var(--muted)">발음 연습 </span><span style="font-weight:700">ai · ei · ui</span></div>'
-      + '<div class="mode-row"><button class="mb on" id="xsg-btn-all" onclick="setMode(\'xsg\',\'all\')">병음 전체</button><button class="mb" id="xsg-btn-hover" onclick="setMode(\'xsg\',\'hover\')">클릭 모드</button></div>'
-      + '<div class="text-area" id="xsg-poem"></div></div>'
-      + '<div class="lp" id="lp-1"><div class="vg" id="xsg-vocab"></div></div>';
+    body.innerHTML = `
+      <div class="lp active" id="lp-0">
+        <div class="mode-row">
+          <button class="mb on" onclick="setMode('xsg','all')">병음 전체</button>
+          <button class="mb" onclick="setMode('xsg','hover')">클릭 모드</button>
+        </div>
+        <div class="text-area" id="xsg-poem"></div>
+      </div>
+      <div class="lp" id="lp-1">
+        <div class="info-box">
+          <h4>🧼 손 씻기 순서</h4>
+          <p>1. 비누로 비비기(搓搓手) <br> 2. 물로 헹구기(冲冲手) <br> 3. 수건으로 닦기(擦擦手)</p>
+        </div>
+      </div>
+      <div class="lp" id="lp-2">
+        <div class="quiz-item">"비누"를 중국어로 무엇이라고 할까요? (정답: 肥皂)</div>
+      </div>`;
     buildPoem('xsg-poem', xsgPoem, 'xsg');
-    buildVocab('xsg-vocab', xsgVocab);
   }
 };
 
-// ─── 3. 麻辣烫 ───
-const mltVocab = [
-  {zh:'麻辣烫', py:'málàtàng', ko:'마라탕'}, {zh:'吃过', py:'chīguò', ko:'먹어본 적 있다'},
-  {zh:'味道', py:'wèidào', ko:'맛'}, {zh:'特别', py:'tèbié', ko:'특별히/매우'},
-  {zh:'牛肉', py:'niúròu', ko:'소고기'}, {zh:'蔬菜', py:'shūcài', ko:'채소'}
+// ─── 4. 剪窗花 (파일 내용 기반 복구) ───
+const jchPoem = [
+  { py:['xiǎo','jiǎn','dāo','','shǒu','zhōng','ná'], zh:['小','剪','刀','，','手','中','拿','，'] },
+  { py:['wǒ','xué','nǎi','nai','jiǎn','chuāng','huā'], zh:['我','学','奶','奶','剪','窗','花','。'] }
 ];
 
-LESSONS.malatang = {
-  titleZh:'你吃过麻辣烫吗？', titleKo:'마라탕 먹어봤니?',
-  tags:[{t:'독해 스터디',c:'g'},{t:'1주차',c:'p'}],
-  tabs:['📝 핵심 단어','🥘 재료 고르기'],
+LESSONS.jianchuanghua = {
+  titleZh:'剪窗花', titleKo:'전지 오리기',
+  tags:[{t:'전통문화',c:'r'},{t:'유네스코',c:'g'}],
+  tabs:['✂️ 시 읽기','🌸 동물 의미','👵 이야기'],
   render: function(body) {
-    body.innerHTML = '<div class="lp active" id="lp-0">'
-      + '<p class="sub">마라탕 관련 단어를 익혀보세요.</p>'
-      + '<div class="vg" id="mlt-vocab"></div></div>'
-      + '<div class="lp" id="lp-1"><h3>준비 중입니다!</h3><p>재료 선택 퀴즈가 곧 추가됩니다.</p></div>';
-    buildVocab('mlt-vocab', mltVocab);
+    body.innerHTML = `
+      <div class="lp active" id="lp-0">
+        <div class="text-area" id="jch-poem"></div>
+      </div>
+      <div class="lp" id="lp-1">
+        <p>🐟 잉어(鲤鱼): 풍요와 행운 <br> 🐦 까치(喜鹊): 기쁜 소식</p>
+      </div>
+      <div class="lp" id="lp-2">
+        <p>할머니에게 배우는 따뜻한 전지 공예 이야기...</p>
+      </div>`;
+    buildPoem('jch-poem', jchPoem, 'jch');
   }
 };
 
