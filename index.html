@@ -3,777 +3,448 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>카이카이 중국어</title>
+<title>카이카이 중국어 중급 독해</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+SC:wght@400;700&family=Raleway:wght@800;900&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --red:#C0392B;--red2:#E74C3C;--red-l:#FDEDEC;
-  --blue:#1A5276;--blue2:#2980B9;--blue-l:#EBF5FB;
-  --green:#1E8449;--green2:#27AE60;--green-l:#E9F7EF;
-  --gold:#B7950B;--gold2:#F39C12;--gold-l:#FEF9E7;
-  --pink:#C0392B;--pink2:#E91E8C;--pink-l:#FCE4EC;
-  --ink:#1a1a2e;--ink2:#2d2d44;--muted:#6c757d;--hint:#adb5bd;
-  --bg:#FAFAF8;--surface:#fff;--surface2:#F4F3EF;
-  --border:rgba(0,0,0,0.08);
-  --r:14px;--r-sm:8px;
+  --red:#C0392B;--red2:#E74C3C;--redl:#FDEDEC;
+  --blue:#1A5276;--blue2:#2980B9;--bluel:#EBF5FB;
+  --green:#1E8449;--green2:#27AE60;--greenl:#E9F7EF;
+  --gold:#B7950B;--gold2:#F39C12;--goldl:#FEF9E7;
+  --pink:#C2185B;--pinkl:#FCE4EC;
+  --purple:#3C3489;--purplel:#EEEDFE;
+  --ink:#1a1a2e;--ink2:#2d2d44;--muted:#666;--hint:#adb5bd;
+  --bg:#FAFAF8;--sur:#fff;--sur2:#F4F3EF;--bdr:rgba(0,0,0,0.08);
+  --r:12px;--rs:8px;
 }
 html{scroll-behavior:smooth}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
 
 /* ── SITE HEADER ── */
-.site-header{
-  background:var(--ink);
-  padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:64px;position:sticky;top:0;z-index:100;
-  border-bottom:2px solid var(--red);
-}
-.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
-.logo-zh{font-family:'Noto Serif SC',serif;font-size:22px;color:#fff;font-weight:700}
-.logo-dot{width:8px;height:8px;background:var(--red2);border-radius:50%}
-.logo-ko{font-size:13px;color:rgba(255,255,255,0.5);font-weight:500}
-.site-nav{display:flex;gap:4px}
-.site-nav-btn{
-  font-size:13px;padding:6px 14px;border-radius:20px;
-  border:none;background:transparent;color:rgba(255,255,255,0.6);
-  cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;
-  transition:all 0.2s;white-space:nowrap;
-}
-.site-nav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
-.site-nav-btn.active{background:var(--red2);color:#fff}
+.shead{background:var(--ink);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--red2)}
+.logo{display:flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none}
+.logo-zh{font-family:'Noto Serif SC',serif;font-size:20px;color:#fff;font-weight:700}
+.logo-dot{width:7px;height:7px;background:var(--red2);border-radius:50%}
+.logo-sub{font-size:12px;color:rgba(255,255,255,0.5);font-weight:500}
+.snav{display:flex;gap:3px}
+.snb{font-size:12px;padding:5px 12px;border-radius:18px;border:none;background:transparent;color:rgba(255,255,255,0.55);cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;transition:all .2s;white-space:nowrap}
+.snb:hover{background:rgba(255,255,255,0.1);color:#fff}
+.snb.on{background:var(--red2);color:#fff}
 
 /* ── PAGES ── */
-.page{display:none;min-height:calc(100vh - 64px)}
-.page.active{display:block}
+.pg{display:none;min-height:calc(100vh - 60px)}
+.pg.show{display:block}
 
-/* ══════════════════════════════════
-   HOME PAGE
-══════════════════════════════════ */
-.hero{
-  background:var(--ink2);
-  padding:4rem 2rem 3rem;
-  text-align:center;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'中文';
-  position:absolute;font-family:'Raleway',sans-serif;
-  font-size:260px;font-weight:900;color:rgba(255,255,255,0.03);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;white-space:nowrap;
-}
-.hero-label{
-  display:inline-block;font-size:11px;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  background:var(--red2);color:#fff;
-  padding:4px 14px;border-radius:20px;margin-bottom:1.25rem;
-}
-.hero-title{
-  font-family:'Noto Serif SC',serif;
-  font-size:clamp(32px,5vw,56px);font-weight:700;
-  color:#fff;line-height:1.15;margin-bottom:0.75rem;
-}
-.hero-sub{font-size:16px;color:rgba(255,255,255,0.55);margin-bottom:2.5rem;line-height:1.7}
-.hero-stats{
-  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
-}
-.hero-stat{text-align:center}
-.hero-stat-num{font-family:'Raleway',sans-serif;font-size:32px;font-weight:900;color:var(--red2)}
-.hero-stat-label{font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px}
+/* ── HOME ── */
+.hero{background:var(--ink2);padding:3.5rem 1.5rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'中文';position:absolute;font-family:'Raleway',sans-serif;font-size:220px;font-weight:900;color:rgba(255,255,255,0.03);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap}
+.hero-lbl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--red2);color:#fff;padding:3px 12px;border-radius:18px;margin-bottom:1rem}
+.hero-ttl{font-family:'Noto Serif SC',serif;font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:.6rem}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:2rem;line-height:1.6}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:'Raleway',sans-serif;font-size:30px;font-weight:900;color:var(--red2)}
+.hstat-l{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
 
-.home-content{max-width:960px;margin:0 auto;padding:3rem 1.5rem}
-.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:1.5rem}
-.section-title-main{font-size:20px;font-weight:700;color:var(--ink)}
-.section-title-zh{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--muted)}
+.home-body{max-width:940px;margin:0 auto;padding:2.5rem 1.5rem}
+.sec-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:1.25rem}
+.sec-ttl{font-size:18px;font-weight:700}
+.sec-sub{font-family:'Noto Serif SC',serif;font-size:13px;color:var(--muted)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:2.5rem}
+.ccard{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .2s}
+.ccard:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,0.1)}
+.ctop{height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
+.ctop.cr{background:var(--redl)}.ctop.cb{background:var(--bluel)}.ctop.cg{background:var(--greenl)}.ctop.cy{background:var(--goldl)}.ctop.cp{background:var(--pinkl)}
+.cbadge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px}
+.be{background:var(--redl);color:var(--red)}.bt{background:var(--bluel);color:var(--blue2)}
+.cbody{padding:.9rem 1.1rem}
+.cttl{font-size:15px;font-weight:700;margin-bottom:3px}
+.cttl .zh{font-family:'Noto Serif SC',serif;font-size:17px;margin-right:5px;color:var(--red2)}
+.csub{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+.ctags{display:flex;gap:4px;flex-wrap:wrap}
+.ct{font-size:10px;padding:2px 7px;border-radius:9px;font-weight:500;background:var(--sur2);color:var(--muted)}
+.cfoot{padding:.65rem 1.1rem;background:var(--sur2);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--bdr)}
+.gobtn{font-size:12px;font-weight:700;color:var(--red2);background:none;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;gap:3px}
+.gobtn::after{content:'→';transition:transform .2s}
+.ccard:hover .gobtn::after{transform:translateX(4px)}
+.tipbox{background:var(--ink);border-radius:var(--r);padding:1.25rem 1.75rem;color:rgba(255,255,255,0.65);font-size:14px;line-height:1.8;display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}
+.tipbox strong{color:#fff}
 
-.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:3rem}
-.course-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);overflow:hidden;cursor:pointer;
-  transition:all 0.2s;position:relative;
-}
-.course-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
-.course-card-top{height:90px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
-.course-card-top.c-red{background:var(--red-l)}
-.course-card-top.c-blue{background:var(--blue-l)}
-.course-card-top.c-green{background:var(--green-l)}
-.course-card-top.c-gold{background:var(--gold-l)}
-.course-card-top.c-pink{background:var(--pink-l)}
-.course-card-badge{
-  position:absolute;top:10px;right:10px;
-  font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;
-}
-.badge-elem{background:var(--red-l);color:var(--red)}
-.badge-teen{background:var(--blue-l);color:var(--blue)}
-.course-card-body{padding:1rem 1.25rem}
-.course-card-title{font-size:16px;font-weight:700;margin-bottom:4px}
-.course-card-title .zh{font-family:'Noto Serif SC',serif;font-size:18px;margin-right:6px;color:var(--red2)}
-.course-card-sub{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px}
-.course-card-tags{display:flex;gap:5px;flex-wrap:wrap}
-.c-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
-.c-tag-gray{background:var(--surface2);color:var(--muted)}
-.course-card-footer{
-  padding:0.75rem 1.25rem;background:var(--surface2);
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid var(--border);
-}
-.go-btn{
-  font-size:12px;font-weight:700;color:var(--red2);
-  background:none;border:none;cursor:pointer;
-  font-family:'Noto Sans KR',sans-serif;
-  display:flex;align-items:center;gap:4px;
-}
-.go-btn::after{content:'→';transition:transform 0.2s}
-.course-card:hover .go-btn::after{transform:translateX(4px)}
+/* ── LESSON PAGE ── */
+.lhead{padding:1.5rem 1.5rem 1.25rem;border-bottom:1px solid var(--bdr);background:var(--sur)}
+.lhead-in{max-width:880px;margin:0 auto}
+.backbtn{font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;margin-bottom:.6rem;display:flex;align-items:center;gap:4px}
+.backbtn:hover{color:var(--ink)}
+.lttlzh{font-family:'Noto Serif SC',serif;font-size:24px;font-weight:700;margin-bottom:3px}
+.lttlko{font-size:13px;color:var(--muted);margin-bottom:9px}
+.ltags{display:flex;gap:5px;flex-wrap:wrap}
+.lt{font-size:11px;padding:2px 9px;border-radius:11px;font-weight:500}
+.ltr{background:var(--redl);color:var(--red)}.ltb{background:var(--bluel);color:var(--blue2)}.ltg{background:var(--greenl);color:var(--green2)}.lty{background:var(--goldl);color:var(--gold)}.ltp{background:var(--pinkl);color:var(--pink)}
 
-.tip-box{
-  background:var(--ink);border-radius:var(--r);
-  padding:1.5rem 2rem;color:rgba(255,255,255,0.7);
-  font-size:14px;line-height:1.8;
-  display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;
-}
-.tip-box strong{color:#fff}
-.tip-icon{font-size:28px;flex-shrink:0}
+.ltabs{display:flex;background:var(--sur);border-bottom:1px solid var(--bdr);overflow-x:auto;padding:0 1.5rem;position:sticky;top:60px;z-index:50}
+.ltab{font-size:13px;padding:.8rem .9rem;border:none;border-bottom:3px solid transparent;background:transparent;color:var(--muted);cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.ltab:hover{color:var(--ink)}
+.ltab.on{color:var(--red2);border-bottom-color:var(--red2)}
 
-/* ══════════════════════════════════
-   LESSON PAGE SHARED
-══════════════════════════════════ */
-.lesson-header{
-  padding:2rem 2rem 1.5rem;
-  border-bottom:1px solid var(--border);
-  background:var(--surface);
-}
-.lesson-header-inner{max-width:900px;margin:0 auto}
-.lesson-back{
-  font-size:12px;color:var(--muted);background:none;border:none;
-  cursor:pointer;font-family:'Noto Sans KR',sans-serif;
-  margin-bottom:0.75rem;display:flex;align-items:center;gap:4px;
-}
-.lesson-back:hover{color:var(--ink)}
-.lesson-title-zh{font-family:'Noto Serif SC',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:4px}
-.lesson-title-ko{font-size:14px;color:var(--muted);margin-bottom:10px}
-.lesson-tags{display:flex;gap:6px;flex-wrap:wrap}
-.l-tag{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500}
-.l-tag-red{background:var(--red-l);color:var(--red)}
-.l-tag-blue{background:var(--blue-l);color:var(--blue2)}
-.l-tag-green{background:var(--green-l);color:var(--green2)}
-.l-tag-gold{background:var(--gold-l);color:var(--gold)}
-.l-tag-pink{background:var(--pink-l);color:#C2185B}
+.lbody{max-width:880px;margin:0 auto;padding:1.75rem 1.5rem}
+.lp{display:none}.lp.show{display:block}
 
-.lesson-tabs{
-  display:flex;background:var(--surface);
-  border-bottom:1px solid var(--border);overflow-x:auto;
-  padding:0 2rem;position:sticky;top:64px;z-index:50;
-}
-.lesson-tab{
-  font-size:13px;padding:0.85rem 1rem;
-  border:none;border-bottom:3px solid transparent;
-  background:transparent;color:var(--muted);
-  cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-weight:500;
-  white-space:nowrap;transition:all 0.15s;flex-shrink:0;
-}
-.lesson-tab:hover{color:var(--ink)}
-.lesson-tab.active{color:var(--red2);border-bottom-color:var(--red2)}
+/* ── SHARED LESSON COMPONENTS ── */
+.mr{display:flex;gap:6px;margin-bottom:1.1rem;flex-wrap:wrap}
+.mb{font-size:13px;padding:5px 13px;border-radius:18px;border:1px solid var(--bdr);background:transparent;color:var(--muted);cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .15s}
+.mb.on{background:var(--purplel);color:var(--purple);border-color:transparent;font-weight:500}
+.kbox{background:var(--sur2);border-radius:var(--rs);padding:9px 14px;margin-bottom:1.1rem;font-size:14px;border-left:3px solid var(--red2)}
+.ta{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);padding:1.4rem 1.6rem}
+.tl{display:flex;align-items:flex-end;gap:3px;margin-bottom:1.1rem;flex-wrap:wrap}
+.cb{display:inline-flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer}
+.py{font-size:10px;color:var(--hint);min-height:13px;transition:opacity .2s}
+.hz{font-family:'Noto Serif SC',serif;font-size:22px;line-height:1.2;color:var(--ink)}
+.pc{font-family:'Noto Serif SC',serif;font-size:22px;color:var(--muted)}
+.la{font-size:18px;color:var(--ink);padding:0 2px;align-self:flex-end;padding-bottom:2px}
+.ht{font-size:12px;color:var(--hint);margin-top:.6rem}
+.sub{font-size:14px;color:var(--muted);margin-bottom:1.1rem;line-height:1.6}
 
-.lesson-body{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
-.l-panel{display:none}
-.l-panel.active{display:block}
+.vg{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:9px}
+.vc{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);padding:.9rem .7rem;text-align:center;cursor:pointer;transition:all .15s}
+.vc:hover{border-color:var(--red2)}
+.vz{font-family:'Noto Serif SC',serif;font-size:19px;font-weight:700;margin-bottom:3px}
+.vp{font-size:11px;color:var(--blue2);min-height:15px;font-weight:500}
+.vk{font-size:11px;color:var(--hint);margin-top:2px}
 
-/* ── reading ── */
-.mode-row{display:flex;gap:6px;margin-bottom:1.25rem;flex-wrap:wrap}
-.mode-btn{
-  font-size:13px;padding:5px 14px;border-radius:20px;
-  border:1px solid var(--border);background:transparent;
-  color:var(--muted);cursor:pointer;
-  font-family:'Noto Sans KR',sans-serif;transition:all 0.15s;
-}
-.mode-btn.on{background:#EEEDFE;color:#3C3489;border-color:transparent;font-weight:500}
-.text-area{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:1.75rem 2rem;
-}
-.text-line{display:flex;align-items:flex-end;gap:3px;margin-bottom:1.2rem;flex-wrap:wrap}
-.char-block{display:inline-flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer}
-.pinyin{font-size:10px;color:var(--hint);min-height:14px;transition:opacity 0.2s}
-.hanzi{font-family:'Noto Serif SC',serif;font-size:24px;line-height:1.2;color:var(--ink)}
-.punc{font-family:'Noto Serif SC',serif;font-size:24px;color:var(--muted)}
-.latin{font-size:20px;color:var(--ink);padding:0 2px;align-self:flex-end;padding-bottom:3px}
-.key-box{
-  background:var(--surface2);border-radius:var(--r-sm);
-  padding:10px 16px;margin-bottom:1.25rem;font-size:14px;
-  border-left:3px solid var(--red2);
-}
+.oxbox{background:var(--sur2);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:9px}
+.oxq{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;margin-bottom:3px}
+.oxpy{font-size:11px;color:var(--muted);margin-bottom:10px}
+.oxbtns{display:flex;gap:7px}
+.oxbtn{font-size:20px;padding:7px 24px;border-radius:var(--rs);border:1px solid var(--bdr);background:var(--sur);cursor:pointer;transition:all .15s}
+.oxbtn:hover:not(:disabled){background:var(--sur2)}
+.oxbtn.ok{background:var(--greenl);border-color:#A9DFBF}
+.oxbtn.ng{background:var(--redl);border-color:#F5B7B1}
+.oxres{font-size:13px;margin-top:7px;min-height:17px;line-height:1.6}
 
-/* ── vocab ── */
-.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
-.vocab-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r);padding:1rem 0.75rem;text-align:center;
-  cursor:pointer;transition:all 0.15s;
-}
-.vocab-card:hover{border-color:var(--red2);box-shadow:0 2px 10px rgba(192,57,43,0.1)}
-.vc-zh{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;margin-bottom:4px;color:var(--ink)}
-.vc-py{font-size:11px;color:var(--blue2);min-height:16px;font-weight:500}
-.vc-ko{font-size:11px;color:var(--hint);margin-top:2px}
+.sr{display:flex;gap:7px;margin-bottom:.9rem}
+.sb{font-size:13px;padding:5px 16px;border-radius:18px;border:1px solid var(--bdr);background:transparent;color:var(--muted);cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:all .15s}
+.sb.on{background:var(--goldl);color:var(--gold);border-color:transparent;font-weight:500}
+.pw{height:5px;background:var(--sur2);border-radius:3px;margin-bottom:1.25rem}
+.pf{height:5px;background:var(--green2);border-radius:3px;transition:width .3s}
+.cl{display:flex;flex-direction:column;gap:7px}
+.ci{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:var(--rs);border:1px solid var(--bdr);background:var(--sur);cursor:pointer;transition:all .15s}
+.ci:hover{border-color:#aaa}.ci.done{background:var(--greenl);border-color:#A9DFBF}
+.cbox{width:21px;height:21px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px}
+.ci.done .cbox{background:var(--green2);border-color:var(--green2);color:#fff}
+.clbl{font-size:14px;font-weight:500}.csb{font-size:12px;color:var(--muted);margin-top:2px}
 
-/* ── quiz ── */
-.ox-box{background:var(--surface2);border-radius:var(--r);padding:1.1rem 1.25rem;margin-bottom:10px}
-.ox-q{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;margin-bottom:4px}
-.ox-py{font-size:11px;color:var(--muted);margin-bottom:12px}
-.ox-btns{display:flex;gap:8px}
-.ox-btn{font-size:22px;padding:8px 28px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all 0.15s}
-.ox-btn:hover:not(:disabled){background:var(--surface2)}
-.ox-btn.correct{background:var(--green-l);border-color:#A9DFBF}
-.ox-btn.wrong{background:#FDEDEC;border-color:#F5B7B1}
-.ox-result{font-size:13px;margin-top:8px;min-height:18px;line-height:1.6}
+.ic{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:9px}
+.ic h3{font-size:15px;font-weight:700;margin-bottom:7px}
+.ic p{font-size:14px;color:var(--muted);line-height:1.8}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:11px;margin-right:5px;margin-bottom:7px;font-weight:500}
+.tgr{background:var(--greenl);color:var(--green2)}.tbl{background:var(--bluel);color:var(--blue2)}.tgd{background:var(--goldl);color:var(--gold)}.trd{background:var(--redl);color:var(--red)}.tpk{background:var(--pinkl);color:var(--pink)}
 
-/* ── checklist ── */
-.stu-row{display:flex;gap:8px;margin-bottom:1rem}
-.stu-btn{
-  font-size:13px;padding:6px 20px;border-radius:20px;
-  border:1px solid var(--border);background:transparent;
-  color:var(--muted);cursor:pointer;
-  font-family:'Noto Sans KR',sans-serif;transition:all 0.15s;
-}
-.stu-btn.active{background:var(--gold-l);color:var(--gold);border-color:transparent;font-weight:700}
-.progress-wrap{height:6px;background:var(--surface2);border-radius:4px;margin-bottom:1.5rem}
-.progress-fill{height:6px;background:var(--green2);border-radius:4px;transition:width 0.3s}
-.check-list{display:flex;flex-direction:column;gap:8px}
-.check-item{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 14px;border-radius:var(--r-sm);
-  border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all 0.15s;
-}
-.check-item:hover{border-color:#aaa}
-.check-item.done{background:var(--green-l);border-color:#A9DFBF}
-.check-box{width:22px;height:22px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px}
-.check-item.done .check-box{background:var(--green2);border-color:var(--green2);color:#fff}
-.check-label{font-size:14px;font-weight:500}
-.check-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:9px}
+.ac{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--r);padding:.9rem;cursor:pointer;transition:all .15s;text-align:center}
+.ac:hover{border-color:#aaa}.ac.open{border-color:var(--red2)}
+.adet{display:none;font-size:12px;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px solid var(--bdr);line-height:1.5;text-align:left}
+.ac.open .adet{display:block}
 
-/* ── info cards ── */
-.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.25rem;margin-bottom:10px}
-.info-card h3{font-size:15px;font-weight:700;margin-bottom:8px}
-.info-card p{font-size:14px;color:var(--muted);line-height:1.8}
-.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:12px;margin-right:5px;margin-bottom:8px;font-weight:500}
-.tag-red{background:var(--red-l);color:var(--red)}
-.tag-blue{background:var(--blue-l);color:var(--blue2)}
-.tag-green{background:var(--green-l);color:var(--green2)}
-.tag-gold{background:var(--gold-l);color:var(--gold)}
-.tag-pink{background:var(--pink-l);color:#C2185B}
+.mmp{background:var(--sur);border:2px solid var(--red2);border-radius:var(--r);padding:.9rem 1.1rem;margin-bottom:11px}
+.mmn{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:700;color:var(--red2);margin-bottom:3px}
+.mms{font-size:12px;color:var(--muted);margin-bottom:10px}
+.mmr{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.mmc{border-radius:var(--rs);padding:7px 9px;font-size:12px;line-height:1.5}
+.mml{font-size:10px;font-weight:700;text-transform:uppercase;margin-bottom:3px}
+.mmg{background:var(--greenl)}.mmg .mml{color:var(--green2)}
+.mmk{background:var(--pinkl)}.mmk .mml{color:var(--pink)}
+.mma{background:var(--goldl)}.mma .mml{color:var(--gold)}
 
-/* ── animal/ingr cards ── */
-.animal-grid,.ingr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.animal-card,.ingr-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;cursor:pointer;transition:all 0.15s;text-align:center}
-.animal-card:hover,.ingr-card:hover{border-color:#aaa}
-.animal-card.open,.ingr-card.open{border-color:var(--red2)}
-.a-icon,.i-icon{font-size:30px;margin-bottom:6px}
-.a-zh,.i-zh{font-family:'Noto Serif SC',serif;font-size:17px;font-weight:700}
-.a-py,.i-py{font-size:11px;color:var(--blue2);margin:2px 0}
-.a-ko,.i-ko{font-size:12px;color:var(--muted)}
-.a-detail,.i-detail{display:none;font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.6;text-align:left}
-.animal-card.open .a-detail,.ingr-card.open .i-detail{display:block}
+.pg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:7px;margin-bottom:1.1rem}
+.pb{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rs);padding:9px 13px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:var(--ink);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.pb:hover{border-color:var(--red2);background:var(--redl)}
+.pb.sel{background:var(--redl);border-color:var(--red2);color:var(--red);font-weight:500}
+.pres{background:var(--redl);border-radius:var(--r);padding:.9rem 1.1rem;border-left:3px solid var(--red2);font-size:14px;line-height:1.8;min-height:55px}
+.pres .bz{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--red)}
 
-/* ── mindmap ── */
-.mm-person{background:var(--surface);border:2px solid var(--red2);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:12px}
-.mm-person-name{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--red2);margin-bottom:3px}
-.mm-person-sub{font-size:12px;color:var(--muted);margin-bottom:12px}
-.mm-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.mm-cell{border-radius:var(--r-sm);padding:8px 10px;font-size:13px;line-height:1.5}
-.mm-lbl{font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:4px}
-.mm-green{background:var(--green-l)}.mm-green .mm-lbl{color:var(--green2)}
-.mm-pink{background:var(--pink-l)}.mm-pink .mm-lbl{color:#C2185B}
-.mm-gold{background:var(--gold-l)}.mm-gold .mm-lbl{color:var(--gold)}
+.tli{display:flex;gap:12px;padding-bottom:14px;position:relative}
+.tli:not(:last-child)::before{content:'';position:absolute;left:18px;top:34px;bottom:0;width:2px;background:var(--bdr)}
+.tld{width:38px;height:38px;border-radius:50%;background:var(--redl);color:var(--red);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid var(--red2)}
+.tlc{padding-top:7px;font-size:13px;color:var(--muted);line-height:1.7}.tlc b{color:var(--ink)}
 
-/* ── pick ── */
-.pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-bottom:1.25rem}
-.pick-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;font-family:'Noto Sans KR',sans-serif;color:var(--ink);cursor:pointer;text-align:left;transition:all 0.15s;line-height:1.5}
-.pick-btn:hover{border-color:var(--red2);background:var(--red-l)}
-.pick-btn.selected{background:var(--red-l);border-color:var(--red2);color:var(--red);font-weight:500}
-.pick-result{background:var(--red-l);border-radius:var(--r);padding:1rem 1.25rem;border-left:3px solid var(--red2);font-size:14px;line-height:1.8;min-height:60px}
-.pick-result .big-zh{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;color:var(--red)}
+.pysc{margin-bottom:1.5rem}
+.pyst{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:.65rem;letter-spacing:.04em;text-transform:uppercase}
+.pyc{display:flex;flex-wrap:wrap;gap:7px}
+.pyb{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rs);padding:9px 16px;font-size:16px;color:var(--ink);cursor:pointer;font-weight:500;font-family:'Noto Sans KR',sans-serif;transition:all .15s}
+.pyb:hover{background:var(--sur2)}.pyb.apy{background:var(--bluel);color:var(--blue2);border-color:var(--blue2)}
+.pye{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px;min-height:38px;align-items:center}
+.pyei{background:var(--sur2);border-radius:var(--rs);padding:5px 13px;font-size:13px;border:1px solid var(--bdr)}
 
-/* ── hallyu timeline ── */
-.tl-item{display:flex;gap:14px;padding-bottom:16px;position:relative}
-.tl-item:not(:last-child)::before{content:'';position:absolute;left:19px;top:36px;bottom:0;width:2px;background:var(--border)}
-.tl-dot{width:40px;height:40px;border-radius:50%;background:var(--red-l);color:var(--red);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid var(--red2)}
-.tl-content{padding-top:8px;font-size:14px;color:var(--muted);line-height:1.7}
-.tl-content b{color:var(--ink)}
-
-/* ── py practice ── */
-.py-section{margin-bottom:1.75rem}
-.py-stitle{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:0.75rem;letter-spacing:0.04em;text-transform:uppercase}
-.py-cards{display:flex;flex-wrap:wrap;gap:8px}
-.py-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 18px;font-size:17px;color:var(--ink);cursor:pointer;font-weight:500;font-family:'Noto Sans KR',sans-serif;transition:all 0.15s}
-.py-card:hover{background:var(--surface2)}
-.py-card.active-py{background:var(--blue-l);color:var(--blue2);border-color:var(--blue2)}
-.py-example{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;min-height:40px;align-items:center}
-.py-ex-item{background:var(--surface2);border-radius:var(--r-sm);padding:6px 14px;font-size:14px;border:1px solid var(--border)}
-
-/* ── steps ── */
-.step{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--surface2);border-radius:var(--r-sm);margin-bottom:8px}
-.step-num{width:26px;height:26px;border-radius:50%;background:var(--blue2);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-zh{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700}
-.step-desc{font-size:12px;color:var(--muted);margin-top:2px}
-
-.hint-text{font-size:12px;color:var(--hint);margin-top:0.75rem}
-.page-sub-label{font-size:14px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6}
-
-/* ── culture bg ── */
-.culture-section .info-card h3{color:var(--ink)}
-
-/* animations */
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.page.active{animation:fadeIn 0.25s ease}
-.course-card{animation:fadeIn 0.3s ease both}
-.course-card:nth-child(2){animation-delay:0.05s}
-.course-card:nth-child(3){animation-delay:0.1s}
-.course-card:nth-child(4){animation-delay:0.15s}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pg.show{animation:fi .22s ease}
 </style>
 </head>
 <body>
 
-<!-- SITE HEADER -->
-<header class="site-header">
-  <div class="logo" onclick="showHome()">
+<header class="shead">
+  <a class="logo" id="logo-btn" href="#">
     <span class="logo-zh">中文</span>
     <span class="logo-dot"></span>
-    <span class="logo-ko">카이카이 중국어 독해</span>
-  </div>
-  <nav class="site-nav">
-    <button class="site-nav-btn active" id="nav-home" onclick="showHome()">🏠 홈</button>
-    <button class="site-nav-btn" id="nav-elem" onclick="showPage('elem')">📚 초등 교과서</button>
-    <button class="site-nav-btn" id="nav-teen" onclick="showPage('teen')">📖 독해 스터디</button>
+    <span class="logo-sub">카이카이 중국어</span>
+  </a>
+  <nav class="snav">
+    <button class="snb on" id="snb-home">🏠 홈</button>
+    <button class="snb" id="snb-elem">📚 초등</button>
+    <button class="snb" id="snb-teen">📖 독해</button>
   </nav>
 </header>
 
-<!-- ══ HOME ══ -->
-<div class="page active" id="page-home">
+<!-- 홈 -->
+<div class="pg show" id="pg-home">
   <div class="hero">
-    <div class="hero-label">카이카이 중국어 독해</div>
-    <h1 class="hero-title">중국어,<br>재미있게 읽어봐요!</h1>
+    <div class="hero-lbl">카이카이 중국어 중급 독해</div>
+    <h1 class="hero-ttl">중국어,<br>재미있게 읽어봐요!</h1>
     <p class="hero-sub">병음부터 독해까지 — 단계별 읽기 연습 사이트</p>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">수업 자료</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">2</div><div class="hero-stat-label">학습 레벨</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">40+</div><div class="hero-stat-label">핵심 단어</div></div>
+      <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">수업 자료</div></div>
+      <div class="hstat"><div class="hstat-n">2</div><div class="hstat-l">학습 레벨</div></div>
+      <div class="hstat"><div class="hstat-n">60+</div><div class="hstat-l">핵심 단어</div></div>
     </div>
   </div>
-
-  <div class="home-content">
-    <div class="section-header">
-      <span class="section-title-main">📚 초등 교과서</span>
-      <span class="section-title-zh">小学语文 1학년 상권</span>
-    </div>
-    <div class="courses-grid">
-      <div class="course-card" onclick="openLesson('jianjianhua')">
-        <div class="course-card-top c-red">✂️<span class="course-card-badge badge-elem">초등</span></div>
-        <div class="course-card-body">
-          <div class="course-card-title"><span class="zh">剪窗花</span></div>
-          <div class="course-card-sub">가위로 창문 꽃을 오리는 시예요. 할머니와 손녀의 따뜻한 이야기가 담겨 있어요.</div>
-          <div class="course-card-tags">
-            <span class="c-tag c-tag-gray">병음 3단계</span>
-            <span class="c-tag c-tag-gray">단어 10개</span>
-            <span class="c-tag c-tag-gray">전지 문화</span>
-          </div>
+  <div class="home-body">
+    <div class="sec-hd"><span class="sec-ttl">📚 초등 교과서</span><span class="sec-sub">小学语文 1학년 상권</span></div>
+    <div class="cgrid">
+      <div class="ccard" id="go-jjh">
+        <div class="ctop cr">✂️<span class="cbadge be">초등</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">剪窗花</span></div>
+          <div class="csub">가위로 창문 꽃을 오리는 시. 할머니와 손녀의 따뜻한 이야기예요.</div>
+          <div class="ctags"><span class="ct">병음 3단계</span><span class="ct">단어 10개</span><span class="ct">전지 문화</span></div>
         </div>
-        <div class="course-card-footer">
-          <span style="font-size:12px;color:var(--muted)">p.38–39</span>
-          <button class="go-btn">학습 시작</button>
-        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">p.38–39</span><button class="gobtn">학습 시작</button></div>
       </div>
-      <div class="course-card" onclick="openLesson('xishouge')">
-        <div class="course-card-top c-blue">🧼<span class="course-card-badge badge-elem">초등</span></div>
-        <div class="course-card-body">
-          <div class="course-card-title"><span class="zh">洗手歌</span></div>
-          <div class="course-card-sub">손 씻는 방법을 노래로 배워요. ai·ei·ui 복합 모음도 함께 연습해요!</div>
-          <div class="course-card-tags">
-            <span class="c-tag c-tag-gray">ai·ei·ui</span>
-            <span class="c-tag c-tag-gray">단어 12개</span>
-            <span class="c-tag c-tag-gray">생활 중국어</span>
-          </div>
+      <div class="ccard" id="go-xsg">
+        <div class="ctop cb">🧼<span class="cbadge be">초등</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">洗手歌</span></div>
+          <div class="csub">손 씻는 노래! ai·ei·ui 복합 모음도 함께 연습해요.</div>
+          <div class="ctags"><span class="ct">ai·ei·ui</span><span class="ct">단어 12개</span><span class="ct">생활 중국어</span></div>
         </div>
-        <div class="course-card-footer">
-          <span style="font-size:12px;color:var(--muted)">p.40–41</span>
-          <button class="go-btn">학습 시작</button>
-        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">p.40–41</span><button class="gobtn">학습 시작</button></div>
       </div>
     </div>
-
-    <div class="section-header">
-      <span class="section-title-main">📖 10대 독해 스터디</span>
-      <span class="section-title-zh">중국어 독해 스터디 1·2주차</span>
+    <div class="sec-hd"><span class="sec-ttl">📖 10대 독해 스터디</span><span class="sec-sub">중국어 독해 스터디 1~5주차</span></div>
+    <div class="cgrid">
+      <div class="ccard" id="go-mlt">
+        <div class="ctop cg">🍲<span class="cbadge bt">독해</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">你吃过麻辣烫吗？</span></div>
+          <div class="csub">마라탕을 먹어 본 적 있나요? 경험 표현 "过"를 배워요.</div>
+          <div class="ctags"><span class="ct">经验 过</span><span class="ct">단어 12개</span><span class="ct">재료 6가지</span></div>
+        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">第一课</span><button class="gobtn">학습 시작</button></div>
+      </div>
+      <div class="ccard" id="go-hly">
+        <div class="ctop cp">❤️<span class="cbadge bt">독해</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">我爱上了韩国的这个！</span></div>
+          <div class="csub">한국 드라마·아이돌·음식에 반한 중국 친구 이야기.</div>
+          <div class="ctags"><span class="ct">爱上了</span><span class="ct">又…又…</span><span class="ct">한류 이야기</span></div>
+        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">第二课</span><button class="gobtn">학습 시작</button></div>
+      </div>
+      <div class="ccard" id="go-zgn">
+        <div class="ctop cy">📦<span class="cbadge bt">독해</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">你知道Z世代吗？</span></div>
+          <div class="csub">Z세대와 블라인드박스! LABUBU를 중국어로 배워요.</div>
+          <div class="ctags"><span class="ct">盲盒</span><span class="ct">단어 12개</span><span class="ct">한자 분해</span></div>
+        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">第三课</span><button class="gobtn">학습 시작</button></div>
+      </div>
+      <div class="ccard" id="go-mgy">
+        <div class="ctop cg">🐢<span class="cbadge bt">독해</span></div>
+        <div class="cbody">
+          <div class="cttl"><span class="zh">小小名言，大大力量</span></div>
+          <div class="csub">작은 명언, 큰 힘! 거북이와 에디슨으로 배우는 명언.</div>
+          <div class="ctags"><span class="ct">不怕慢只怕站</span><span class="ct">명언 12개</span><span class="ct">암송대회</span></div>
+        </div>
+        <div class="cfoot"><span style="font-size:11px;color:var(--muted)">第五课</span><button class="gobtn">학습 시작</button></div>
+      </div>
     </div>
-    <div class="courses-grid">
-      <div class="course-card" onclick="openLesson('malatang')">
-        <div class="course-card-top c-green">🍲<span class="course-card-badge badge-teen">독해</span></div>
-        <div class="course-card-body">
-          <div class="course-card-title"><span class="zh">你吃过麻辣烫吗？</span></div>
-          <div class="course-card-sub">마라탕을 먹어 본 적 있나요? 경험을 나타내는 "过"를 배워요.</div>
-          <div class="course-card-tags">
-            <span class="c-tag c-tag-gray">经验 过</span>
-            <span class="c-tag c-tag-gray">단어 12개</span>
-            <span class="c-tag c-tag-gray">재료 6가지</span>
-          </div>
-        </div>
-        <div class="course-card-footer">
-          <span style="font-size:12px;color:var(--muted)">第一课</span>
-          <button class="go-btn">학습 시작</button>
-        </div>
-      </div>
-      <div class="course-card" onclick="openLesson('hallyu')">
-        <div class="course-card-top c-pink" style="background:var(--pink-l)">❤️<span class="course-card-badge badge-teen">독해</span></div>
-        <div class="course-card-body">
-          <div class="course-card-title"><span class="zh">我爱上了韩国的这个！</span></div>
-          <div class="course-card-sub">한국 드라마·아이돌·음식에 반한 중국 친구의 이야기예요.</div>
-          <div class="course-card-tags">
-            <span class="c-tag c-tag-gray">爱上了</span>
-            <span class="c-tag c-tag-gray">又…又…</span>
-            <span class="c-tag c-tag-gray">한류 이야기</span>
-          </div>
-        </div>
-        <div class="course-card-footer">
-          <span style="font-size:12px;color:var(--muted)">第二课</span>
-          <button class="go-btn">학습 시작</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="tip-box">
-      <span class="tip-icon">💡</span>
-      <div>
-        <strong>학습 방법</strong><br>
-        ① 단어 카드로 핵심 어휘 먼저 확인 → ② 병음 보며 전체 읽기 → ③ 클릭 모드로 연습 → ④ 병음 없이 유창하게 읽기<br>
-        막히는 글자는 클릭하면 병음이 나타나요!
-      </div>
+    <div class="tipbox">
+      <span style="font-size:26px;flex-shrink:0">💡</span>
+      <div><strong>학습 방법</strong><br>① 단어 카드로 어휘 확인 → ② 병음 보며 읽기 → ③ 클릭 모드 연습 → ④ 병음 없이 유창하게!</div>
     </div>
   </div>
 </div>
 
-<!-- ══ LESSON PAGES ══ -->
-<div class="page" id="page-lesson">
-  <div class="lesson-header">
-    <div class="lesson-header-inner">
-      <button class="lesson-back" id="lesson-back-btn">← 목록으로</button>
-      <div class="lesson-title-zh" id="l-title-zh"></div>
-      <div class="lesson-title-ko" id="l-title-ko"></div>
-      <div class="lesson-tags" id="l-tags"></div>
+<!-- 수업 페이지 -->
+<div class="pg" id="pg-lesson">
+  <div class="lhead">
+    <div class="lhead-in">
+      <button class="backbtn" id="back-btn">← 목록으로</button>
+      <div class="lttlzh" id="l-tzh"></div>
+      <div class="lttlko" id="l-tko"></div>
+      <div class="ltags" id="l-tags"></div>
     </div>
   </div>
-  <div class="lesson-tabs" id="lesson-tabs"></div>
-  <div class="lesson-body" id="lesson-body"></div>
+  <div class="ltabs" id="l-tabs"></div>
+  <div class="lbody" id="l-body"></div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-//  LESSON DATA
-// ═══════════════════════════════════════════
+// ════════════════════════════════
+// 공통 헬퍼 함수
+// ════════════════════════════════
+var PUNCS = ['，','。','？','！','：','、'];
+var LATINS = ['G-Dragon','BLACKPINK','POP MART','LABUBU','Z'];
 
-const LESSONS = {
-
-// ─────────────────────────────────────
-// 1. 剪窗花
-// ─────────────────────────────────────
-jianjianhua: {
-  titleZh:'剪窗花',titleKo:'창문 꽃을 오리며',
-  tags:[{t:'초등 교과서',c:'red'},{t:'p.38-39',c:'gold'},{t:'HSK 2급',c:'blue'}],
-  tabs:['📖 시 읽기','📝 단어 카드','✂️ 배경지식','❓ 퀴즈','✅ 체크리스트'],
-  render(body){
-    body.innerHTML=`
-<div class="l-panel active" id="lp-0">
-  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">剪___，剪___</span></div>
-  <div class="mode-row">
-    <button class="mode-btn on" id="jjh-all" onclick="jjhMode('all')">병음 전체 보기</button>
-    <button class="mode-btn" id="jjh-hover" onclick="jjhMode('hover')">클릭하면 병음 보기</button>
-    <button class="mode-btn" id="jjh-none" onclick="jjhMode('none')">병음 없이 읽기</button>
-  </div>
-  <div class="text-area" id="jjh-poem"></div>
-  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
-</div>
-<div class="l-panel" id="lp-1">
-  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
-  <div class="vocab-grid" id="jjh-vocab"></div>
-</div>
-<div class="l-panel" id="lp-2" id="jjh-culture"></div>
-<div class="l-panel" id="lp-3" id="jjh-quiz"></div>
-<div class="l-panel" id="lp-4">
-  <div class="stu-row">
-    <button class="stu-btn active" id="jjh-s1" onclick="jjhStu('a')">1단계</button>
-    <button class="stu-btn" id="jjh-s2" onclick="jjhStu('b')">2단계</button>
-  </div>
-  <div class="progress-wrap"><div class="progress-fill" id="jjh-prog" style="width:0%"></div></div>
-  <div class="check-list" id="jjh-check"></div>
-</div>`;
-    buildJJH();
-  }
-},
-
-// ─────────────────────────────────────
-// 2. 洗手歌
-// ─────────────────────────────────────
-xishouge: {
-  titleZh:'洗手歌',titleKo:'손 씻기 노래',
-  tags:[{t:'초등 교과서',c:'red'},{t:'p.40-41',c:'gold'},{t:'ai·ei·ui',c:'blue'}],
-  tabs:['📖 시 읽기','🔤 병음 연습','📝 단어 카드','❓ 퀴즈','✅ 체크리스트'],
-  render(body){
-    body.innerHTML=`
-<div class="l-panel active" id="lp-0">
-  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">肥皂搓搓手 → 清水冲冲手 → 毛巾擦擦手</span></div>
-  <div class="mode-row">
-    <button class="mode-btn on" id="xsg-all" onclick="xsgMode('all')">병음 전체 보기</button>
-    <button class="mode-btn" id="xsg-hover" onclick="xsgMode('hover')">클릭하면 병음 보기</button>
-    <button class="mode-btn" id="xsg-none" onclick="xsgMode('none')">병음 없이 읽기</button>
-  </div>
-  <div class="text-area" id="xsg-poem"></div>
-  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
-</div>
-<div class="l-panel" id="lp-1">
-  <p class="page-sub-label">이번 과에서 배우는 복합 모음이에요. 카드를 클릭하면 시에서 쓰인 단어를 볼 수 있어요!</p>
-  <div class="py-section"><div class="py-stitle">ai 계열</div><div class="py-cards" id="ai-cards"></div><div class="py-example" id="ai-ex"></div></div>
-  <div class="py-section"><div class="py-stitle">ei 계열</div><div class="py-cards" id="ei-cards"></div><div class="py-example" id="ei-ex"></div></div>
-  <div class="py-section"><div class="py-stitle">ui 계열</div><div class="py-cards" id="ui-cards"></div><div class="py-example" id="ui-ex"></div></div>
-</div>
-<div class="l-panel" id="lp-2">
-  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
-  <div class="vocab-grid" id="xsg-vocab"></div>
-</div>
-<div class="l-panel" id="lp-3" id="xsg-quiz"></div>
-<div class="l-panel" id="lp-4">
-  <div class="stu-row">
-    <button class="stu-btn active" id="xsg-s1" onclick="xsgStu('a')">1단계</button>
-    <button class="stu-btn" id="xsg-s2" onclick="xsgStu('b')">2단계</button>
-  </div>
-  <div class="progress-wrap"><div class="progress-fill" id="xsg-prog" style="width:0%"></div></div>
-  <div class="check-list" id="xsg-check"></div>
-</div>`;
-    buildXSG();
-  }
-},
-
-// ─────────────────────────────────────
-// 3. 麻辣烫
-// ─────────────────────────────────────
-malatang: {
-  titleZh:'你吃过麻辣烫吗？',titleKo:'마라탕을 먹어 본 적 있니?',
-  tags:[{t:'第一课',c:'red'},{t:'10대 독해',c:'blue'},{t:'경험 过',c:'green'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','🥢 재료 이름','⭕ OX 퀴즈','🇨🇳 진짜 중국','✅ 체크리스트'],
-  render(body){
-    body.innerHTML=`
-<div class="l-panel active" id="lp-0">
-  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">你吃过___吗？→ 吃过 / 没吃过</span></div>
-  <div class="mode-row">
-    <button class="mode-btn on" id="mlt-all" onclick="mltMode('all')">병음 전체 보기</button>
-    <button class="mode-btn" id="mlt-hover" onclick="mltMode('hover')">클릭하면 병음 보기</button>
-    <button class="mode-btn" id="mlt-none" onclick="mltMode('none')">병음 없이 읽기</button>
-  </div>
-  <div class="text-area" id="mlt-text"></div>
-  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
-</div>
-<div class="l-panel" id="lp-1">
-  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
-  <div class="vocab-grid" id="mlt-vocab"></div>
-</div>
-<div class="l-panel" id="lp-2">
-  <p class="page-sub-label">카드를 클릭하면 이름의 유래를 볼 수 있어요!</p>
-  <div class="ingr-grid" id="mlt-ingr"></div>
-</div>
-<div class="l-panel" id="lp-3" id="mlt-quiz"></div>
-<div class="l-panel" id="lp-4" id="mlt-china"></div>
-<div class="l-panel" id="lp-5">
-  <div class="stu-row">
-    <button class="stu-btn active" id="mlt-s1" onclick="mltStu('a')">1단계</button>
-    <button class="stu-btn" id="mlt-s2" onclick="mltStu('b')">2단계</button>
-  </div>
-  <div class="progress-wrap"><div class="progress-fill" id="mlt-prog" style="width:0%"></div></div>
-  <div class="check-list" id="mlt-check"></div>
-</div>`;
-    buildMLT();
-  }
-},
-
-// ─────────────────────────────────────
-// 4. 韩流
-// ─────────────────────────────────────
-hallyu: {
-  titleZh:'我爱上了韩国的这个！',titleKo:'나는 한국의 이것에 반했어!',
-  tags:[{t:'第二课',c:'red'},{t:'10대 독해',c:'blue'},{t:'爱上了',c:'green'},{t:'又…又…',c:'gold'}],
-  tabs:['📖 본문 읽기','📝 단어 카드','🗺️ 마인드맵','⭕ OX 퀴즈','💬 나의 대답','🌊 한류 이야기','✅ 체크리스트'],
-  render(body){
-    body.innerHTML=`
-<div class="l-panel active" id="lp-0">
-  <div class="key-box"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">爱上了 / 又___又___ / 太___了！</span></div>
-  <div class="mode-row">
-    <button class="mode-btn on" id="hly-all" onclick="hlyMode('all')">병음 전체 보기</button>
-    <button class="mode-btn" id="hly-hover" onclick="hlyMode('hover')">클릭하면 병음 보기</button>
-    <button class="mode-btn" id="hly-none" onclick="hlyMode('none')">병음 없이 읽기</button>
-  </div>
-  <div class="text-area" id="hly-text"></div>
-  <p class="hint-text">"클릭하면 병음 보기" 모드에서 한자를 클릭하면 병음이 나타납니다.</p>
-</div>
-<div class="l-panel" id="lp-1">
-  <p class="page-sub-label">카드를 클릭하면 병음이 나타나요!</p>
-  <div class="vocab-grid" id="hly-vocab"></div>
-</div>
-<div class="l-panel" id="lp-2">
-  <p class="page-sub-label">세 인물이 한국의 무엇에 반했는지 정리해봐요!</p>
-  <div id="hly-mm"></div>
-</div>
-<div class="l-panel" id="lp-3" id="hly-quiz"></div>
-<div class="l-panel" id="lp-4">
-  <p style="font-family:'Noto Serif SC',serif;font-size:17px;font-weight:700;margin-bottom:6px;">你觉得韩国文化里最有魅力的是什么？</p>
-  <p class="page-sub-label">한국 문화 중 가장 매력 있는 것은 무엇인가요? 클릭해서 골라봐요!</p>
-  <div class="pick-grid" id="hly-pick"></div>
-  <div class="pick-result" id="hly-result"><span style="color:var(--hint);">위에서 항목을 골라보세요!</span></div>
-</div>
-<div class="l-panel" id="lp-5" id="hly-hallyu"></div>
-<div class="l-panel" id="lp-6">
-  <div class="stu-row">
-    <button class="stu-btn active" id="hly-s1" onclick="hlyStu('a')">1단계</button>
-    <button class="stu-btn" id="hly-s2" onclick="hlyStu('b')">2단계</button>
-  </div>
-  <div class="progress-wrap"><div class="progress-fill" id="hly-prog" style="width:0%"></div></div>
-  <div class="check-list" id="hly-check"></div>
-</div>`;
-    buildHLY();
-  }
-}
-};
-
-// ═══════════════════════════════════════════
-//  NAV
-// ═══════════════════════════════════════════
-function showHome(){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-home').classList.add('active');
-  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-home').classList.add('active');
-}
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-home').classList.add('active');
-  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-}
-let currentLesson=null;
-function openLesson(id){
-  currentLesson=id;
-  const L=LESSONS[id];
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-lesson').classList.add('active');
-  document.querySelectorAll('.site-nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('l-title-zh').textContent=L.titleZh;
-  document.getElementById('l-title-ko').textContent=L.titleKo;
-  const tagsEl=document.getElementById('l-tags'); tagsEl.innerHTML='';
-  L.tags.forEach(t=>{const sp=document.createElement('span');sp.className=`l-tag l-tag-${t.c}`;sp.textContent=t.t;tagsEl.appendChild(sp);});
-  const tabsEl=document.getElementById('lesson-tabs'); tabsEl.innerHTML='';
-  L.tabs.forEach((t,i)=>{
-    const btn=document.createElement('button');btn.className='lesson-tab'+(i===0?' active':'');
-    btn.textContent=t;btn.onclick=()=>switchLPanel(i,L.tabs.length);
-    tabsEl.appendChild(btn);
-  });
-  const body=document.getElementById('lesson-body');
-  L.render(body);
-  document.getElementById('lesson-back-btn').onclick=showHome;
-  window.scrollTo(0,0);
-}
-function switchLPanel(idx,total){
-  document.querySelectorAll('.lesson-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
-  document.querySelectorAll('.l-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
-}
-
-// ═══════════════════════════════════════════
-//  SHARED HELPERS
-// ═══════════════════════════════════════════
-function buildPoem(containerId, lines, modePrefix){
-  const area=document.getElementById(containerId); if(!area)return;
-  area.innerHTML='';
-  const puncs=['，','。','？','！','：','、'];
-  lines.forEach((line,li)=>{
-    const div=document.createElement('div');div.className='text-line';
-    line.zh.forEach((ch,ci)=>{
-      if(puncs.includes(ch)){const sp=document.createElement('span');sp.className='punc';sp.textContent=ch;div.appendChild(sp);}
-      else if(ch==='G-Dragon'||ch==='BLACKPINK'){const sp=document.createElement('span');sp.className='latin';sp.textContent=ch;div.appendChild(sp);}
-      else{
-        const b=document.createElement('span');b.className='char-block';
-        const py=document.createElement('span');py.className='pinyin';py.id=`${modePrefix}-py-${li}-${ci}`;py.textContent=line.py[ci]||'';
-        const zh=document.createElement('span');zh.className='hanzi';zh.textContent=ch;
-        b.appendChild(py);b.appendChild(zh);
-        b.onclick=()=>{if(window[modePrefix+'_mode']==='hover') py.style.opacity=py.style.opacity==='0'?'1':'0';};
-        div.appendChild(b);
+function buildPoem(areaId, lines, pfx) {
+  var area = document.getElementById(areaId);
+  if (!area) return;
+  area.innerHTML = '';
+  lines.forEach(function(line, li) {
+    var div = document.createElement('div'); div.className = 'tl';
+    line.zh.forEach(function(ch, ci) {
+      if (!ch) return;
+      if (PUNCS.indexOf(ch) >= 0) {
+        var s = document.createElement('span'); s.className = 'pc'; s.textContent = ch; div.appendChild(s);
+      } else if (LATINS.indexOf(ch) >= 0) {
+        var s = document.createElement('span'); s.className = 'la'; s.textContent = ch; div.appendChild(s);
+      } else {
+        var blk = document.createElement('span'); blk.className = 'cb';
+        var pyEl = document.createElement('span'); pyEl.className = 'py';
+        pyEl.id = pfx + '_' + li + '_' + ci;
+        pyEl.textContent = line.py[ci] || '';
+        var hzEl = document.createElement('span'); hzEl.className = 'hz'; hzEl.textContent = ch;
+        blk.appendChild(pyEl); blk.appendChild(hzEl);
+        (function(p) {
+          blk.addEventListener('click', function() {
+            if (window[pfx + '_mode'] === 'hover')
+              p.style.opacity = p.style.opacity === '0' ? '1' : '0';
+          });
+        })(pyEl);
+        div.appendChild(blk);
       }
     });
     area.appendChild(div);
   });
-  applyPoemMode(modePrefix);
+  applyMode(pfx);
 }
-function applyPoemMode(pfx){
-  const m=window[pfx+'_mode']||'all';
-  document.querySelectorAll(`[id^="${pfx}-py-"]`).forEach(el=>el.style.opacity=m==='all'?'1':'0');
-}
-function setPoemMode(pfx,m){
-  window[pfx+'_mode']=m;
-  ['all','hover','none'].forEach(k=>{const el=document.getElementById(pfx+'-'+k);if(el)el.classList.toggle('on',k===m);});
-  applyPoemMode(pfx);
-}
-function buildVocabGrid(containerId, data){
-  const grid=document.getElementById(containerId);if(!grid)return;
-  data.forEach((v,i)=>{
-    const c=document.createElement('div');c.className='vocab-card';
-    c.innerHTML=`<div class="vc-zh">${v.zh}</div><div class="vc-py" id="${containerId}-py${i}"></div><div class="vc-ko">${v.ko}</div>`;
-    c.onclick=()=>{const py=document.getElementById(containerId+'-py'+i);py.textContent=py.textContent?'':v.py;};
-    grid.appendChild(c);
+
+function applyMode(pfx) {
+  var m = window[pfx + '_mode'] || 'all';
+  document.querySelectorAll('[id^="' + pfx + '_"]').forEach(function(el) {
+    if (el.classList.contains('py')) el.style.opacity = m === 'all' ? '1' : '0';
   });
 }
-function buildOX(containerId, data){
-  const area=document.getElementById(containerId);if(!area)return;
-  const answered={};
-  data.forEach((q,qi)=>{
-    const box=document.createElement('div');box.className='ox-box';
-    const qEl=document.createElement('div');qEl.className='ox-q';qEl.textContent=q.q;
-    const pyEl=document.createElement('div');pyEl.className='ox-py';pyEl.textContent=q.py;
-    const btns=document.createElement('div');btns.className='ox-btns';
-    const res=document.createElement('div');res.className='ox-result';
-    ['⭕','❌'].forEach((lbl,bi)=>{
-      const btn=document.createElement('button');btn.className='ox-btn';btn.textContent=lbl;
-      btn.onclick=()=>{
-        if(answered[qi])return;answered[qi]=true;
-        const isO=bi===0;const correct=isO===q.ans;
-        btn.classList.add(correct?'correct':'wrong');
-        btns.querySelectorAll('.ox-btn').forEach(b=>b.disabled=true);
-        if(!correct)btns.querySelectorAll('.ox-btn')[q.ans?0:1].classList.add('correct');
-        res.style.color=correct?'#1E8449':'#C0392B';
-        res.textContent=(correct?'정답! ':'오답! ')+q.explain;
-      };
+
+function setMode(pfx, m) {
+  window[pfx + '_mode'] = m;
+  ['all','hover','none'].forEach(function(k) {
+    var el = document.getElementById(pfx + '-m-' + k);
+    if (el) el.classList.toggle('on', k === m);
+  });
+  applyMode(pfx);
+}
+
+function buildVocab(gid, data) {
+  var g = document.getElementById(gid); if (!g) return;
+  data.forEach(function(v, i) {
+    var c = document.createElement('div'); c.className = 'vc';
+    var pid = gid + '_p' + i;
+    c.innerHTML = '<div class="vz">' + v.zh + '</div><div class="vp" id="' + pid + '"></div><div class="vk">' + v.ko + '</div>';
+    c.addEventListener('click', function() {
+      var p = document.getElementById(pid); p.textContent = p.textContent ? '' : v.py;
+    });
+    g.appendChild(c);
+  });
+}
+
+function buildOX(cid, data) {
+  var area = document.getElementById(cid); if (!area) return;
+  var answered = {};
+  data.forEach(function(q, qi) {
+    var box = document.createElement('div'); box.className = 'oxbox';
+    var qEl = document.createElement('div'); qEl.className = 'oxq'; qEl.textContent = q.q;
+    var pyEl = document.createElement('div'); pyEl.className = 'oxpy'; pyEl.textContent = q.py || '';
+    var btns = document.createElement('div'); btns.className = 'oxbtns';
+    var res = document.createElement('div'); res.className = 'oxres';
+    ['⭕','❌'].forEach(function(lbl, bi) {
+      var btn = document.createElement('button'); btn.className = 'oxbtn'; btn.textContent = lbl;
+      btn.addEventListener('click', function() {
+        if (answered[qi]) return; answered[qi] = true;
+        var correct = (bi === 0) === q.ans;
+        btn.classList.add(correct ? 'ok' : 'ng');
+        btns.querySelectorAll('.oxbtn').forEach(function(b) { b.disabled = true; });
+        if (!correct) btns.querySelectorAll('.oxbtn')[q.ans ? 0 : 1].classList.add('ok');
+        res.style.color = correct ? '#1E8449' : '#C0392B';
+        res.textContent = (correct ? '정답! ' : '오답! ') + q.explain;
+      });
       btns.appendChild(btn);
     });
-    box.appendChild(qEl);box.appendChild(pyEl);box.appendChild(btns);box.appendChild(res);
+    box.appendChild(qEl); box.appendChild(pyEl); box.appendChild(btns); box.appendChild(res);
     area.appendChild(box);
   });
 }
-function buildChecklist(containerId, progId, data, stuKey){
-  const cl=document.getElementById(containerId);if(!cl)return;
-  const items=data[stuKey];const states=window[containerId+'_states']||new Array(items.length).fill(false);
-  window[containerId+'_states']=states;
-  cl.innerHTML='';
-  items.forEach((item,i)=>{
-    const div=document.createElement('div');div.className='check-item'+(states[i]?' done':'');
-    div.innerHTML=`<div class="check-box">${states[i]?'✓':''}</div><div><div class="check-label">${item.label}</div><div class="check-sub">${item.sub}</div></div>`;
-    div.onclick=()=>{states[i]=!states[i];buildChecklist(containerId,progId,data,stuKey);};
-    cl.appendChild(div);
+
+function buildChecklist(cid, pid, data, key) {
+  var cl = document.getElementById(cid); if (!cl) return;
+  var items = data[key];
+  if (!window['_cs'] ) window['_cs'] = {};
+  var k = cid + '_' + key;
+  if (!window['_cs'][k]) window['_cs'][k] = new Array(items.length).fill(false);
+  var states = window['_cs'][k];
+  cl.innerHTML = '';
+  items.forEach(function(item, i) {
+    var d = document.createElement('div');
+    d.className = 'ci' + (states[i] ? ' done' : '');
+    d.innerHTML = '<div class="cbox">' + (states[i] ? '✓' : '') + '</div><div><div class="clbl">' + item.label + '</div><div class="csb">' + item.sub + '</div></div>';
+    d.addEventListener('click', function() { states[i] = !states[i]; buildChecklist(cid, pid, data, key); });
+    cl.appendChild(d);
   });
-  const done=states.filter(Boolean).length;
-  document.getElementById(progId).style.width=Math.round(done/items.length*100)+'%';
+  var done = states.filter(Boolean).length;
+  var pf = document.getElementById(pid);
+  if (pf) pf.style.width = Math.round(done / items.length * 100) + '%';
 }
 
-// ═══════════════════════════════════════════
-//  JJH — 剪窗花
-// ═══════════════════════════════════════════
-window.jjh_mode='all';
-function jjhMode(m){setPoemMode('jjh',m);}
-let jjhStuKey='a';
-function jjhStu(k){jjhStuKey=k;document.getElementById('jjh-s1').classList.toggle('active',k==='a');document.getElementById('jjh-s2').classList.toggle('active',k==='b');buildChecklist('jjh-check','jjh-prog',jjhCheckData,k);}
-const jjhPoem=[
+function makeModeRow(pfx) {
+  return '<div class="mr">'
+    + '<button class="mb on" id="' + pfx + '-m-all">병음 전체 보기</button>'
+    + '<button class="mb" id="' + pfx + '-m-hover">클릭하면 병음 보기</button>'
+    + '<button class="mb" id="' + pfx + '-m-none">병음 없이 읽기</button>'
+    + '</div>';
+}
+
+function attachModeEvents(pfx) {
+  ['all','hover','none'].forEach(function(m) {
+    var el = document.getElementById(pfx + '-m-' + m);
+    if (el) el.addEventListener('click', function() { setMode(pfx, m); });
+  });
+}
+
+function makeStuRow(pfx) {
+  return '<div class="sr"><button class="sb on" id="' + pfx + '-s1">1단계</button><button class="sb" id="' + pfx + '-s2">2단계</button></div>'
+    + '<div class="pw"><div class="pf" id="' + pfx + '-pf" style="width:0%"></div></div>'
+    + '<div class="cl" id="' + pfx + '-cl"></div>';
+}
+
+function attachStuEvents(pfx, checkData) {
+  var s1 = document.getElementById(pfx + '-s1');
+  var s2 = document.getElementById(pfx + '-s2');
+  if (s1) s1.addEventListener('click', function() {
+    s1.classList.add('on'); s2.classList.remove('on');
+    buildChecklist(pfx + '-cl', pfx + '-pf', checkData, 'a');
+  });
+  if (s2) s2.addEventListener('click', function() {
+    s2.classList.add('on'); s1.classList.remove('on');
+    buildChecklist(pfx + '-cl', pfx + '-pf', checkData, 'b');
+  });
+}
+
+// ════════════════════════════════
+// 수업 데이터 & 렌더러
+// ════════════════════════════════
+
+// ── 1. 剪窗花 ──
+var jjhPoem = [
   {py:['xiǎo','jiǎn','dāo','','shǒu','zhōng','ná'],zh:['小','剪','刀','，','手','中','拿','，']},
   {py:['wǒ','xué','nǎi','nai','jiǎn','chuāng','huā'],zh:['我','学','奶','奶','剪','窗','花','。']},
   {py:['jiǎn','méi','huā','','jiǎn','xuě','huā'],zh:['剪','梅','花','，','剪','雪','花','，']},
@@ -783,66 +454,34 @@ const jjhPoem=[
   {py:['dà','hóng','lǐ','yú','shuí','lái','bào'],zh:['大','红','鲤','鱼','谁','来','抱','？']},
   {py:['ò','','zài','jiǎn','yī','gè','pàng','wá','wa'],zh:['哦','！','再','剪','一','个','胖','娃','娃','。']},
 ];
-const jjhVocab=[
+var jjhVocab = [
   {zh:'剪刀',py:'jiǎndāo',ko:'가위'},{zh:'窗花',py:'chuānghuā',ko:'창문 꽃'},
   {zh:'梅花',py:'méihuā',ko:'매화'},{zh:'雪花',py:'xuěhuā',ko:'눈꽃'},
   {zh:'喜鹊',py:'xǐquè',ko:'까치'},{zh:'鲤鱼',py:'lǐyú',ko:'잉어'},
   {zh:'摇尾巴',py:'yáo wěiba',ko:'꼬리를 흔들다'},{zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 인형'},
   {zh:'学',py:'xué',ko:'배우다'},{zh:'奶奶',py:'nǎinai',ko:'할머니'},
 ];
-const jjhAnimals=[
-  {icon:'🌸',zh:'梅花',py:'méihuā',ko:'매화',desc:'겨울에도 피는 꽃이라 강인함·희망의 상징. 중국 국화(国花)예요.'},
+var jjhAnimals = [
+  {icon:'🌸',zh:'梅花',py:'méihuā',ko:'매화',desc:'겨울에도 피는 꽃. 강인함·희망의 상징. 중국 국화예요!'},
   {icon:'❄️',zh:'雪花',py:'xuěhuā',ko:'눈꽃',desc:'설날 즈음 내리는 눈을 꽃에 비유한 말. 육각형 눈꽃 전지가 유명해요.'},
-  {icon:'🐦',zh:'喜鹊',py:'xǐquè',ko:'까치',desc:'기쁜 소식을 가져오는 새. 이름에 "기쁠 喜"가 들어있어요. 한국과 똑같이 길조!'},
+  {icon:'🐦',zh:'喜鹊',py:'xǐquè',ko:'까치',desc:'기쁜 소식을 가져오는 새. 이름에 "기쁠 喜"가 들어있어요!'},
   {icon:'🐔',zh:'鸡',py:'jī',ko:'닭',desc:'새벽을 알리는 부지런함의 상징. 12지신 중 하나예요.'},
   {icon:'🦆',zh:'鸭',py:'yā',ko:'오리',desc:'물과 관련된 동물이라 풍요·평화를 상징해요.'},
-  {icon:'🐟',zh:'鲤鱼',py:'lǐyú',ko:'잉어',desc:'풍요·행운·성공을 뜻해요. 魚와 余(풍족하다)의 발음이 같아서 행운의 상징!'},
-  {icon:'👶',zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 아기 인형',desc:'건강·복·자손 번영을 상징해요. 빨간 잉어를 안고 있는 모습이 유명해요.'},
+  {icon:'🐟',zh:'鲤鱼',py:'lǐyú',ko:'잉어',desc:'풍요·행운·성공을 뜻해요. 魚와 余(풍족)의 발음이 같아서 행운의 상징!'},
+  {icon:'👶',zh:'胖娃娃',py:'pàng wáwa',ko:'통통한 아기 인형',desc:'건강·복·자손 번영을 상징. 빨간 잉어를 안고 있는 모습이 유명해요.'},
 ];
-const jjhOX=[
-  {q:'1. 剪窗花는 설날에 창문에 붙이는 전통 장식이다.',py:'',ans:true,explain:'맞아요! 중국에서는 설날(春节)에 빨간 종이를 오려 창문에 붙여요.'},
-  {q:'2. 시에서 아이는 엄마에게 가위질을 배우고 있다.',py:'',ans:false,explain:'틀렸어요! 시에서 我(나)는 奶奶(할머니)에게 배우고 있어요.'},
-  {q:'3. 마지막으로 오린 것은 胖娃娃(통통한 아기 인형)이다.',py:'',ans:true,explain:'맞아요! 마지막 행에 "再剪一个胖娃娃"가 나와요.'},
+var jjhOX = [
+  {q:'1. 剪窗花는 설날에 창문에 붙이는 전통 장식이다.',ans:true,explain:'맞아요! 중국에서는 설날(春节)에 빨간 종이를 오려 창문에 붙여요.'},
+  {q:'2. 시에서 아이는 엄마에게 가위질을 배우고 있다.',ans:false,explain:'틀렸어요! 시에서 我(나)는 奶奶(할머니)에게 배우고 있어요.'},
+  {q:'3. 마지막으로 오린 것은 胖娃娃(통통한 아기 인형)이다.',ans:true,explain:'맞아요! 마지막 행 "再剪一个胖娃娃"에 나와요.'},
 ];
-const jjhCheckData={
-  a:[{label:'단어 카드 10개 확인',sub:'병음 보지 않고 읽어보기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'1~4행 병음 없이 읽기',sub:'小剪刀 ~ 叫喳喳'},{label:'전체 시 병음 없이 1회 읽기',sub:'막히는 부분 체크'},{label:'유창하게 2회 연속 읽기',sub:'속도 일정하게 유지'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 읽기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'뜻 말하며 읽기',sub:'각 행의 내용 설명하기'},{label:'강세·리듬 살려 읽기',sub:'시처럼 자연스럽게'},{label:'속도 높여 유창하게 읽기',sub:'막힘 없이 1분 안에'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
+var jjhCheck = {
+  a:[{label:'단어 카드 10개 확인',sub:'병음 보지 않고 읽어보기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'1~4행 병음 없이 읽기',sub:'小剪刀 ~ 叫喳喳'},{label:'전체 시 병음 없이 1회',sub:'막히는 부분 체크'},{label:'유창하게 2회 연속 읽기',sub:'속도 일정하게 유지'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 읽기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'뜻 말하며 읽기',sub:'각 행의 내용 설명하기'},{label:'강세·리듬 살려 읽기',sub:'시처럼 자연스럽게'},{label:'속도 높여 유창하게',sub:'막힘 없이 1분 안에'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
 };
-function buildJJH(){
-  buildPoem('jjh-poem',jjhPoem,'jjh');
-  buildVocabGrid('jjh-vocab',jjhVocab);
-  // culture
-  const lp2=document.getElementById('lp-2');
-  lp2.innerHTML=`<div id="jjh-culture-inner"></div><div id="jjh-anim" style="margin-top:1rem"></div><div id="jjh-quiz-inner" style="margin-top:1.5rem"></div>`;
-  const ci=document.getElementById('jjh-culture-inner');
-  ci.innerHTML=`
-<div class="info-card"><span class="tag tag-red">중국 전통문화</span><span class="tag tag-gold">유네스코 문화유산</span><h3>剪纸(jiǎnzhǐ)란?</h3><p>가위나 칼로 종이를 오려 만드는 중국 전통 예술이에요. 2000년 넘는 역사, 2009년 유네스코 세계 무형문화유산으로 등재되었어요.</p></div>
-<div class="info-card"><h3>窗花(chuānghuā) — 창문에 붙이는 종이 꽃</h3><p>설날(春节)이 되면 빨간 종이를 오려 창문에 붙여요. 복(福)을 불러오고 나쁜 기운을 쫓는다고 믿었어요. 주로 꽃·새·물고기·아기 모양을 만들어요.</p></div>
-<div class="info-card"><span class="tag tag-blue">생각해보기</span><h3>한국에도 비슷한 문화가 있을까요?</h3><p>한국의 색종이 접기와 비슷해요. 중국 전지는 빨간 종이를 <b>오린다</b>는 것, 한국 종이접기는 <b>접는다</b>는 점이 달라요!</p></div>`;
-  const ag=document.getElementById('jjh-anim');
-  ag.innerHTML=`<p class="page-sub-label">카드를 클릭하면 중국 문화에서의 의미를 볼 수 있어요!</p><div class="animal-grid" id="jjh-anim-grid"></div>`;
-  const grid=document.getElementById('jjh-anim-grid');
-  jjhAnimals.forEach(a=>{
-    const c=document.createElement('div');c.className='animal-card';
-    c.innerHTML=`<div class="a-icon">${a.icon}</div><div class="a-zh">${a.zh}</div><div class="a-py">${a.py}</div><div class="a-ko">${a.ko}</div><div class="a-detail">${a.desc}</div>`;
-    c.onclick=()=>c.classList.toggle('open');
-    grid.appendChild(c);
-  });
-  // quiz
-  const lp3=document.getElementById('lp-3');
-  lp3.innerHTML=`<p class="page-sub-label">배운 내용을 확인해보세요!</p><div id="jjh-ox"></div>`;
-  buildOX('jjh-ox',jjhOX);
-  buildChecklist('jjh-check','jjh-prog',jjhCheckData,'a');
-}
 
-// ═══════════════════════════════════════════
-//  XSG — 洗手歌
-// ═══════════════════════════════════════════
-window.xsg_mode='all';
-function xsgMode(m){setPoemMode('xsg',m);}
-let xsgStuKey='a';
-function xsgStu(k){xsgStuKey=k;document.getElementById('xsg-s1').classList.toggle('active',k==='a');document.getElementById('xsg-s2').classList.toggle('active',k==='b');buildChecklist('xsg-check','xsg-prog',xsgCheckData,k);}
-const xsgPoem=[
+// ── 2. 洗手歌 ──
+var xsgPoem = [
   {py:['pái','zhe','duì','','xiàng','qián','zǒu'],zh:['排','着','队','，','向','前','走','，']},
   {py:['zuò','shén','me','','qù','xǐ','shǒu'],zh:['做','什','么','？','去','洗','手','。']},
   {py:['féi','zào','yòng','lái','cuō','cuo','shǒu'],zh:['肥','皂','用','来','搓','搓','手','，']},
@@ -851,7 +490,7 @@ const xsgPoem=[
   {py:['xiǎo','shǒu','xǐ','de','zhēn','gān','jìng'],zh:['小','手','洗','得','真','干','净','，']},
   {py:['dà','jiā','yī','qǐ','xiào','kāi','kǒu'],zh:['大','家','一','起','笑','开','口','。']},
 ];
-const xsgVocab=[
+var xsgVocab = [
   {zh:'排队',py:'pái duì',ko:'줄 서다'},{zh:'向前走',py:'xiàng qián zǒu',ko:'앞으로 걷다'},
   {zh:'洗手',py:'xǐ shǒu',ko:'손 씻다'},{zh:'肥皂',py:'féi zào',ko:'비누'},
   {zh:'搓手',py:'cuō shǒu',ko:'손을 비비다'},{zh:'清水',py:'qīng shuǐ',ko:'깨끗한 물'},
@@ -859,54 +498,23 @@ const xsgVocab=[
   {zh:'擦手',py:'cā shǒu',ko:'손을 닦다'},{zh:'干净',py:'gān jìng',ko:'깨끗하다'},
   {zh:'笑开口',py:'xiào kāi kǒu',ko:'활짝 웃다'},{zh:'大家',py:'dà jiā',ko:'모두'},
 ];
-const xsgPyGroups={
-  ai:{tones:['āi','ái','ǎi','ài'],examples:{āi:[],ái:['排(pái duì) - 줄 서다'],ǎi:[],ài:[]}},
-  ei:{tones:['ēi','éi','ěi','èi'],examples:{ēi:[],éi:['肥(féi zào) - 비누'],ěi:['给(gěi) - 주다'],èi:[]}},
-  ui:{tones:['uī','uí','uǐ','uì'],examples:{uī:[],uí:[],uǐ:['水(shuǐ) - 물'],uì:['队(duì) - 줄']}},
+var xsgPY = {
+  ai:{tones:['āi','ái','ǎi','ài'],ex:{āi:[],ái:['排(pái duì) 줄서다'],ǎi:[],ài:[]}},
+  ei:{tones:['ēi','éi','ěi','èi'],ex:{ēi:[],éi:['肥(féi zào) 비누'],ěi:['给(gěi) 주다'],èi:[]}},
+  ui:{tones:['uī','uí','uǐ','uì'],ex:{uī:[],uí:[],uǐ:['水(shuǐ) 물'],uì:['队(duì) 줄']}},
 };
-const xsgOX=[
-  {q:'1. 시에서 아이들은 밥 먹고 나서 손을 씻으러 간다.',py:'',ans:false,explain:'본문에서 손 씻으러 가는 이유는 나오지 않아요. 줄 서서 앞으로 걸어가는 장면만 나와요.'},
-  {q:'2. 肥皂(비누)로 손을 비빈 후 清水(물)로 헹군다.',py:'',ans:true,explain:'맞아요! 肥皂搓搓手 → 清水冲冲手 → 毛巾擦擦手 순서예요.'},
-  {q:'3. 마지막에 大家一起笑开口로 모두 함께 웃는다.',py:'',ans:true,explain:'맞아요! 손을 깨끗이 씻고 나서 大家一起笑开口(모두 함께 활짝 웃어요)로 끝나요.'},
+var xsgOX = [
+  {q:'1. 시에서 아이들은 肥皂(비누)로 먼저 손을 비빈다.',ans:true,explain:'맞아요! 肥皂搓搓手 → 清水冲冲手 → 毛巾擦擦手 순서예요.'},
+  {q:'2. 마지막에 혼자서 조용히 손을 닦는다.',ans:false,explain:'틀렸어요! 大家一起笑开口 — 모두 함께 활짝 웃어요.'},
+  {q:'3. 洗手歌에서 손 씻기는 총 3단계다.',ans:true,explain:'맞아요! 搓(비비기) → 冲(헹구기) → 擦(닦기) 3단계예요.'},
 ];
-const xsgCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'ai·ei·ui 병음 카드 연습',sub:'각 성조 소리 구별하기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'1~4행 병음 없이 읽기',sub:'排着队 ~ 冲冲手'},{label:'전체 시 병음 없이 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'ai·ei·ui 포함 단어 빠르게 찾기',sub:'시에서 해당 병음 단어 모두 찾기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'각 행 뜻 설명하기',sub:'손 씻는 순서대로 설명'},{label:'리듬감 살려 읽기',sub:'동요처럼 자연스럽게'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
+var xsgCheck = {
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'ai·ei·ui 병음 카드 연습',sub:'각 성조 소리 구별하기'},{label:'병음 보며 전체 시 읽기',sub:'한 줄씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭'},{label:'1~4행 병음 없이 읽기',sub:'排着队 ~ 冲冲手'},{label:'전체 시 병음 없이 1회',sub:'막히는 부분 체크'}],
+  b:[{label:'ai·ei·ui 단어 빠르게 찾기',sub:'시에서 해당 병음 단어 찾기'},{label:'병음 없이 전체 시 읽기',sub:'처음부터 끝까지'},{label:'각 행 뜻 설명하기',sub:'손 씻는 순서대로'},{label:'리듬감 살려 읽기',sub:'동요처럼 자연스럽게'},{label:'유창하게 2회 연속',sub:'막힘 없이'},{label:'암송 도전',sub:'교재 보지 않고 전체 읽기'}],
 };
-function buildXSG(){
-  buildPoem('xsg-poem',xsgPoem,'xsg');
-  // pinyin
-  ['ai','ei','ui'].forEach(g=>{
-    const data=xsgPyGroups[g];
-    const container=document.getElementById(g+'-cards');
-    const exDiv=document.getElementById(g+'-ex');
-    if(!container)return;
-    data.tones.forEach(tone=>{
-      const btn=document.createElement('button');btn.className='py-card';btn.textContent=tone;
-      btn.onclick=()=>{
-        container.querySelectorAll('.py-card').forEach(b=>b.classList.remove('active-py'));
-        btn.classList.add('active-py');
-        const exs=data.examples[tone]||[];
-        exDiv.innerHTML=exs.length?exs.map(e=>`<span class="py-ex-item">${e}</span>`).join(''):`<span style="font-size:13px;color:var(--hint)">이 시에서 직접 쓰인 예가 없어요</span>`;
-      };
-      container.appendChild(btn);
-    });
-  });
-  buildVocabGrid('xsg-vocab',xsgVocab);
-  const lp3=document.getElementById('lp-3');
-  lp3.innerHTML=`<p class="page-sub-label">본문 내용을 확인해보세요!</p><div id="xsg-ox"></div>`;
-  buildOX('xsg-ox',xsgOX);
-  buildChecklist('xsg-check','xsg-prog',xsgCheckData,'a');
-}
 
-// ═══════════════════════════════════════════
-//  MLT — 麻辣烫
-// ═══════════════════════════════════════════
-window.mlt_mode='all';
-function mltMode(m){setPoemMode('mlt',m);}
-let mltStuKey='a';
-function mltStu(k){mltStuKey=k;document.getElementById('mlt-s1').classList.toggle('active',k==='a');document.getElementById('mlt-s2').classList.toggle('active',k==='b');buildChecklist('mlt-check','mlt-prog',mltCheckData,k);}
-const mltText=[
+// ── 3. 麻辣烫 ──
+var mltText = [
   {py:['Nǐ','chī','guo','Málàtàng','ma'],zh:['你','吃','过','麻辣烫','吗','？']},
   {py:['Málàtàng','shì','Zhōngguó','yǒumíng','de','shíwù','','tā','de','míngzi','hěn','yǒu','yìsi'],zh:['麻辣烫','是','中国','有名','的','食物','，','它','的','名字','很','有','意思','。']},
   {py:['"Má"','shì','shétou','mámá','de','gǎnjué','','"là"','shì','hěn','là','de','wèidào','','"tàng"','shì','hěn','tàng','de','tāng'],zh:['"麻"','是','舌头','麻麻','的','感觉','，','"辣"','是','很','辣','的','味道','，','"烫"','是','很','烫','的','汤','。']},
@@ -915,7 +523,7 @@ const mltText=[
   {py:['Wǒ','yě','chī','guo','liǎng','cì','','wǒ','juéde','yǒudiǎn','là','','dàn','hěn','hǎochī'],zh:['我','也','吃','过','两','次','，','我','觉得','有点','辣','，','但','很','好吃','。']},
   {py:['Nǐ','ne','','Nǐ','chī','guo','jǐ','cì','Málàtàng'],zh:['你','呢','？','你','吃','过','几','次','麻辣烫','？']},
 ];
-const mltVocab=[
+var mltVocab = [
   {zh:'麻辣烫',py:'Málàtàng',ko:'마라탕'},{zh:'过',py:'guo',ko:'~한 적 있다'},
   {zh:'有名',py:'yǒumíng',ko:'유명하다'},{zh:'食物',py:'shíwù',ko:'음식'},
   {zh:'舌头',py:'shétou',ko:'혀'},{zh:'麻',py:'má',ko:'얼얼하다'},
@@ -923,56 +531,26 @@ const mltVocab=[
   {zh:'蔬菜',py:'shūcài',ko:'채소'},{zh:'肉',py:'ròu',ko:'고기'},
   {zh:'年轻人',py:'niánqīngrén',ko:'청년, 젊은이'},{zh:'觉得',py:'juéde',ko:'~라고 느끼다'},
 ];
-const mltIngr=[
-  {zh:'木耳',py:'mù\'ěr',ko:'목이버섯',desc:'나무(木)의 귀(耳)처럼 생긴 버섯이에요. 쫄깃한 식감이 특징!'},
-  {zh:'金针菇',py:'jīnzhēngū',ko:'팽이버섯',desc:'금(金)색의 바늘(针) 모양 버섯이라서 이런 이름이 붙었어요.'},
-  {zh:'粉耗子',py:'fěnhàozi',ko:'분모자(굵은 당면)',desc:'모양이 길고 넓어 쥐(耗子)처럼 길게 늘어난다고 해서 이 이름이에요!'},
-  {zh:'肉丸',py:'ròuwán',ko:'고기 완자',desc:'고기를 동그랗게(丸) 빚어 만든 것이에요.'},
-  {zh:'鱼丸',py:'yúwán',ko:'생선 완자',desc:'생선을 동그랗게(丸) 빚어 만든 것이에요.'},
-  {zh:'豆皮',py:'dòupí',ko:'두부피',desc:'두유를 얇게 말려 만든 껍질(皮)이에요.'},
+var mltIngr = [
+  {zh:'木耳',py:"mù'ěr",ko:'목이버섯',desc:'나무(木)의 귀(耳)처럼 생긴 버섯. 쫄깃한 식감!'},
+  {zh:'金针菇',py:'jīnzhēngū',ko:'팽이버섯',desc:'금(金)색의 바늘(针) 모양 버섯이라서 이런 이름이에요.'},
+  {zh:'粉耗子',py:'fěnhàozi',ko:'분모자(굵은 당면)',desc:'쥐(耗子)처럼 길게 늘어난다고 해서 이 이름이에요!'},
+  {zh:'肉丸',py:'ròuwán',ko:'고기 완자',desc:'고기를 동그랗게(丸) 빚어 만든 것.'},
+  {zh:'鱼丸',py:'yúwán',ko:'생선 완자',desc:'생선을 동그랗게(丸) 빚어 만든 것.'},
+  {zh:'豆皮',py:'dòupí',ko:'두부피',desc:'두유를 얇게 말려 만든 껍질(皮).'},
 ];
-const mltOX=[
+var mltOX = [
   {q:'1. 麻辣烫是一种中国有名的食物。',py:'(Málàtàng shì yìzhǒng Zhōngguó yǒumíng de shíwù.)',ans:true,explain:'맞아요! 본문 첫 문장에서 마라탕은 중국의 유명한 음식이라고 했어요.'},
-  {q:'2. 麻辣烫一点儿也不辣。',py:'(Málàtàng yìdiǎnr yě bú là.)',ans:false,explain:'틀렸어요! 마라탕은 又麻又辣又烫, 얼얼하고 맵고 뜨거운 음식이에요.'},
-  {q:'3. 麻辣烫里面只有肉，没有蔬菜。',py:'(Málàtàng lǐmian zhǐ yǒu ròu, méiyǒu shūcài.)',ans:false,explain:'틀렸어요! 마라탕에는 蔬菜(채소)와 肉(고기)가 모두 들어간다고 했어요.'},
+  {q:'2. 麻辣烫一点儿也不辣。',py:'(Málàtàng yìdiǎnr yě bú là.)',ans:false,explain:'틀렸어요! 마라탕은 又麻又辣又烫 — 얼얼하고 맵고 뜨거운 음식이에요.'},
+  {q:'3. 麻辣烫里面只有肉，没有蔬菜。',py:'(Málàtàng lǐmian zhǐ yǒu ròu, méiyǒu shūcài.)',ans:false,explain:'틀렸어요! 마라탕에는 蔬菜(채소)와 肉(고기)가 모두 들어가요.'},
 ];
-const mltCheckData={
-  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'재료 이름 6가지 읽기',sub:'카드 클릭해서 유래 확인'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'OX 퀴즈 + 이유 설명',sub:'왜 O/X인지 중국어로 말하기'},{label:'핵심 문형 활용하기',sub:'你吃过___吗? 직접 문장 만들기'},{label:'진짜 중국 이야기 읽기',sub:'새로 알게 된 내용 1가지 말하기'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
+var mltCheck = {
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'재료 이름 6가지 읽기',sub:'카드 클릭해서 유래 확인'},{label:'병음 보며 본문 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'OX 퀴즈 + 이유 설명',sub:'왜 O/X인지 중국어로'},{label:'핵심 문형 활용',sub:'你吃过___吗? 문장 만들기'},{label:'진짜 중국 이야기 읽기',sub:'새로 알게 된 내용 말하기'},{label:'유창하게 2회 연속',sub:'막힘 없이 본문 전체'}],
 };
-function buildMLT(){
-  buildPoem('mlt-text',mltText,'mlt');
-  buildVocabGrid('mlt-vocab',mltVocab);
-  // ingr
-  const ig=document.getElementById('mlt-ingr');
-  mltIngr.forEach(v=>{
-    const c=document.createElement('div');c.className='ingr-card';
-    c.innerHTML=`<div class="i-zh">${v.zh}</div><div class="i-py">${v.py}</div><div class="i-ko">${v.ko}</div><div class="i-detail">${v.desc}</div>`;
-    c.onclick=()=>c.classList.toggle('open');
-    ig.appendChild(c);
-  });
-  // quiz
-  const lp3=document.getElementById('lp-3');
-  lp3.innerHTML=`<p class="page-sub-label">본문 내용을 확인해보세요!</p><div id="mlt-ox"></div>`;
-  buildOX('mlt-ox',mltOX);
-  // china
-  const lp4=document.getElementById('lp-4');
-  lp4.innerHTML=`
-<div class="info-card"><span class="tag tag-green">인기 폭발</span><h3>중국에서 마라탕은?</h3><p>학생들과 젊은 사람들 사이에서 점심·저녁으로 자주 먹어요.</p></div>
-<div class="info-card"><span class="tag tag-gold">셀프 주문</span><h3>중국 마라탕 가게는 이렇게!</h3><p>직접 재료를 골라 담는 셀프 방식 가게가 많아요. 무게로 계산해요!</p></div>
-<div class="info-card"><span class="tag tag-blue">지역마다 다른 맛</span><h3>고향은 四川省(쓰촨성)</h3><p>쓰촨성은 매운맛이 강하고, 북방은 국물이 진해요. <b>干麻辣烫(건마라탕)</b>도 있어요!</p></div>
-<div class="info-card"><span class="tag tag-red">麻(마)의 비밀</span><h3>혀가 얼얼한 이유 — 산초(花椒)</h3><p>산초의 향과 고추의 매운맛이 합쳐져 마라의 매력이 완성돼요!</p></div>`;
-  buildChecklist('mlt-check','mlt-prog',mltCheckData,'a');
-}
 
-// ═══════════════════════════════════════════
-//  HLY — 韩流
-// ═══════════════════════════════════════════
-window.hly_mode='all';
-function hlyMode(m){setPoemMode('hly',m);}
-let hlyStuKey='a';
-function hlyStu(k){hlyStuKey=k;document.getElementById('hly-s1').classList.toggle('active',k==='a');document.getElementById('hly-s2').classList.toggle('active',k==='b');buildChecklist('hly-check','hly-prog',hlyCheckData,k);}
-const hlyText=[
+// ── 4. 韩流 ──
+var hlyText = [
   {py:['Wǒ','ài','shàng','le','Hánguó','diànshìjù','.','Hánjù','de','gùshi','hěn','yǒuyìsi','','nán','zhǔjué','hěn','shuài'],zh:['我','爱','上','了','韩国','电视剧','。','韩剧','的','故事','很','有意思','，','男','主角','很','帅','，']},
   {py:['nǚ','zhǔjué','hěn','piàoliang','.','Wǒ','jīngcháng','xiǎng'],zh:['女','主角','很','漂亮','。','我','经常','想','：']},
   {py:['Hánguó','rén','dōu','zhème','shuài','ma'],zh:['韩国','人','都','这么','帅','吗','？']},
@@ -982,7 +560,7 @@ const hlyText=[
   {py:['tèbié','hǎochī','.','Xiànzài','tā','měi','ge','xīngqī','dōu','yào','chī','yī','cì'],zh:['特别','好吃','。','现在','她','每','个','星期','都','要','吃','一','次','！']},
   {py:['Hánguó','wénhuà','tài','yǒu','mèilì','le'],zh:['韩国','文化','太','有','魅力','了','！']},
 ];
-const hlyVocab=[
+var hlyVocab = [
   {zh:'爱上',py:'ài shàng',ko:'사랑에 빠지다'},{zh:'电视剧',py:'diànshìjù',ko:'드라마'},
   {zh:'男主角',py:'nán zhǔjué',ko:'남자 주인공'},{zh:'女主角',py:'nǚ zhǔjué',ko:'여자 주인공'},
   {zh:'帅',py:'shuài',ko:'멋지다'},{zh:'偶像',py:'ǒuxiàng',ko:'아이돌'},
@@ -990,77 +568,460 @@ const hlyVocab=[
   {zh:'烤肉',py:'kǎoròu',ko:'불고기, 구이'},{zh:'又…又…',py:'yòu…yòu…',ko:'~하기도 하고 ~하기도'},
   {zh:'魅力',py:'mèilì',ko:'매력'},
 ];
-const hlyMM=[
-  {name:'나 (我)',sub:'한국 드라마에 반함',like:'韩国电视剧',likeKo:'한국 드라마',reason:'故事很有意思\n男主角很帅\n女主角很漂亮',reasonKo:'이야기 재미있고 배우들이 멋지고 아름다워서',action:'韩国人都这么帅吗？',actionKo:'"한국 사람들은 모두 이렇게 멋있나?" 라고 생각함'},
-  {name:'妹妹 (여동생)',sub:'한국 아이돌에 반함',like:'韩国偶像',likeKo:'한국 아이돌',reason:'G-Dragon\nBLACKPINK',reasonKo:'방에 아이돌 사진이 가득',action:'想去韩国看演唱会',actionKo:'한국에 가서 콘서트를 보겠다고 말함'},
-  {name:'小李 (친구 샤오리)',sub:'한국 고기에 반함',like:'韩国烤肉',likeKo:'한국 구이',reason:'又甜又咸\n特别好吃',reasonKo:'달콤하면서 짭짤하고 특별히 맛있어서',action:'每个星期吃一次',actionKo:'매주 한 번씩 꼭 먹음'},
+var hlyMM = [
+  {name:'나 (我)',sub:'한국 드라마에 반함',like:'韩国电视剧',likeKo:'한국 드라마',reason:'故事很有意思\n男主角很帅\n女主角很漂亮',reasonKo:'이야기 재미있고 배우들이 멋져서',action:'韩国人都这么帅吗？',actionKo:'"한국 사람 다 이렇게 멋있나?" 생각함'},
+  {name:'妹妹 (여동생)',sub:'한국 아이돌에 반함',like:'韩国偶像',likeKo:'한국 아이돌',reason:'G-Dragon\nBLACKPINK',reasonKo:'방에 아이돌 사진이 가득',action:'想去韩国看演唱会',actionKo:'한국 가서 콘서트 보겠다고 함'},
+  {name:'小李 (친구 샤오리)',sub:'한국 고기에 반함',like:'韩国烤肉',likeKo:'한국 구이',reason:'又甜又咸\n特别好吃',reasonKo:'달콤하면서 짭짤하고 맛있어서',action:'每个星期吃一次',actionKo:'매주 한 번씩 꼭 먹음'},
 ];
-const hlyOX=[
+var hlyOX = [
   {q:'1. 我爱上了韩国电视剧。',py:'(Wǒ ài shàng le Hánguó diànshìjù.)',ans:true,explain:'맞아요! 본문 첫 문장에서 나는 한국 드라마에 반했다고 했어요.'},
-  {q:'2. 我的妹妹房间里有BLACKPINK和G-Dragon的照片。',py:'(Wǒ de mèimei fángjiān lǐ yǒu BLACKPINK hé G-Dragon de zhàopiàn.)',ans:true,explain:'맞아요! 여동생 방은 한국 아이돌 사진이 가득하고, G-Dragon과 BLACKPINK가 예시로 나와요.'},
-  {q:'3. 我的好朋友小李喜欢韩国泡菜，每个星期都要吃一次。',py:'(Wǒ de hǎo péngyǒu Xiǎo Lǐ xǐhuān Hánguó pàocài…)',ans:false,explain:'틀렸어요! 小李가 좋아하는 건 泡菜(김치)가 아니라 烤肉(불고기/구이)예요!'},
+  {q:'2. 我的妹妹房间里有BLACKPINK和G-Dragon的照片。',py:'',ans:true,explain:'맞아요! 여동생 방은 온통 한국 아이돌 사진이고, G-Dragon과 BLACKPINK가 예시로 나와요.'},
+  {q:'3. 我的好朋友小李喜欢韩国泡菜，每个星期都要吃一次。',py:'',ans:false,explain:'틀렸어요! 小李가 좋아하는 건 泡菜(김치)가 아니라 烤肉(불고기)예요!'},
 ];
-const hlyPickData=[
-  {label:'A. 韩国美食',ko:'한국 음식',fill:'我觉得韩国美食最有魅力！',ko2:'저는 한국 음식이 가장 매력 있다고 생각해요!'},
-  {label:'B. 韩国音乐(K-pop)',ko:'한국 음악',fill:'我觉得韩国音乐最有魅力！',ko2:'저는 K-pop이 가장 매력 있다고 생각해요!'},
-  {label:'C. 韩国电视剧',ko:'한국 드라마',fill:'我觉得韩国电视剧最有魅力！',ko2:'저는 한국 드라마가 가장 매력 있다고 생각해요!'},
-  {label:'D. 韩国偶像',ko:'한국 아이돌',fill:'我觉得韩国偶像最有魅力！',ko2:'저는 한국 아이돌이 가장 매력 있다고 생각해요!'},
-  {label:'E. 韩国化妆品',ko:'한국 화장품',fill:'我觉得韩国化妆品最有魅力！',ko2:'저는 한국 화장품이 가장 매력 있다고 생각해요!'},
-  {label:'F. 韩国时尚',ko:'한국 패션',fill:'我觉得韩国时尚最有魅力！',ko2:'저는 한국 패션이 가장 매력 있다고 생각해요!'},
-  {label:'G. 其他',ko:'기타',fill:'我觉得韩国______最有魅力！',ko2:'저는 한국 _____이/가 가장 매력 있다고 생각해요!'},
+var hlyPick = [
+  {label:'A. 韩国美食',ko:'한국 음식',fill:'我觉得韩国美食最有魅力！',ko2:'저는 한국 음식이 가장 매력 있어요!'},
+  {label:'B. 韩国音乐(K-pop)',ko:'한국 음악',fill:'我觉得韩国音乐最有魅力！',ko2:'저는 K-pop이 가장 매력 있어요!'},
+  {label:'C. 韩国电视剧',ko:'한국 드라마',fill:'我觉得韩国电视剧最有魅力！',ko2:'저는 한국 드라마가 가장 매력 있어요!'},
+  {label:'D. 韩国偶像',ko:'한국 아이돌',fill:'我觉得韩国偶像最有魅力！',ko2:'저는 한국 아이돌이 가장 매력 있어요!'},
+  {label:'E. 韩国化妆品',ko:'한국 화장품',fill:'我觉得韩国化妆品最有魅力！',ko2:'저는 한국 화장품이 가장 매력 있어요!'},
+  {label:'F. 韩国时尚',ko:'한국 패션',fill:'我觉得韩国时尚最有魅力！',ko2:'저는 한국 패션이 가장 매력 있어요!'},
+  {label:'G. 其他',ko:'기타',fill:'我觉得韩国______最有魅力！',ko2:'저는 한국 _____이 가장 매력 있어요!'},
 ];
-const hlyCheckData={
-  a:[{label:'단어 카드 11개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 전체 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭해서 확인'},{label:'마인드맵 3인물 확인하기',sub:'누가 무엇에 반했는지 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회 읽기',sub:'막히는 부분 체크'}],
-  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'마인드맵 구조 설명하기',sub:'세 인물 이유·행동까지 중국어로'},{label:'핵심 문형 활용하기',sub:'爱上了 / 又___又___ 직접 문장 만들기'},{label:'나의 대답 중국어로 말하기',sub:'我觉得韩国___最有魅力！'},{label:'유창하게 2회 연속 읽기',sub:'막힘 없이 본문 전체'}],
+var hlyCheck = {
+  a:[{label:'단어 카드 11개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭'},{label:'마인드맵 3인물 확인',sub:'누가 무엇에 반했는지 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'마인드맵 구조 설명',sub:'세 인물 이유·행동 중국어로'},{label:'핵심 문형 활용',sub:'爱上了 / 又___又___ 문장 만들기'},{label:'나의 대답 중국어로',sub:'我觉得韩国___最有魅力！'},{label:'유창하게 2회 연속',sub:'막힘 없이 본문 전체'}],
 };
-function buildHLY(){
-  buildPoem('hly-text',hlyText,'hly');
-  buildVocabGrid('hly-vocab',hlyVocab);
-  // mindmap
-  const mm=document.getElementById('hly-mm');
-  hlyMM.forEach(p=>{
-    const c=document.createElement('div');c.className='mm-person';
-    c.innerHTML=`<div class="mm-person-name">${p.name}</div><div class="mm-person-sub">${p.sub}</div>
-<div class="mm-rows">
-<div class="mm-cell mm-green"><div class="mm-lbl">좋아하는 것</div><div style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;">${p.like}</div><div style="font-size:11px;color:var(--green2);margin-top:3px;">${p.likeKo}</div></div>
-<div class="mm-cell mm-pink"><div class="mm-lbl">이유/예시</div><div style="font-size:13px;white-space:pre-line;">${p.reason}</div><div style="font-size:11px;color:#C2185B;margin-top:3px;">${p.reasonKo}</div></div>
-<div class="mm-cell mm-gold"><div class="mm-lbl">생각·행동</div><div style="font-family:'Noto Serif SC',serif;font-size:13px;">${p.action}</div><div style="font-size:11px;color:var(--gold);margin-top:3px;">${p.actionKo}</div></div>
-</div>`;
-    mm.appendChild(c);
-  });
-  // quiz
-  const lp3=document.getElementById('lp-3');
-  lp3.innerHTML=`<p class="page-sub-label">본문 내용을 확인해보세요!</p><div id="hly-ox"></div>`;
-  buildOX('hly-ox',hlyOX);
-  // pick
-  const pg=document.getElementById('hly-pick');
-  hlyPickData.forEach((p,i)=>{
-    const btn=document.createElement('button');btn.className='pick-btn';
-    btn.innerHTML=`<span style="font-weight:700;">${p.label}</span><br><span style="font-size:11px;color:var(--hint)">${p.ko}</span>`;
-    btn.onclick=()=>{
-      pg.querySelectorAll('.pick-btn').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const res=document.getElementById('hly-result');
-      res.innerHTML=`<div class="big-zh">${p.fill}</div><div style="font-size:13px;color:var(--muted);margin-top:6px;">${p.ko2}</div>`;
-    };
-    pg.appendChild(btn);
-  });
-  // hallyu
-  const lp5=document.getElementById('lp-5');
-  lp5.innerHTML=`
-<div style="font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;margin-bottom:0.5rem;color:var(--red2);">한류 韩流 Hánliú — 한국의 물결</div>
-<div class="info-card"><span class="tag tag-red">한류란?</span><h3>韩流(Hánliú)</h3><p>한국 드라마·음악·음식·화장품 등이 중국과 전 세계로 퍼져나가는 현상이에요.</p></div>
-<div class="info-card"><span class="tag tag-blue">한류의 역사</span><h3>어떻게 시작됐을까요?</h3>
-<div style="margin-top:0.5rem">
-<div class="tl-item"><div class="tl-dot">2003</div><div class="tl-content"><b>《대장금》(大长今)</b>이 중국에서 방영되며 한국 문화가 큰 주목을 받기 시작했어요.</div></div>
-<div class="tl-item"><div class="tl-dot">이후</div><div class="tl-content"><b>《별에서 온 그대》, 《상속자들》</b> 등이 연이어 인기를 얻으며 韩流라는 이름이 생겼어요.</div></div>
-<div class="tl-item"><div class="tl-dot">확산</div><div class="tl-content">드라마 → <b>BTS, BLACKPINK</b> → 화장품, 패션, 삼겹살·김치까지 빠르게 퍼져나갔어요.</div></div>
-<div class="tl-item"><div class="tl-dot">2016</div><div class="tl-content"><b>한한령(限韩令)</b>으로 한국 드라마·연예인이 중국 방송에서 잠시 활동 금지가 됐어요.</div></div>
-<div class="tl-item"><div class="tl-dot">현재</div><div class="tl-content">지금도 한류는 계속 변화하며 <b>중국과 세계에 한국을 알리는 다리</b> 역할을 하고 있어요.</div></div>
-</div></div>
-<div class="info-card"><span class="tag tag-gold">본문과 연결</span><h3>본문 속 인물들도 한류의 일부!</h3><p>한국 드라마, 아이돌(G-Dragon, BLACKPINK), 한국 음식(烤肉)은 모두 한류가 중국에 퍼진 대표적인 예예요 💕</p></div>`;
-  buildChecklist('hly-check','hly-prog',hlyCheckData,'a');
+
+// ── 5. Z世代 ──
+var zgnText = [
+  {py:['Nǐ','zhīdào','Z','shìdài','ma'],zh:['你','知道','Z','世代','吗','？']},
+  {py:['Z','shìdài','shì','1996','nián','dào','2010','nián','zhījiān','chūshēng','de','rén'],zh:['Z','世代','是','1996','年','到','2010','年','之间','出生','的','人','。']},
+  {py:['Tāmen','hěn','xǐhuan','mánghé'],zh:['他们','很','喜欢','盲盒','！']},
+  {py:['"Máng"','de','yìsi','shì','kàn','bu','jiàn','','"hé"','de','yìsi','shì','hézi'],zh:['"盲"','的','意思','是','看','不','见','，','"盒"','的','意思','是','盒子','。']},
+  {py:['Mánghé','lǐmiàn','yǒu','xiǎo','wánjù','','nǐ','yī','kāishǐ','bù','zhīdào','lǐmiàn','yǒu','shénme'],zh:['盲盒','里面','有','小','玩具','，','你','一','开始','不','知道','里面','有','什么','。']},
+  {py:['"Dādā','!"','dǎkāi','yǐhòu','cái','zhīdào','!','Hěn','hǎowán'],zh:['"哒哒','！"','打开','以后','才','知道','！','很','好玩','。']},
+  {py:['Bǐrú','POP MART','de','LABUBU','','yǒu','hěn','duō','yánsè','','tèbié','kě\'ài'],zh:['比如','POP MART','的','LABUBU','，','有','很','多','颜色','，','特别','可爱','。']},
+  {py:['Nǐ','yě','mǎiguo','mánghé','ma'],zh:['你','也','买过','盲盒','吗','？']},
+];
+var zgnVocab = [
+  {zh:'世代',py:'shìdài',ko:'세대'},{zh:'之间',py:'zhījiān',ko:'~사이'},
+  {zh:'出生',py:'chūshēng',ko:'태어나다'},{zh:'喜欢',py:'xǐhuan',ko:'좋아하다'},
+  {zh:'盲',py:'máng',ko:'눈이 멀다, 블라인드'},{zh:'盒',py:'hé',ko:'상자, 박스'},
+  {zh:'意思',py:'yìsi',ko:'뜻, 의미'},{zh:'里面',py:'lǐmiàn',ko:'안, 내부'},
+  {zh:'打开',py:'dǎkāi',ko:'열다'},{zh:'好玩',py:'hǎowán',ko:'재미있다'},
+  {zh:'颜色',py:'yánsè',ko:'색깔'},{zh:'可爱',py:"kě'ài",ko:'귀엽다'},
+];
+var zgnOX = [
+  {q:'1. Z世代是1996年到2010年之间出生的人。',py:'(Z shìdài shì 1996 nián dào 2010 nián zhījiān chūshēng de rén.)',ans:true,explain:'맞아요! 본문 두 번째 문장에 정확히 나와요.'},
+  {q:'2. 盲盒里面有小玩具，但是一开始不知道里面有什么。',py:'',ans:true,explain:'맞아요! 열어봐야만 안에 뭐가 있는지 알 수 있어요.'},
+  {q:'3. LABUBU是POP MART的盲盒玩具，它只有一种颜色。',py:'',ans:false,explain:'틀렸어요! 본문에서 LABUBU는 有很多颜色(색깔이 매우 많다)고 했어요.'},
+];
+var zgnCheck = {
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'한자 분해 盲·盒 읽기',sub:'부수 뜻 이해하기'},{label:'병음 보며 본문 읽기',sub:'한 문장씩 따라 읽기'},{label:'클릭 모드로 읽기',sub:'모르는 글자만 클릭'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'병음 없이 본문 1회',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'"___的意思是___" 문장 만들기',sub:'새 단어로 직접 만들기'},{label:'라부부 인기 이유 설명',sub:'한국어 또는 중국어로'},{label:'OX 퀴즈 이유 설명',sub:'왜 O/X인지 중국어로'},{label:'유창하게 2회 연속',sub:'막힘 없이 본문 전체'}],
+};
+
+// ── 6. 명언 ──
+var mgyText = [
+  {py:['Nǐ','tīng','guo','zhèxiē','huà','ma'],zh:['你','听','过','这些','话','吗','？']},
+  {py:['"Bú','pà','màn','','zhǐ','pà','zhàn','."'],zh:['"不','怕','慢','，','只','怕','站','。"']},
+  {py:['Wūguī','zǒu','de','hěn','màn','','kěshì','tā','yīzhí','zǒu','','zuìhòu','dào','le','zhōngdiǎn'],zh:['乌龟','走','得','很','慢','，','可是','它','一直','走','，','最后','到','了','终点','。']},
+  {py:['"Shībài','shì','chénggōng','zhī','mǔ','."'],zh:['"失败','是','成功','之','母','。"']},
+  {py:['Àidíshēng','zuò','dēng','de','shíhou','','shībài','le','yī','qiān','cì','','zuìhòu','chénggōng','le'],zh:['爱迪生','做','灯','的','时候','，','失败','了','一','千','次','，','最后','成功','了','。']},
+  {py:['Zhèxiē','míngyán','huì','ràng','wǒmen','gèng','yǒnggǎn','','yě','gèng','kuàilè'],zh:['这些','名言','会','让','我们','更','勇敢','，','也','更','快乐','。']},
+  {py:['Nǐ','hái','zhīdào','bié','de','míngyán','ma'],zh:['你','还','知道','别','的','名言','吗','？']},
+];
+var mgyVocab = [
+  {zh:'这些',py:'zhèxiē',ko:'이들, 이것들'},{zh:'话',py:'huà',ko:'말, 이야기'},
+  {zh:'怕',py:'pà',ko:'두려워하다'},{zh:'慢',py:'màn',ko:'느리다'},
+  {zh:'站',py:'zhàn',ko:'서다'},{zh:'乌龟',py:'wūguī',ko:'거북이'},
+  {zh:'走',py:'zǒu',ko:'걷다'},{zh:'终点',py:'zhōngdiǎn',ko:'종점, 끝'},
+  {zh:'失败',py:'shībài',ko:'실패하다'},{zh:'成功',py:'chénggōng',ko:'성공하다'},
+  {zh:'灯',py:'dēng',ko:'등, 전등'},{zh:'快乐',py:'kuàilè',ko:'즐겁다, 행복하다'},
+];
+var mgyOX = [
+  {q:'1. 乌龟走得很快。',py:'(Wūguī zǒu de hěn kuài.)',ans:false,explain:'틀렸어요! 본문에서 乌龟走得很慢(거북이는 아주 천천히 걸었다)고 했어요.'},
+  {q:'2. 爱迪生做灯的时候，一次就成功了。',py:'(Àidíshēng zuò dēng de shíhou, yícì jiù chénggōng le.)',ans:false,explain:'틀렸어요! 에디슨은 失败了一千次(천 번이나 실패한 후) 성공했어요.'},
+  {q:'3. 这些名言会让我们更勇敢，也更快乐。',py:'(Zhèxiē míngyán huì ràng wǒmen gèng yǒnggǎn, yě gèng kuàilè.)',ans:true,explain:'맞아요! 마지막 문장에 정확히 나와요. 명언은 우리를 더 용감하고 즐겁게 해줘요!'},
+];
+var mgyContest = [
+  {ko:'느린 것은 두렵지 않다, 멈추는 것이 두렵다',en:"Don't be afraid of going slow, only of standing still.",zh:'不怕慢，只怕站。',py:'Bú pà màn, zhǐ pà zhàn.'},
+  {ko:'실패는 성공의 어머니다',en:'Failure is the mother of success.',zh:'失败是成功之母。',py:'Shībài shì chénggōng zhī mǔ.'},
+  {ko:'연습하면 능숙해진다',en:'Practice makes perfect.',zh:'熟能生巧。',py:'Shúnéng shēng qiǎo.'},
+  {ko:'지식은 힘이다',en:'Knowledge is power.',zh:'知识就是力量。',py:'Zhīshi jiù shì lìliang.'},
+  {ko:'시간은 돈이다',en:'Time is money.',zh:'时间就是金钱。',py:'Shíjiān jiù shì jīnqián.'},
+  {ko:'정직이 최선의 방책이다',en:'Honesty is the best policy.',zh:'诚实为上策。',py:'Chéngshí wéi shàngcè.'},
+  {ko:'웃음은 최고의 약이다',en:'Laughter is the best medicine.',zh:'笑是最好的药。',py:'Xiào shì zuì hǎo de yào.'},
+  {ko:'말보다 행동이 더 중요하다',en:'Actions speak louder than words.',zh:'行动胜于言语。',py:'Xíngdòng shèng yú yányǔ.'},
+  {ko:'일찍 일어나는 새가 벌레를 잡는다',en:'The early bird catches the worm.',zh:'早起的鸟儿有虫吃。',py:'Zǎoqǐ de niǎor yǒu chóng chī.'},
+  {ko:'노력 없이는 얻는 것도 없다',en:'No pain, no gain.',zh:'没有付出，就没有收获。',py:'Méiyǒu fùchū, jiù méiyǒu shōuhuò.'},
+  {ko:'어려울 때 친구가 진짜 친구다',en:'A friend in need is a friend indeed.',zh:'患难见真情。',py:'Huànnàn jiàn zhēnqíng.'},
+  {ko:'천 리 길도 한 걸음부터',en:'The journey of a thousand miles begins with a single step.',zh:'千里之行，始于足下。',py:'Qiānlǐ zhī xíng, shǐ yú zú xià.'},
+];
+var mgyCheck = {
+  a:[{label:'단어 카드 12개 확인',sub:'병음 보지 않고 뜻 말하기'},{label:'병음 보며 본문 읽기',sub:'한 문장씩 따라 읽기'},{label:'비교표 내용 확인',sub:'두 명언의 예시·핵심어 말하기'},{label:'OX 퀴즈 3문제 풀기',sub:'본문 내용 이해 확인'},{label:'명언 암송대회에서 7개 선택',sub:'한·영·중 3개 국어로 연습'},{label:'병음 없이 본문 1회',sub:'막히는 부분 체크'}],
+  b:[{label:'단어 카드 빠르게 확인',sub:'5초 안에 뜻 말하기'},{label:'병음 없이 본문 읽기',sub:'처음부터 끝까지'},{label:'두 명언 차이 설명',sub:'각 명언이 주는 교훈 말하기'},{label:'명언 7개 암기 완료',sub:'한국어·영어·중국어 모두'},{label:'좋아하는 명언 이유 말하기',sub:'중국어로 한 문장 만들기'},{label:'유창하게 2회 연속',sub:'막힘 없이 본문 전체'}],
+};
+
+// ════════════════════════════════
+// 수업 렌더러
+// ════════════════════════════════
+
+var LESSONS = {
+  jjh: {
+    titleZh:'剪窗花', titleKo:'창문 꽃을 오리며',
+    tags:[{t:'초등 교과서',c:'ltr'},{t:'p.38-39',c:'lty'},{t:'HSK 2급',c:'ltb'}],
+    tabs:['📖 시 읽기','📝 단어 카드','✂️ 배경지식','❓ 퀴즈','✅ 체크리스트'],
+    render: function(body) {
+      window.jjh_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="jjh-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">剪___，剪___</span></div>'
+        + makeModeRow('jjh')
+        + '<div class="ta" id="jjh-poem"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="jjh-p1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="jjh-vg"></div></div>'
+        + '<div class="lp" id="jjh-p2"><p class="sub">카드를 클릭하면 중국 문화에서의 의미를 볼 수 있어요!</p>'
+        + '<div class="ic"><span class="tag tgd">중국 전통문화</span><h3>剪纸(jiǎnzhǐ)란?</h3><p>가위나 칼로 종이를 오려 만드는 전통 예술. 2009년 유네스코 세계 무형문화유산에 등재됐어요!</p></div>'
+        + '<div class="ic"><h3>窗花 — 창문에 붙이는 종이 꽃</h3><p>설날(春节)에 빨간 종이를 오려 창문에 붙여요. 복(福)을 불러오고 나쁜 기운을 쫓는다고 믿었어요.</p></div>'
+        + '<div class="ag" id="jjh-ag" style="margin-top:1rem"></div></div>'
+        + '<div class="lp" id="jjh-p3"><p class="sub">배운 내용을 확인해보세요!</p><div id="jjh-ox"></div></div>'
+        + '<div class="lp" id="jjh-p4">' + makeStuRow('jjh') + '</div>';
+      buildPoem('jjh-poem', jjhPoem, 'jjh');
+      buildVocab('jjh-vg', jjhVocab);
+      var ag = document.getElementById('jjh-ag');
+      jjhAnimals.forEach(function(a) {
+        var c = document.createElement('div'); c.className = 'ac';
+        c.innerHTML = '<div style="font-size:28px;margin-bottom:5px">' + a.icon + '</div>'
+          + '<div style="font-family:\'Noto Serif SC\',serif;font-size:16px;font-weight:700">' + a.zh + '</div>'
+          + '<div style="font-size:11px;color:var(--blue2);margin:2px 0">' + a.py + '</div>'
+          + '<div style="font-size:12px;color:var(--muted)">' + a.ko + '</div>'
+          + '<div class="adet">' + a.desc + '</div>';
+        c.addEventListener('click', function() { c.classList.toggle('open'); });
+        ag.appendChild(c);
+      });
+      buildOX('jjh-ox', jjhOX);
+      buildChecklist('jjh-cl', 'jjh-pf', jjhCheck, 'a');
+      attachModeEvents('jjh');
+      attachStuEvents('jjh', jjhCheck);
+    }
+  },
+
+  xsg: {
+    titleZh:'洗手歌', titleKo:'손 씻기 노래',
+    tags:[{t:'초등 교과서',c:'ltr'},{t:'p.40-41',c:'lty'},{t:'ai·ei·ui',c:'ltb'}],
+    tabs:['📖 시 읽기','🔤 병음 연습','📝 단어 카드','❓ 퀴즈','✅ 체크리스트'],
+    render: function(body) {
+      window.xsg_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="xsg-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">손 씻기 순서 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">肥皂搓 → 清水冲 → 毛巾擦</span></div>'
+        + makeModeRow('xsg')
+        + '<div class="ta" id="xsg-poem"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="xsg-p1"><p class="sub">복합 모음 카드! 클릭하면 시에서 쓰인 단어를 볼 수 있어요.</p>'
+        + '<div class="pysc"><div class="pyst">ai 계열</div><div class="pyc" id="ai-c"></div><div class="pye" id="ai-e"></div></div>'
+        + '<div class="pysc"><div class="pyst">ei 계열</div><div class="pyc" id="ei-c"></div><div class="pye" id="ei-e"></div></div>'
+        + '<div class="pysc"><div class="pyst">ui 계열</div><div class="pyc" id="ui-c"></div><div class="pye" id="ui-e"></div></div></div>'
+        + '<div class="lp" id="xsg-p2"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="xsg-vg"></div></div>'
+        + '<div class="lp" id="xsg-p3"><p class="sub">본문 내용을 확인해보세요!</p><div id="xsg-ox"></div></div>'
+        + '<div class="lp" id="xsg-p4">' + makeStuRow('xsg') + '</div>';
+      buildPoem('xsg-poem', xsgPoem, 'xsg');
+      ['ai','ei','ui'].forEach(function(g) {
+        var data = xsgPY[g];
+        var cont = document.getElementById(g + '-c');
+        var exDiv = document.getElementById(g + '-e');
+        data.tones.forEach(function(tone) {
+          var btn = document.createElement('button'); btn.className = 'pyb'; btn.textContent = tone;
+          btn.addEventListener('click', function() {
+            cont.querySelectorAll('.pyb').forEach(function(b) { b.classList.remove('apy'); });
+            btn.classList.add('apy');
+            var exs = data.ex[tone] || [];
+            exDiv.innerHTML = exs.length
+              ? exs.map(function(e) { return '<span class="pyei">' + e + '</span>'; }).join('')
+              : '<span style="font-size:13px;color:var(--hint)">이 시에서 직접 쓰인 예가 없어요</span>';
+          });
+          cont.appendChild(btn);
+        });
+      });
+      buildVocab('xsg-vg', xsgVocab);
+      buildOX('xsg-ox', xsgOX);
+      buildChecklist('xsg-cl', 'xsg-pf', xsgCheck, 'a');
+      attachModeEvents('xsg');
+      attachStuEvents('xsg', xsgCheck);
+    }
+  },
+
+  mlt: {
+    titleZh:'你吃过麻辣烫吗？', titleKo:'마라탕을 먹어 본 적 있니?',
+    tags:[{t:'第一课',c:'ltr'},{t:'10대 독해',c:'ltb'},{t:'경험 过',c:'ltg'}],
+    tabs:['📖 본문 읽기','📝 단어 카드','🥢 재료 이름','⭕ OX 퀴즈','🇨🇳 진짜 중국','✅ 체크리스트'],
+    render: function(body) {
+      window.mlt_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="mlt-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">你吃过___吗？→ 吃过 / 没吃过</span></div>'
+        + makeModeRow('mlt')
+        + '<div class="ta" id="mlt-text"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="mlt-p1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="mlt-vg"></div></div>'
+        + '<div class="lp" id="mlt-p2"><p class="sub">카드를 클릭하면 이름의 유래를 볼 수 있어요!</p><div class="ag" id="mlt-ingr"></div></div>'
+        + '<div class="lp" id="mlt-p3"><p class="sub">본문 내용을 확인해보세요!</p><div id="mlt-ox"></div></div>'
+        + '<div class="lp" id="mlt-p4">'
+        + '<div class="ic"><span class="tag tgr">인기 폭발</span><h3>중국에서 마라탕은?</h3><p>학생들과 젊은 사람들 사이에서 점심·저녁으로 자주 먹어요. 직접 재료를 골라 담는 셀프 방식이 인기예요!</p></div>'
+        + '<div class="ic"><span class="tag tgd">麻(마)의 비밀</span><h3>혀가 얼얼한 이유 — 산초(花椒)</h3><p>산초의 향과 고추의 매운맛이 합쳐져 마라의 매력이 완성돼요. 한국의 매운맛과는 다른 독특한 느낌이에요!</p></div></div>'
+        + '<div class="lp" id="mlt-p5">' + makeStuRow('mlt') + '</div>';
+      buildPoem('mlt-text', mltText, 'mlt');
+      buildVocab('mlt-vg', mltVocab);
+      var ig = document.getElementById('mlt-ingr');
+      mltIngr.forEach(function(v) {
+        var c = document.createElement('div'); c.className = 'ac';
+        c.innerHTML = '<div style="font-family:\'Noto Serif SC\',serif;font-size:17px;font-weight:700">' + v.zh + '</div>'
+          + '<div style="font-size:11px;color:var(--blue2);margin:2px 0">' + v.py + '</div>'
+          + '<div style="font-size:12px;color:var(--muted);font-weight:500">' + v.ko + '</div>'
+          + '<div class="adet">' + v.desc + '</div>';
+        c.addEventListener('click', function() { c.classList.toggle('open'); });
+        ig.appendChild(c);
+      });
+      buildOX('mlt-ox', mltOX);
+      buildChecklist('mlt-cl', 'mlt-pf', mltCheck, 'a');
+      attachModeEvents('mlt');
+      attachStuEvents('mlt', mltCheck);
+    }
+  },
+
+  hly: {
+    titleZh:'我爱上了韩国的这个！', titleKo:'나는 한국의 이것에 반했어!',
+    tags:[{t:'第二课',c:'ltr'},{t:'10대 독해',c:'ltb'},{t:'爱上了',c:'ltg'},{t:'又…又…',c:'lty'}],
+    tabs:['📖 본문 읽기','📝 단어 카드','🗺️ 마인드맵','⭕ OX 퀴즈','💬 나의 대답','🌊 한류','✅ 체크리스트'],
+    render: function(body) {
+      window.hly_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="hly-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">爱上了 / 又___又___ / 太___了！</span></div>'
+        + makeModeRow('hly')
+        + '<div class="ta" id="hly-text"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="hly-p1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="hly-vg"></div></div>'
+        + '<div class="lp" id="hly-p2"><p class="sub">세 인물이 한국의 무엇에 반했는지 정리해봐요!</p><div id="hly-mm"></div></div>'
+        + '<div class="lp" id="hly-p3"><p class="sub">본문 내용을 확인해보세요!</p><div id="hly-ox"></div></div>'
+        + '<div class="lp" id="hly-p4"><p style="font-family:\'Noto Serif SC\',serif;font-size:16px;font-weight:700;margin-bottom:6px">你觉得韩国文化里最有魅力的是什么？</p><p class="sub">한국 문화 중 가장 매력 있는 것은?</p><div class="pg2" id="hly-pg"></div><div class="pres" id="hly-res"><span style="color:var(--hint)">위에서 항목을 골라보세요!</span></div></div>'
+        + '<div class="lp" id="hly-p5">'
+        + '<div class="ic"><span class="tag trd">한류란?</span><h3>韩流(Hánliú) — 한국의 물결</h3><p>한국 드라마·음악·음식·화장품 등이 중국과 전 세계로 퍼져나가는 현상이에요.</p></div>'
+        + '<div id="hly-tl"></div></div>'
+        + '<div class="lp" id="hly-p6">' + makeStuRow('hly') + '</div>';
+      buildPoem('hly-text', hlyText, 'hly');
+      buildVocab('hly-vg', hlyVocab);
+      var mm = document.getElementById('hly-mm');
+      hlyMM.forEach(function(p) {
+        var c = document.createElement('div'); c.className = 'mmp';
+        c.innerHTML = '<div class="mmn">' + p.name + '</div><div class="mms">' + p.sub + '</div>'
+          + '<div class="mmr">'
+          + '<div class="mmc mmg"><div class="mml">좋아하는 것</div><div style="font-family:\'Noto Serif SC\',serif;font-size:14px;font-weight:700">' + p.like + '</div><div style="font-size:11px;color:var(--green2);margin-top:2px">' + p.likeKo + '</div></div>'
+          + '<div class="mmc mmk"><div class="mml">이유/예시</div><div style="font-size:12px;white-space:pre-line">' + p.reason + '</div><div style="font-size:11px;color:var(--pink);margin-top:2px">' + p.reasonKo + '</div></div>'
+          + '<div class="mmc mma"><div class="mml">생각·행동</div><div style="font-family:\'Noto Serif SC\',serif;font-size:12px">' + p.action + '</div><div style="font-size:11px;color:var(--gold);margin-top:2px">' + p.actionKo + '</div></div>'
+          + '</div>';
+        mm.appendChild(c);
+      });
+      buildOX('hly-ox', hlyOX);
+      var pg = document.getElementById('hly-pg');
+      hlyPick.forEach(function(p) {
+        var btn = document.createElement('button'); btn.className = 'pb';
+        btn.innerHTML = '<span style="font-weight:700">' + p.label + '</span><br><span style="font-size:11px;color:var(--hint)">' + p.ko + '</span>';
+        btn.addEventListener('click', function() {
+          pg.querySelectorAll('.pb').forEach(function(b) { b.classList.remove('sel'); });
+          btn.classList.add('sel');
+          var r = document.getElementById('hly-res');
+          r.innerHTML = '<div class="bz">' + p.fill + '</div><div style="font-size:13px;color:var(--muted);margin-top:5px">' + p.ko2 + '</div>';
+        });
+        pg.appendChild(btn);
+      });
+      var tl = document.getElementById('hly-tl');
+      [{y:'2003',t:'《대장금》(大长今)이 중국에서 방영되며 한국 문화가 큰 주목을 받기 시작했어요.'},
+       {y:'이후',t:'《별에서 온 그대》, 《상속자들》 등이 이어서 인기를 얻으며 韩流라는 이름이 생겼어요.'},
+       {y:'확산',t:'드라마 → BTS·BLACKPINK → 화장품·패션·삼겹살·김치까지 빠르게 퍼져나갔어요.'},
+       {y:'2016',t:'한한령(限韩令)으로 한국 드라마·연예인이 중국 방송에서 잠시 활동 금지됐어요.'},
+       {y:'현재',t:'지금도 한류는 계속 변화하며 중국과 세계에 한국을 알리는 다리 역할을 해요.'},
+      ].forEach(function(item) {
+        tl.innerHTML += '<div class="tli"><div class="tld">' + item.y + '</div><div class="tlc">' + item.t + '</div></div>';
+      });
+      buildChecklist('hly-cl', 'hly-pf', hlyCheck, 'a');
+      attachModeEvents('hly');
+      attachStuEvents('hly', hlyCheck);
+    }
+  },
+
+  zgn: {
+    titleZh:'你知道Z世代吗？', titleKo:'Z세대를 아나요? — 블라인드박스 이야기',
+    tags:[{t:'第三课',c:'ltr'},{t:'10대 독해',c:'ltb'},{t:'Z世代·盲盒',c:'ltg'}],
+    tabs:['📖 본문 읽기','📝 단어 카드','🔍 한자 분해','⭕ OX 퀴즈','🌏 라부부','✅ 체크리스트'],
+    render: function(body) {
+      window.zgn_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="zgn-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">핵심 문형 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">"___"的意思是___ / 你也___过___吗？</span></div>'
+        + makeModeRow('zgn')
+        + '<div class="ta" id="zgn-text"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="zgn-p1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="zgn-vg"></div></div>'
+        + '<div class="lp" id="zgn-p2"><p class="sub">盲(máng)과 盒(hé)의 부수를 분해해서 뜻을 이해해봐요!</p>'
+        + '<div class="ic" style="border-left:4px solid var(--gold2)">'
+        + '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px">'
+        + '<div style="font-family:\'Noto Serif SC\',serif;font-size:56px;font-weight:700;color:var(--gold2);line-height:1">盲</div>'
+        + '<div><div style="font-size:13px;color:var(--muted);margin-bottom:7px">máng — 눈이 멀다, 블라인드</div>'
+        + '<div style="font-size:13px;line-height:1.8"><span style="background:var(--goldl);padding:2px 8px;border-radius:5px;margin-right:6px;font-weight:500">위 亡</span>망하다, 잃다<br>'
+        + '<span style="background:var(--goldl);padding:2px 8px;border-radius:5px;margin-right:6px;font-weight:500">아래 目</span>눈(eye)<br>'
+        + '→ <b>눈(目)을 잃은(亡) 상태 = 볼 수 없다!</b></div></div></div>'
+        + '<div style="background:var(--sur2);border-radius:var(--rs);padding:9px 13px;font-size:13px;color:var(--muted)">💡 盲盒 = 盲(볼 수 없다) + 盒(상자) → <b>열기 전까지 안을 볼 수 없는 상자!</b></div></div>'
+        + '<div class="ic" style="border-left:4px solid var(--green2)">'
+        + '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">'
+        + '<div style="font-family:\'Noto Serif SC\',serif;font-size:56px;font-weight:700;color:var(--green2);line-height:1">盒</div>'
+        + '<div><div style="font-size:13px;color:var(--muted);margin-bottom:7px">hé — 상자, 박스</div>'
+        + '<div style="font-size:13px;line-height:1.8"><span style="background:var(--greenl);padding:2px 8px;border-radius:5px;margin-right:6px;font-weight:500">위 合</span>합하다 (발음 힌트: hé)<br>'
+        + '<span style="background:var(--greenl);padding:2px 8px;border-radius:5px;margin-right:6px;font-weight:500">아래 皿</span>그릇, 접시<br>'
+        + '→ <b>뚜껑과 그릇(皿)이 합쳐진(合) 것 = 상자!</b></div></div></div></div></div>'
+        + '<div class="lp" id="zgn-p3"><p class="sub">본문 내용을 확인해보세요!</p><div id="zgn-ox"></div></div>'
+        + '<div class="lp" id="zgn-p4">'
+        + '<div class="ic"><span class="tag tgd">라부부란?</span><h3>LABUBU — 2.7조 대박 캐릭터</h3><p>홍콩 아티스트 카싱 렁이 북유럽 신화에서 영감을 받아 만든 요정 캐릭터. 리한나, 블랙핑크 리사 등이 소장하면서 전 세계 인기에 불을 당겼어요!</p></div>'
+        + '<div class="ic"><span class="tag tbl">왜 Z세대가 열광할까?</span><h3>블라인드박스의 매력</h3><p>열기 전까지 어떤 캐릭터인지 알 수 없는 두근두근 설렘이 매력! 또 "울어도 괜찮다"는 솔직한 감정 표현이 Z세대의 감성을 자극해요.</p></div>'
+        + '<div class="ic"><span class="tag trd">가격이 놀라워요!</span><h3>베이징 경매장에서 2억 3천만 원?!</h3><p>국내 정품은 2~5만원이지만 베이징 경매장에서 사람 크기 한정판이 120만 위안(약 2억 3천만 원)에 낙찰됐어요!</p></div></div>'
+        + '<div class="lp" id="zgn-p5">' + makeStuRow('zgn') + '</div>';
+      buildPoem('zgn-text', zgnText, 'zgn');
+      buildVocab('zgn-vg', zgnVocab);
+      buildOX('zgn-ox', zgnOX);
+      buildChecklist('zgn-cl', 'zgn-pf', zgnCheck, 'a');
+      attachModeEvents('zgn');
+      attachStuEvents('zgn', zgnCheck);
+    }
+  },
+
+  mgy: {
+    titleZh:'小小名言，大大力量', titleKo:'작은 명언, 큰 힘',
+    tags:[{t:'第五课',c:'ltr'},{t:'10대 독해',c:'ltb'},{t:'不怕慢只怕站',c:'ltg'},{t:'명언 암송대회',c:'lty'}],
+    tabs:['📖 본문 읽기','📝 단어 카드','📊 비교표','⭕ OX 퀴즈','🏆 명언 암송대회','✅ 체크리스트'],
+    render: function(body) {
+      window.mgy_mode = 'all';
+      body.innerHTML =
+        '<div class="lp show" id="mgy-p0">'
+        + '<div class="kbox"><span style="font-size:13px;color:var(--muted)">핵심 명언 </span><span style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">不怕慢，只怕站。 / 失败是成功之母。</span></div>'
+        + makeModeRow('mgy')
+        + '<div class="ta" id="mgy-text"></div>'
+        + '<p class="ht">클릭하면 병음 보기 모드에서 한자를 클릭하면 병음이 나타납니다.</p></div>'
+        + '<div class="lp" id="mgy-p1"><p class="sub">카드를 클릭하면 병음이 나타나요!</p><div class="vg" id="mgy-vg"></div></div>'
+        + '<div class="lp" id="mgy-p2"><p class="sub">두 명언을 비교해서 정리해봐요!</p>'
+        + '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px">'
+        + '<thead><tr><th style="background:var(--sur2);padding:11px;border:1px solid var(--bdr);font-weight:700;width:20%">항목</th><th style="background:var(--goldl);padding:11px;border:1px solid var(--bdr);font-family:\'Noto Serif SC\',serif;font-size:15px;text-align:center">不怕慢，只怕站</th><th style="background:var(--greenl);padding:11px;border:1px solid var(--bdr);font-family:\'Noto Serif SC\',serif;font-size:15px;text-align:center">失败是成功之母</th></tr></thead>'
+        + '<tbody><tr><td style="padding:11px;border:1px solid var(--bdr);font-weight:700;background:var(--sur2)">예시</td><td style="padding:11px;border:1px solid var(--bdr);text-align:center"><span style="font-family:\'Noto Serif SC\',serif;font-size:15px">🐢 乌龟</span><br><span style="font-size:12px;color:var(--muted)">천천히 걸어도 결국 종점 도착</span></td><td style="padding:11px;border:1px solid var(--bdr);text-align:center"><span style="font-family:\'Noto Serif SC\',serif;font-size:15px">💡 爱迪生</span><br><span style="font-size:12px;color:var(--muted)">천 번 실패 후 전등 발명 성공</span></td></tr>'
+        + '<tr><td style="padding:11px;border:1px solid var(--bdr);font-weight:700;background:var(--sur2)">핵심어</td><td style="padding:11px;border:1px solid var(--bdr);text-align:center"><span style="background:var(--goldl);padding:2px 7px;border-radius:5px;margin:2px;display:inline-block">慢·站·走</span></td><td style="padding:11px;border:1px solid var(--bdr);text-align:center"><span style="background:var(--greenl);padding:2px 7px;border-radius:5px;margin:2px;display:inline-block">失败·成功</span></td></tr>'
+        + '<tr><td style="padding:11px;border:1px solid var(--bdr);font-weight:700;background:var(--sur2)">교훈</td><td colspan="2" style="padding:11px;border:1px solid var(--bdr);text-align:center"><span style="font-family:\'Noto Serif SC\',serif;font-size:16px;font-weight:700">勇敢 + 快乐</span><br><span style="font-size:12px;color:var(--muted)">더 용감하게, 더 즐겁게!</span></td></tr>'
+        + '</tbody></table></div></div>'
+        + '<div class="lp" id="mgy-p3"><p class="sub">본문 내용을 확인해보세요!</p><div id="mgy-ox"></div></div>'
+        + '<div class="lp" id="mgy-p4">'
+        + '<div style="background:var(--ink);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1.1rem;color:#fff"><div style="font-size:16px;font-weight:700;margin-bottom:4px">🏆 명언 암송대회</div><div style="font-size:13px;color:rgba(255,255,255,0.6)">12개 중 7개 이상 골라 암기! 한·영·중 3개 국어 완료 시 기프티콘 선물 🎁</div><div style="margin-top:7px;font-size:13px;color:rgba(255,255,255,0.8)">선택: <span id="mgy-cnt" style="font-weight:700">0</span>개 / 목표 7개</div></div>'
+        + '<div id="mgy-clist"></div></div>'
+        + '<div class="lp" id="mgy-p5">' + makeStuRow('mgy') + '</div>';
+      buildPoem('mgy-text', mgyText, 'mgy');
+      buildVocab('mgy-vg', mgyVocab);
+      buildOX('mgy-ox', mgyOX);
+      var cl = document.getElementById('mgy-clist');
+      var mgySelected = new Set();
+      mgyContest.forEach(function(m, i) {
+        var d = document.createElement('div');
+        d.style.cssText = 'background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rs);padding:11px 13px;cursor:pointer;transition:all .15s;margin-bottom:7px';
+        d.innerHTML = '<div style="display:flex;align-items:center;gap:9px;margin-bottom:5px">'
+          + '<div id="mgy-cb' + i + '" style="width:21px;height:21px;border-radius:50%;border:1.5px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px"></div>'
+          + '<div style="font-family:\'Noto Serif SC\',serif;font-size:15px;font-weight:700">' + m.zh + '</div></div>'
+          + '<div style="font-size:11px;color:var(--muted);margin-left:30px">' + m.py + '</div>'
+          + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-left:30px;margin-top:5px">'
+          + '<div style="font-size:12px;background:var(--sur2);border-radius:4px;padding:3px 7px">🇰🇷 ' + m.ko + '</div>'
+          + '<div style="font-size:12px;background:var(--sur2);border-radius:4px;padding:3px 7px">🇬🇧 ' + m.en + '</div></div>';
+        (function(idx, el) {
+          el.addEventListener('click', function() {
+            var cb = document.getElementById('mgy-cb' + idx);
+            var cnt = document.getElementById('mgy-cnt');
+            if (mgySelected.has(idx)) {
+              mgySelected.delete(idx);
+              el.style.background = 'var(--sur)'; el.style.borderColor = 'var(--bdr)';
+              cb.style.background = 'transparent'; cb.style.borderColor = '#ccc'; cb.textContent = '';
+            } else {
+              mgySelected.add(idx);
+              el.style.background = 'var(--greenl)'; el.style.borderColor = '#A9DFBF';
+              cb.style.background = 'var(--green2)'; cb.style.borderColor = 'var(--green2)'; cb.style.color = '#fff'; cb.textContent = '✓';
+            }
+            if (cnt) { cnt.textContent = mgySelected.size; cnt.style.color = mgySelected.size >= 7 ? '#27AE60' : '#fff'; }
+          });
+        })(i, d);
+        cl.appendChild(d);
+      });
+      buildChecklist('mgy-cl', 'mgy-pf', mgyCheck, 'a');
+      attachModeEvents('mgy');
+      attachStuEvents('mgy', mgyCheck);
+    }
+  }
+};
+
+// ════════════════════════════════
+// 페이지 라우팅
+// ════════════════════════════════
+var curLesson = null;
+
+function showHome() {
+  document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('show'); });
+  document.getElementById('pg-home').classList.add('show');
+  document.querySelectorAll('.snb').forEach(function(b) { b.classList.remove('on'); });
+  document.getElementById('snb-home').classList.add('on');
 }
+
+function showLesson(id) {
+  var L = LESSONS[id]; if (!L) return;
+  curLesson = id;
+  document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('show'); });
+  document.getElementById('pg-lesson').classList.add('show');
+  document.querySelectorAll('.snb').forEach(function(b) { b.classList.remove('on'); });
+
+  document.getElementById('l-tzh').textContent = L.titleZh;
+  document.getElementById('l-tko').textContent = L.titleKo;
+
+  var tagsEl = document.getElementById('l-tags'); tagsEl.innerHTML = '';
+  L.tags.forEach(function(t) {
+    var s = document.createElement('span'); s.className = 'lt ' + t.c; s.textContent = t.t; tagsEl.appendChild(s);
+  });
+
+  var tabsEl = document.getElementById('l-tabs'); tabsEl.innerHTML = '';
+  L.tabs.forEach(function(t, i) {
+    var b = document.createElement('button'); b.className = 'ltab' + (i === 0 ? ' on' : ''); b.textContent = t;
+    b.addEventListener('click', function() {
+      document.querySelectorAll('.ltab').forEach(function(x, j) { x.classList.toggle('on', j === i); });
+      document.querySelectorAll('.lp').forEach(function(x, j) { x.classList.toggle('show', j === i); });
+    });
+    tabsEl.appendChild(b);
+  });
+
+  var body = document.getElementById('l-body');
+  L.render(body);
+  window.scrollTo(0, 0);
+}
+
+// ════════════════════════════════
+// 이벤트 연결
+// ════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  // 수업 카드
+  ['jjh','xsg','mlt','hly','zgn','mgy'].forEach(function(id) {
+    var el = document.getElementById('go-' + id);
+    if (el) el.addEventListener('click', function() { showLesson(id); });
+  });
+  // 로고
+  document.getElementById('logo-btn').addEventListener('click', function(e) { e.preventDefault(); showHome(); });
+  // 네비
+  document.getElementById('snb-home').addEventListener('click', showHome);
+  document.getElementById('snb-elem').addEventListener('click', showHome);
+  document.getElementById('snb-teen').addEventListener('click', showHome);
+  // 뒤로가기
+  document.getElementById('back-btn').addEventListener('click', showHome);
+  // 초기화
+  if (!window._cs) window._cs = {};
+});
 </script>
 </body>
 </html>
